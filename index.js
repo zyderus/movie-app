@@ -8,8 +8,8 @@ const LocalStrategy     = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const app           = express();
-const port          = process.env.PORT || 5000;
-const dburl         = process.env.DATABASEURL || "mongodb://localhost/movies-db";
+const PORT          = process.env.PORT || 5000;
+const DBURL         = process.env.DATABASEURL || "mongodb://localhost/movies-db";
 const Movie         = require("./models/movie");
 const Comment       = require("./models/comment");
 const User          = require("./models/user");
@@ -24,7 +24,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
-mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(DBURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(function() { console.log(`connected to database...`) })
   .catch(function(err) { console.log(`not connected to database`, err) });
 
@@ -53,4 +53,4 @@ app.use(searchRoutes);
 app.use(profileRoutes);
 
 // Listener
-app.listen(port, () => console.log(`server is on port ${port}`));
+app.listen(PORT, () => console.log(`server is on port ${PORT}`));
