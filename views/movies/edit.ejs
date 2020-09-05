@@ -1,0 +1,16 @@
+<%- include("../partials/header") %> 
+
+<h2>Edit <%=  movie.title %> </h2>
+
+<form action="/movies/<%= movie._id %>?_method=put" method="post">
+  <p><input type="text" name="movie[title]" value="<%= movie.title %>"></p>
+  <p><input type="number" name="movie[year]" value="<%= movie.year %>"></p>
+  <p><input type="text" name="movie[poster]" value="<%= movie.poster %>"></p>
+  <p><input type="text" name="movie[trailer]" value="<%= movie.trailer %>"></p>
+  <p><textarea name="movie[description]" cols="30" rows="10"><%= movie.description %> </textarea></p>
+  <p><input type="number" name="movie[price]" value="<%= movie.price %>"></p>
+  <button>Update</button>
+</form>
+<a href="/movies/<%= movie._id %> "><button>Back</button></a>
+
+<%- include("../partials/footer") %> 

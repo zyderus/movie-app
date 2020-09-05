@@ -1,0 +1,47 @@
+<%- include("../partials/header") %> 
+
+
+<h2><%= movie.title %> <span class="movie-year">(<%= movie.year %>)</span></h2>
+<em>added by <%= movie.author.username %> on <%= movie.created.toDateString() %></em>
+
+<% if(currentUser && movie.author.id.equals(currentUser._id)) { %>
+  <a href="/movies/<%= movie._id %>/edit"><button>Edit</button></a>
+  <form action="/movies/<%= movie._id %>?_method=delete" method="post"><button>Delete</button></form>
+<% } %>
+<a href="/movies"><button>Back</button></a>
+<br>
+
+
+<img src="<%= movie.poster %>" width="200"><br>
+
+<iframe width="719" height="300"
+src="<%= movie.trailer %>
+?autoplay=1
+&start=13
+&mute=1" 
+allow="autoplay; picture-in-picture;" frameborder="0" allowfullscreen>
+</iframe>
+
+<p><%- movie.description %></p>
+<button>Rent HD $<%= movie.rent || 0.99 %></button>
+<button>Buy HD $<%= movie.price %></button>
+<button>Cinema from $<%= "14.99" %></button>
+
+<hr>
+<a href="/movies/<%= movie._id %>/comments/new"><button>Add Comment</button></a>
+<hr>
+
+<% movie.comments.forEach(function(comment){ %>
+  <p>
+    <strong><%= comment.author.username %> </strong><br>
+    <em><%= comment.created.toDateString() %></em><br>
+    <%- comment.text %><br>
+  </p>
+  <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+    <a href="/movies/<%= movie._id %>/comments/<%= comment._id %>/edit"><button><em>edit</em></button></a>
+    <form action="/movies/<%= movie._id %>/comments/<%= comment._id %>?_method=delete" method="post"><button><em>delete</em></button></form>
+  <% } %>
+  <hr>
+<% }) %>
+
+<%- include("../partials/footer") %> 

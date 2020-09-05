@@ -1,0 +1,15 @@
+<%- include("./partials/header") %> 
+
+
+<div class="login-form">
+  <h2>Register</h2>
+  <form action="/register" method="post">
+    <p><input type="text" name="username" placeholder="username" required autofocus></p>
+    <p><input type="password" name="password" placeholder="password" required></p>
+    <button>Register</button>
+  </form>
+  <a href="/movies"><button>Back</button></a>
+</div>
+
+
+<%- include("./partials/footer") %> 

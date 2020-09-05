@@ -1,0 +1,23 @@
+<%- include("./partials/header") %> 
+
+<h2>Search Results</h2>
+
+<% if(movies) { %>
+  <% movies.forEach((movie) => { %>
+    <% console.log(movie) %> 
+    <div>
+      <h3><%= movie["Title"] %></h3>
+      <span><%= movie["Year"] %></span><br>
+      <a href="/results/<%= movie.imdbID %>">
+        <img src="<%= movie["Poster"] %> " width="150" height="222">
+      </a>
+      <hr>
+    </div>
+  <% }); %> 
+<% } else { %>
+  <li>Movie not found</li>
+<% } %>
+
+<p><a href="/movies"><button>Back</button></a></p>
+
+<%- include("./partials/footer") %>

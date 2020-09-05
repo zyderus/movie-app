@@ -1,0 +1,17 @@
+<%- include("./partials/header") %> 
+
+
+<% if(movie) { %>
+  <div>
+    <h2><%= movie["Title"] %></h2>
+    <span><%= movie["Year"] %></span><br>
+    <img src="<%= movie["Poster"] %> " width="300" height="444"><br>
+    <p><%= movie.Plot %> </p>
+  </div>
+<% } else { %>
+  <li>Movie not found</li>
+<% } %>
+
+<p><button onclick="goBack()">Back</button></p>
+
+<%- include("./partials/footer") %>

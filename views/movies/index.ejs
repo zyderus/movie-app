@@ -1,0 +1,14 @@
+<%- include("../partials/header") %> 
+
+<h2>Movies</h2>
+
+<% movies.forEach(function(movie) { %>
+  <h3><%= movie.title %> </h2>
+    <span><%= movie.year %> | <%= movie.rated || "R" %></span><br>
+    <span><%= movie.rating || "***ooo" %></span><span><%= movie.customerReviews || " 12" %> </span><br>
+    <a href="/movies/<%= movie._id %>"><img src="<%= movie.poster %> " width="200"></a>
+    <p><%- movie.description.substring(0, 100) %>...<br>
+  <hr>
+<% }) %>
+
+<%- include("../partials/footer") %> 

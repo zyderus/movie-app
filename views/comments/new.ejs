@@ -1,0 +1,11 @@
+<%- include("../partials/header") %> 
+
+<h2>New Comment</h2>
+
+<form action="/movies/<%= movie._id %>/comments" method="post">
+  <p><textarea name="comment[text]" cols="40" rows="10"></textarea></p>
+  <button>Add Comment</button>
+</form>
+<a href="/movies/<%= movie._id %> "><button>Back</button></a>
+
+<%- include("../partials/footer") %> 

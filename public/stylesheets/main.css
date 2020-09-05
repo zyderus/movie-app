@@ -1,0 +1,46 @@
+body, a {
+  background-color: #fff;
+  color: #111;
+  font-size: 1.1em;
+}
+
+h3 {
+  margin-bottom: 0.3em;
+}
+
+.menu {
+  float: right;
+}
+
+.menu li {
+  display: inline;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.center {
+  text-align: center;
+}
+
+form {
+  display: inline;
+}
+
+.login-form {
+  margin: 100px auto;
+  width: 400px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.movie-year {
+  font-weight: 100;
+  font-size: .8em;
+}
+
+.weather-icon {
+  vertical-align: middle;
+}

@@ -1,0 +1,16 @@
+<%- include("../partials/header") %> 
+
+<h2>Add New Movie</h2>
+
+<form action="/movies" method="post">
+  <p><input type="text" name="movie[title]" placeholder="title"></p>
+  <p><input type="number" name="movie[year]" placeholder="year"></p>
+  <p><input type="text" name="movie[poster]" placeholder="poster"></p>
+  <p><input type="text" name="movie[trailer]" placeholder="trailer"></p>
+  <p><textarea name="movie[description]" cols="40" rows="10" placeholder="story"></textarea></p>
+  <p><input type="number" name="movie[price]" placeholder="price"></p>
+  <button>Add</button>
+</form>
+<a href="/movies"><button>Back</button></a>
+
+<%- include("../partials/footer") %>

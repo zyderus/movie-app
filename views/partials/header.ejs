@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+  
+  <div class="menu">
+    <% if (!currentUser) { %>
+      <li><a href="/login">Login</a> | </li>
+      <li><a href="/register">Register</a></li>
+    <% } else { %>
+      <li>Hi, <a href="/profile/<%= currentUser._id %>"><strong><%= currentUser.username %></strong></a> | </li>
+      <li><a href="/logout">Logout</a></li>
+    <% } %>
+
+
+  </div>
+
+  <h3>
+    <a href="/movies">Collection</a> 
+    <form action="/results" method="get">
+      <input type="text" name="search" placeholder="search...">
+      <button>search</button>
+    </form>
+    <a href="/movies/new">Add Movie</a> 
+  </h3>

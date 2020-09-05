@@ -1,0 +1,21 @@
+<%- include("./partials/header") %> 
+
+<div class="login-form">
+  <h2><%= user.username %> </h2>
+<% if (data) { %>
+  <h3 class="weather">
+    <%= data.name %> | 
+    <%= data.main.temp %>&deg;C | 
+    <img class="weather-icon" src="http://openweathermap.org/img/wn/<%= data.weather[0].icon %>@2x.png">
+    <%= data.weather[0].description %>
+  </h3>
+<% } %>
+  <h3>user profile</h3>
+  <h3><a href="tel:+15555555555">+1 (555) 555 5555</a></h3>
+  <h3><a href = "mailto: some@email.com">some@email.com</a></h3>
+  <br>
+  <button onclick="goBack()">Back</button>
+</div>
+
+
+<%- include("./partials/footer") %> 
