@@ -7,14 +7,12 @@ const axios = require("axios");
 // Profile
 router.get("/profile/:user_id", (req, res) => {
   User.findById(req.params.user_id, (err, user) => {
-    let apiKey = "73ccfb39651ee95f5ba9a7a7ae60941a";
+    let owmapi = process.env.OWMAPI || OWMAPI;
     let latitude = 39.749407;
     let longtitude = 64.420079;
     let units = "metric" // "metric", "imperial", "kelvin" by 
     let data;
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longtitude}&units=${units}&lang=en&appid=${apiKey}`;
-    // let url = "https://api.openweathermap.org/data/2.5/weather?lat=39.749407&lon=64.420079&units=metric&lang=ru&appid=73ccfb39651ee95f5ba9a7a7ae60941a";
-    // let url = "https://api.openweathermap.org/data/2.5/onecall?lat=39.749407&lon=64.420079&exclude={part}&appid=73ccfb39651ee95f5ba9a7a7ae60941a";
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longtitude}&units=${units}&lang=en&appid=${owmapi}`;
 
     setTimeout(() => {
       if(!data){

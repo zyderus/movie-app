@@ -6,8 +6,9 @@ const axios = require("axios");
 // Search results
 router.get("/results", (req, res) => {
   // search query from search input
+  let omdbapi = process.env.OMDBAPI || OMDBAPI;
   let query = req.query.search;
-  let url = "http://www.omdbapi.com/?apikey=thewdb&s=" + query;
+  let url = `http://www.omdbapi.com/?apikey=${omdbapi}&s=` + query;
 
   const sendGetRequest = async () => {
     try {
