@@ -7,7 +7,7 @@ const axios = require("axios");
 // Profile
 router.get("/profile/:user_id", (req, res) => {
   User.findById(req.params.user_id, (err, user) => {
-    let owmapi = process.env.OWMAPI || OWMAPI;
+    let owmapi = process.env.OWMAPI;
     let latitude = 39.749407;
     let longtitude = 64.420079;
     let units = "metric" // "metric", "imperial", "kelvin" by 

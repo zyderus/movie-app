@@ -7,6 +7,8 @@ const passport          = require("passport");
 const LocalStrategy     = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 
+require('dotenv').config();
+
 const app           = express();
 const PORT          = process.env.PORT || 5000;
 const DBURL         = process.env.DATABASEURL || "mongodb://localhost/movies-db";
