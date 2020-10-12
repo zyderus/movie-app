@@ -1,0 +1,39 @@
+<%- include('../partials/header') %> 
+
+<h2>Hi, <%= user.username %> </h2>
+
+<span>Your details:</span><br>
+<span><a href="tel:+15555555555">+1 (555) 555 5555</a></span><br>
+<span><a href = "mailto: some@email.com">rus@mail.org</a></span><br>
+<br>
+<!-- goBack: function in JS to go back in browser history. function in main.min.js -->
+<button onclick="goBack()">Back</button>
+
+<% if(!movies.length) { %>
+  <h3>You haven't published any movies yet</h3>
+<% } else { %>
+  <h2>Your Movies</h2>
+  <% movies.forEach(movie => { %>
+    <div class="movie-box">
+      <h3><%= movie.title %></h3>
+      <p><em><%= movie.created.toDateString() %></em></p>
+      <a href="/movies/<%= movie._id %> "><img src="<%= movie.poster %> " width="100"></a>
+      <p><%- movie.description.substring(0, 100) %>... </p>
+    </div>
+    <hr>
+  <% }) %>
+<% } %>
+
+<div>
+  <h2><%= user.username %> </h2>
+<% if (data) { %>
+  <h3 class="weather">
+    <%= data.name %> | 
+    <%= data.main.temp %>&deg;C | 
+    <img class="weather-icon" src="http://openweathermap.org/img/wn/<%= data.weather[0].icon %>@2x.png">
+    <%= data.weather[0].description %>
+  </h3>
+<% } %>
+</div>
+
+<%- include('../partials/footer') %>

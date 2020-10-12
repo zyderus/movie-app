@@ -1,8 +1,10 @@
-const Movie    = require("../models/movie");
-const Comment = require("../models/comment");
-module.exports = {
+const Movie     = require("../models/movie");
+const Comment   = require("../models/comment");
 
-  checkMovieOwnership:(req, res, next) => {
+module.exports  = {
+
+  // User movie authorization
+  checkMovieOwnership: (req, res, next) => {
     if(req.isAuthenticated()) {
       Movie.findById(req.params.id, (err, movie) => {
         if(err) {
@@ -12,17 +14,18 @@ module.exports = {
           if(movie.author.id.equals(req.user._id)) {
             next();
           } else {
-            console.log("YOU DO NOT HAVE AUTHORIZATION TO DO THAT");
+            console.log("YOU ARE NOT AUTHORIZED TO MAKE THESE CHANGES...");
             res.redirect("back");
           }
         }
       });
     } else {
-      console.log("PLEASE LOGIN");
+      console.log("PLEASE LOGIN...");
       res.redirect("back");
     }
   },
 
+  // User comment authorization
   checkCommentOwnership: (req, res, next) => {
     if(req.isAuthenticated()) {
       Comment.findById(req.params.comment_id, (err, comment) => {
@@ -33,7 +36,7 @@ module.exports = {
           if(comment.author.id.equals(req.user._id)) {
             next();
           } else {
-            console.log("YOU DO NOT HAVE AUTHORIZATION TO DO THAT");
+            console.log("YOU ARE NOT AUTHORIZED TO MAKE THESE CHANGES...");
             res.redirect("back");
           }
         }
@@ -44,6 +47,7 @@ module.exports = {
     }
   },
 
+  // User authentication
   isLoggedIn: (req, res, next) => {
     if(req.isAuthenticated()) {
       return next();
@@ -51,6 +55,7 @@ module.exports = {
     res.redirect("/login");
   },
 
+  // Admin authentication
   isAdmin: (req, res, next) => {
     if(req.user.isAdmin) {
       console.log("YOU ARE ADMIN");
@@ -61,6 +66,7 @@ module.exports = {
     }
   },
 
+  // Accept unsplash.com image links
   isSafe: (req, res, next) => {
     if (req.body.image.match(/^https:\/\/images\.unsplash\.com\/.*/)) {
       next();

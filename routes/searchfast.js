@@ -15,7 +15,7 @@ router.get("/results", (req, res) => {
         const resp = await axios.get(url);
         // clean incoming json
         const movies = resp.data.Search;
-        res.render('results', { movies: movies });
+        res.render('movies/results', { movies: movies });
     } catch (err) {
         console.error(err);
     }
@@ -32,7 +32,7 @@ router.get("/results/:imdbID", (req, res) => {
         const resp = await axios.get(url);
         // clean incoming json
         const movie = resp.data;
-        res.render('details', { movie: movie });
+        res.render('movies/details', { movie: movie });
     } catch (err) {
         console.error(err);
     }

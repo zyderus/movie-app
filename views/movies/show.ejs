@@ -31,7 +31,7 @@ allow="autoplay; picture-in-picture;" frameborder="0" allowfullscreen>
 <a href="/movies/<%= movie._id %>/comments/new"><button>Add Comment</button></a>
 <hr>
 
-<% movie.comments.forEach(function(comment){ %>
+<% movie.comments.forEach(comment => { %>
   <p>
     <strong><%= comment.author.username %> </strong><br>
     <em><%= comment.created.toDateString() %></em><br>

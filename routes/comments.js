@@ -5,7 +5,7 @@ const Comment = require("../models/comment");
 const middleware = require("../middleware");
 let { checkMovieOwnership, checkCommentOwnership, isLoggedIn, isAdmin, isSafe } = middleware;
 
-// Add
+// Add new comment
 router.get("/new", isLoggedIn, (req, res) => {
   Movie.findById(req.params.id, (err, movie) => {
     err ? console.log(err) : res.render("comments/new", { movie: movie });
@@ -20,31 +20,37 @@ router.post("/", isLoggedIn, (req, res) => {
       username: req.user.username
     };
     Comment.create(req.body.comment, (err, comment) => {
-      console.log('comment added...');
+      console.log('comment added created');
       movie.comments.push(comment);
       movie.save();
+      console.log('comment id added to movie');
       res.redirect('/movies/' + movie._id);
     });
   });
 });
 
-// Update
+// Edit comments and update
 router.get("/:comment_id/edit", checkCommentOwnership, (req, res) => {
   Comment.findById(req.params.comment_id, (err, comment) => {
-    err ? console.log(err) : res.render("comments/edit", { movie_id: req.params.id, comment: comment });
+    err ? console.log(err) : 
+      res.render("comments/edit", { movie_id: req.params.id, comment: comment });
   });
 });
 
 router.put("/:comment_id", checkCommentOwnership, (req, res) => {
   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, comment) => {
-    err ? console.log(err) : console.log("comment updated..."); res.redirect("/movies/" + req.params.id);
+    err ? console.log(err) : 
+      console.log("comment updated..."); 
+      res.redirect("/movies/" + req.params.id);
   });
 });
 
-// Delete
+// Delete comment
 router.delete("/:comment_id", checkCommentOwnership, (req, res) => {
-  Comment.findByIdAndRemove(req.params.comment_id, (err) => {
-    err ? console.log(err) : console.log("comment deleted..."); res.redirect("/movies/" + req.params.id);
+  Comment.findByIdAndRemove(req.params.comment_id, err => {
+    err ? console.log(err) : 
+      console.log("comment deleted..."); 
+      res.redirect("/movies/" + req.params.id);
   });
 });
 

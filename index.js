@@ -1,4 +1,9 @@
+// Import and activate package to hold environment variables locally
+require('dotenv').config();
+
+// Import packages
 const express           = require("express");
+const chalk             = require('chalk');
 const mongoose          = require("mongoose");
 const bodyParser        = require("body-parser");
 const expressSanitizer  = require("express-sanitizer");
@@ -7,31 +12,31 @@ const passport          = require("passport");
 const LocalStrategy     = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 
-require('dotenv').config();
-
-const app           = express();
-const PORT          = process.env.PORT || 5000;
-const DBURL         = process.env.DATABASEURL || "mongodb://localhost/movies-db";
-const Movie         = require("./models/movie");
-const Comment       = require("./models/comment");
-const User          = require("./models/user");
+// Import routes
 const movieRoutes   = require("./routes/movies");
 const commentRoutes = require("./routes/comments");
 const indexRoutes   = require("./routes/index");
 const searchRoutes  = require("./routes/searchfast");
 const profileRoutes  = require("./routes/profile");
 
+const app           = express();
+const PORT          = process.env.PORT || 5800;
+const DBURL         = process.env.DATABASEURL || "mongodb://localhost/movies-db";
+const Movie         = require("./models/movie");
+const Comment       = require("./models/comment");
+const User          = require("./models/user");
+
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 mongoose.connect(DBURL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(function() { console.log(`connected to database...`) })
-  .catch(function(err) { console.log(`not connected to database`, err) });
+  .then(() => { console.log(`connected to database...`) })
+  .catch((err) => { console.log(`not connected to database`, err) });
 
 app.use(require("express-session")({
-  secret: "They will submit to power of your will",
+  secret: "Have fun watching all these wonderful moveiz",
   resave: false,
   saveUninitialized: false
 }));
@@ -41,7 +46,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// ADD REQ.USER TO ALL ROUTES
+// Add user to all routes (req.user)
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
@@ -54,5 +59,7 @@ app.use(indexRoutes);
 app.use(searchRoutes);
 app.use(profileRoutes);
 
-// Listener
-app.listen(PORT, () => console.log(`server is on port ${PORT}`));
+// Server
+app.listen(PORT, () => {
+  console.log(`Server running ${chalk.cyan('on port')} ${chalk.red(PORT)}`);
+});

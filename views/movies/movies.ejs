@@ -1,8 +1,8 @@
 <%- include("../partials/header") %> 
 
-<h2>Movies</h2>
+<h2>Movie List</h2>
 
-<% movies.forEach(function(movie) { %>
+<% movies.forEach(movie => { %>
   <h3><%= movie.title %> </h2>
     <span><%= movie.year %> | <%= movie.rated || "R" %></span><br>
     <span><%= movie.rating || "***ooo" %></span><span><%= movie.customerReviews || " 12" %> </span><br>

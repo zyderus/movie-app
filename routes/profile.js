@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const Movie = require('../models/movie');
 const passport = require("passport");
 const axios = require("axios");
 
 // Profile
 router.get("/profile/:user_id", (req, res) => {
   User.findById(req.params.user_id, (err, user) => {
+
+
+
     let owmapi = process.env.OWMAPI;
     let latitude = 39.749407;
     let longtitude = 64.420079;
@@ -17,7 +21,9 @@ router.get("/profile/:user_id", (req, res) => {
     setTimeout(() => {
       if(!data){
         console.log("data is still empty: ");
-        return res.render('profile', { user: user, data: data });
+        Movie.find({ 'author.username': user.username }, (err, movies) => {
+          return res.render('users/profile', { user: user, movies: movies, data: data });
+        });
       }
     }, 2000);
     
@@ -25,7 +31,9 @@ router.get("/profile/:user_id", (req, res) => {
       try {
         const resp = await axios.get(url);
         data = resp.data;
-        res.render('profile', { user: user, data: data });
+        Movie.find({ 'author.username': user.username }, (err, movies) => {
+          res.render('users/profile', { user: user, movies: movies, data: data });
+        });
       } catch (err) {  console.error(err); }
     };
     sendGetRequest();

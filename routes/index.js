@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user");
 const passport = require("passport");
+const User = require("../models/user");
 
-// Index
+// Homepage
 router.get("/", (req, res) => {
-  res.redirect("/movies");
+  res.render("index");
 });
 
 // Register
@@ -14,8 +14,8 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  let newUser = new User({username: req.body.username});
-  User.register(newUser, req.body.password, (err) => {
+  const newUser = new User({ username: req.body.username });
+  User.register(newUser, req.body.password, err => {
     if (err) {
       console.log(err);
       return res.render("register");
@@ -42,7 +42,7 @@ router.post("/login", passport.authenticate("local", {
 router.get("/logout", (req, res) => {
   req.logout();
   console.log('user logged out');
-  res.redirect("/movies");
+  res.redirect("/");
 });
 
-module.exports = router;  
+module.exports = router;

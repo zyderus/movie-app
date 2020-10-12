@@ -4,14 +4,14 @@ const Movie = require("../models/movie");
 const middleware = require("../middleware");
 let { checkMovieOwnership, checkCommentOwnership, isLoggedIn, isAdmin, isSafe } = middleware;
 
-// List
+// List movies
 router.get("/", (req, res) => {
   Movie.find({}, (err, movies) => {
-    err ? console.log(err) : res.render("movies/index", { movies: movies });
+    err ? console.log(err) : res.render("movies/movies", { movies: movies });
   });
 });
 
-// Add
+// Add new movie
 router.get("/new", isLoggedIn, (req, res) => {
   res.render("movies/new");
 });
@@ -22,19 +22,21 @@ router.post("/", isLoggedIn, (req, res) => {
     id: req.user._id,
     username: req.user.username
   };
-  Movie.create(req.body.movie, (err) => {
-    err ? console.log(err) : console.log('movie created...'); res.redirect("/movies");
+  Movie.create(req.body.movie, err => {
+    err ? console.log(err) : 
+      console.log("movie created..."); 
+      res.redirect("/movies");
   });
 });
 
-// Show
+// Show movie page
 router.get("/:id", (req, res) => {
   Movie.findById(req.params.id).populate("comments").exec((err, movie) => {
     err ? console.log(err) : res.render("movies/show", { movie: movie });
   });
 });
 
-// Edit
+// Edit movie and update
 router.get("/:id/edit", checkMovieOwnership, (req, res) => {
   Movie.findById(req.params.id, (err, movie) => {
     err ? console.log(err) : res.render("movies/edit", { movie: movie });
@@ -43,16 +45,19 @@ router.get("/:id/edit", checkMovieOwnership, (req, res) => {
 
 router.put("/:id", checkMovieOwnership, (req, res) => {
   req.body.movie.description = req.sanitize(req.body.movie.description);
-  Movie.findByIdAndUpdate(req.params.id, req.body.movie, (err) => {
-    err ? console.log(err) : console.log("movie updated..."); res.redirect("/movies/" + req.params.id);
+  Movie.findByIdAndUpdate(req.params.id, req.body.movie, err => {
+    err ? console.log(err) : 
+      console.log("movie updated..."); 
+      res.redirect("/movies/" + req.params.id);
   });
 });
 
-// Delete
+// Delete movie
 router.delete("/:id", checkMovieOwnership, (req, res) => {
-  Movie.findByIdAndRemove(req.params.id, (err) => {
-    console.log("movie deleted...");
-    res.redirect("/movies");
+  Movie.findByIdAndRemove(req.params.id, err => {
+    err ? console.log(err) : 
+      console.log("movie deleted...");
+      res.redirect("/movies");
   });
 });
 
