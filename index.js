@@ -1,6 +1,5 @@
 // Import packages
 const express           = require("express");
-const chalk             = require('chalk');
 const mongoose          = require("mongoose");
 const bodyParser        = require("body-parser");
 const expressSanitizer  = require("express-sanitizer");
@@ -58,5 +57,5 @@ app.use(profileRoutes);
 
 // Server
 app.listen(process.env.PORT || 5800, () => {
-  console.log(`Server running ${chalk.cyan('on port')} ${chalk.red(5800)}`);
+  console.log(`Server running on port 5800`);
 });
