@@ -16,7 +16,7 @@ const searchRoutes  = require("./routes/searchfast");
 const profileRoutes  = require("./routes/profile");
 
 const app           = express();
-// const PORT          = process.env.PORT || 5800;
+const PORT          = process.env.PORT || 5800;
 const DBURL         = process.env.DATABASEURL || "mongodb://localhost/movies-db";
 const Movie         = require("./models/movie");
 const Comment       = require("./models/comment");
@@ -56,6 +56,6 @@ app.use(searchRoutes);
 app.use(profileRoutes);
 
 // Server
-app.listen(process.env.PORT || 5800, () => {
-  console.log(`Server running on port 5800`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
