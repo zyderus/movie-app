@@ -1,0 +1,241 @@
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+  width: 110px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  .logo {
+    display: flex;
+    align-items: center;
+    .brand-icon {
+      width: 30px;
+    }
+  }
+}
+
+.navbar-nav {
+  white-space: nowrap;
+  width: 335px;
+}
+
+.navbar-nav li,
+.menu li {
+  font-size: 0.98rem;
+}
+
+.icon-bar {
+  width: 25px; 
+  height: 3px;
+  background-color: #B6B6B6;
+  display: block;
+  transition: all 0.2s;
+  margin-top: 4px
+}
+
+.navbar-toggler {
+  border: none;
+  background: transparent !important;
+}
+
+/* Burger menu Animation */
+.navbar-toggler .top-bar {
+  transform: rotate(45deg);
+  transform-origin: 5% 5%;
+}
+.navbar-toggler .middle-bar {
+  opacity: 0;
+}
+.navbar-toggler .bottom-bar {
+  transform: rotate(-45deg);
+  transform-origin: 5% 100%;
+}
+.navbar-toggler.collapsed .top-bar {
+  transform: rotate(0);
+}
+.navbar-toggler.collapsed .middle-bar {
+  opacity: 1;
+}
+.navbar-toggler.collapsed .bottom-bar {
+  transform: rotate(0);
+}
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+#search-container-nav {
+  width: 60%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.search-form {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+.search-form i {
+  position: absolute;
+  top: 33%;
+  left: 0.8rem;
+}
+
+.search-input {
+  background-color: var(--bg-secondary);
+  width: 100%;
+  height: 38px;
+  color: white;
+  border: 2px solid var(--bg-secondary);
+  border-radius: 20px;
+  padding: 0 3.5rem;
+}
+.search-input::placeholder {
+  color: #bbb;
+}
+.search-input:focus {
+  outline: none;
+  border: 2px solid #ccc;
+  background-color: var(--bg-primary);
+}
+
+.menu {
+  white-space: nowrap;
+  li {
+    display: inline;
+    list-style: none;
+    padding: 0;
+  }
+}
+
+.btn-custom {
+  border: 2px solid var(--bg-secondary);
+  color: var(--text-primary);
+  height: 38px;
+  border-radius: 20px;
+  background-color: var(--bg-secondary);
+  padding: 0 1.8rem;
+  white-space: nowrap;
+  transition: all 100ms ease-in;
+}
+.btn-custom:hover {
+  background-color: var(--bg-primary);
+  border: 2px solid var(--text-primary);
+  color: var(--text-secondary);
+}
+.btn-custom:focus {
+  outline: none;
+}
+.btn-custom:active {
+  background-color: var(--bg-secondary);
+}
+
+.modal-login {
+  width: 400px;
+  margin: 30px auto;
+}
+
+.modal-content {
+  background-color: $pt-primary-bgcolor;
+  border: 1px solid $pt-secondary-bgcolor;
+  color: $pt-primary-color;
+  border-radius: 2px;
+  margin-bottom: 15px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 25px;
+}
+
+.modal-login .modal-header {
+  border-bottom: none;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.modal-login .link-close {
+  color: $pt-primary-color;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  svg {
+    margin-top: -1rem;
+    margin-right: -1rem;
+    opacity: 0.6;
+    transition: opacity 75ms;
+  }
+  svg:hover {
+    opacity: 0.9;
+  }
+}
+
+.modal-login h3 {
+  font-size: 26px;
+  margin-top: 0;
+}
+
+.modal-login .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.pw-message {
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-size: 1rem;
+  a {
+    margin: 0 auto;
+  }
+} 
+
+.modal-login .form-control {
+  background-color: inherit;
+  color: inherit;
+  font-size: inherit;
+  min-height: 40px;
+  padding: 0 2rem;
+  box-shadow: none !important;
+  border: 1px solid #888;
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+  &:focus {
+    border-color: #ddd;
+  }
+}
+
+.modal-login .btn-signin {
+  width: 100%;
+}
+
+.modal-login .btn {        
+  font-size: inherit;
+  font-weight: bold;
+  // border-radius: 3px;
+  // border: none;
+  // min-width: 140px;
+  // outline: none !important;
+}
+
+.modal-login .hint-text {
+  text-align: center;
+  padding-top: 5px;
+  font-size: 2.2rem;
+}
+
+.modal-login .modal-footer {
+  text-align: center;
+  border-top: 1px solid rgba(gray, 0.5);
+  // display: i;
+}
+
+.modal-login a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.modal-login a:hover {
+  text-decoration: underline;
+}

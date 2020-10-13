@@ -1,0 +1,139 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/">
+      <div class="logo">
+        <div class="brand-icon"><i class="fas fa-film"></i></div>
+        <div>TRON</div>
+      </div>
+    </a>
+
+    <!-- Burger Menu -->
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="icon-bar top-bar"></span>
+      <span class="icon-bar middle-bar"></span>
+      <span class="icon-bar bottom-bar"></span>				
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0 mr-4">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="#">GENRE</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/movies">MOVIES</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/movies/new">ADD MOVIE</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+            TV SHOWS
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div id="search-container-nav">
+        <form class="search-form" action="/results" method="get">
+          <i class="fas fa-search fa-lg"></i>
+          <input type="text" name="search" class="search-input" placeholder="Search movies...">
+        </form>
+      </div>
+
+      <div class="menu ml-4">
+        <% if (!currentUser) { %>
+          <li><button class="btn-custom" data-toggle="modal" data-target="#authModal">LOGIN</button></li>
+        <% } else { %>
+          <li>hi <a href="/profile/<%= currentUser._id %>"><strong><%= currentUser.username %></strong></a></li>
+          <li><a href="/logout">LOGOUT</a></li>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Auth Modal -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-login">
+  <!-- <div class="modal-dialog modal-dialog-centered modal-login"> -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Sign In</h3>
+
+        <a href="javascript:void(0)" class="link-close" data-dismiss="modal" aria-label="Close">
+          <svg width="3rem" height="3rem" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </a>
+
+      </div>
+      <div class="modal-body">
+        <form class="form-login" action="/login" method="post">
+          <div class="form-group">
+            <label for="username" class="sr-only">Email or phone</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Email or phone" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+          </div>
+          <div class="form-group login-button">
+            <button type="submit" class="btn-custom btn-signin">SIGN IN</button>
+          </div>
+          <div class="form-group">
+            <span class="pw-message"><a href="#">Forgot Password?</a></span>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <span class="pw-message mb-3">or login with </span>
+        <a href="" class="btn btn-danger btn-lg btn-block">Google</a>
+        <a href="" class="btn btn-primary btn-lg btn-block">Facebook</a>
+        <p class="pw-message mt-4">Don't have an account? <a href="javascript:void(0)" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">Create one</a></p> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-login">
+  <!-- <div class="modal-dialog modal-dialog-centered modal-login"> -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Register</h3>
+
+        <a href="javascript:void(0)" class="link-close" data-dismiss="modal" aria-label="Close">
+          <svg width="3rem" height="3rem" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </a>
+
+      </div>
+      <div class="modal-body">
+        <form class="form-login" action="/register" method="post">
+          <div class="form-group">
+            <label for="username2" class="sr-only">Email or phone</label>
+            <input type="text" class="form-control" id="username2" name="username" placeholder="Email or phone" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+          </div>
+          <div class="form-group login-button">
+            <button type="submit" class="btn-custom btn-signin">REGISTER</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="pw-message mt-4"><a href="javascript:void(0)" data-dismiss="modal" data-toggle="modal" data-target="#authModal">Back to SIGN IN</a></p> 
+      </div>
+    </div>
+  </div>
+</div>

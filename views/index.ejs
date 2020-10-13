@@ -1,7 +1,45 @@
 <%- include('./partials/header') %> 
 
-<h1>Homepage</h1>
+<header>
+  <!-- Carousel -->
+  <div id="carousel-main" class="carousel slide" 
+    data-ride="carousel" data-interval="15000">
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-main" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-main" data-slide-to="1"></li>
+      <li data-target="#carousel-main" data-slide-to="2"></li>
+    </ol>
+    
+    <div class="marquee">
+      <div class="marquee-content">
+        <!-- Generate Trending Cards -->
+      </div>
+    </div>
+    
+    <div class="carousel-inner" role="listbox">
+      <!-- Place Generated Gallery to Slides -->
+    </div>
 
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum eligendi perspiciatis quis quaerat ullam quos voluptates ea modi amet corporis, consectetur quae numquam.</p>
+    <a class="carousel-control-prev" href="#carousel-main" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-main" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+
+    <!-- <div  id="search-container-main">
+      <form class="search-form" action="">
+        <i class="fas fa-search fa-lg"></i>
+        <input type="text" class="search search-input" placeholder="Search movies..." autofocus>
+      </form>
+    </div> -->
+
+  </div>
+  
+</header>
+
+<main></main>
 
 <%- include('./partials/footer') %> 

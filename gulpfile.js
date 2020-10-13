@@ -73,9 +73,8 @@ const html = () => {
 const style = () => {
   return src('public/scss/**/*.scss')
   .pipe(sourcemaps.init())
+  .pipe(sass({ outputStyle: 'compressed' })).on('error', sass.logError)
   .pipe(concat('styles.min.css'))
-  .pipe(sass({ outputStyle: 'compressed' }))
-  .on('error', sass.logError)
   .pipe(postcss([ autoprefixer({
     overrideBrowserslist: ['last 5 versions']
   }) ]))
