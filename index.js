@@ -1,6 +1,3 @@
-// Import and activate package to hold environment variables locally
-require('dotenv').config();
-
 // Import packages
 const express           = require("express");
 const chalk             = require('chalk');
