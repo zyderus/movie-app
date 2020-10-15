@@ -16,7 +16,7 @@ document.getElementById('register-form').addEventListener('submit', e => {
     console.log(data);
     if(data.success) {
       console.log('successfully registered');
-      return location.reload();
+      return window.location.href = '/movies';
     }
   });
 });

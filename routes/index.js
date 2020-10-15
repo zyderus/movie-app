@@ -16,10 +16,9 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
 
-  console.log(req.body);
+  // console.log(req.body);
   
   const secretKey = process.env.CAPTCHA_SECRET_KEY;
-  console.log(secretKey);
 
   if(!req.body.captcha) {
     return res.json({ message: "Please select captcha" });
@@ -38,10 +37,10 @@ router.post("/register", async (req, res) => {
 
 
   // If Successful
-  res.json({ message: "Captcha passed" });
+  res.json({ success: true, message: "Captcha passed" });
 
-  console.log(req.body.username);
-  console.log(req.body.password);
+  // console.log(req.body.username);
+  // console.log(req.body.password);
 
   const newUser = new User({ username: req.body.username });
   console.log(newUser);
@@ -49,11 +48,11 @@ router.post("/register", async (req, res) => {
   User.register(newUser, req.body.password, err => {
     if (err) {
       console.log("THIS CRAZY ERROR", err);
-      return res.render("register");
+      // return res.render("register");
     }
     passport.authenticate("local")(req, res, () => {
       console.log("user registered...");
-      res.redirect("/movies");
+      // res.redirect("/movies");
     });
   });
 });
