@@ -41,7 +41,8 @@
       </ul>
 
       <div id="search-container-nav">
-        <form class="search-form" action="/results" method="get">
+        <form class="search-form" action="" method="get">
+        <!-- <form class="search-form" action="/results" method="get"> -->
           <i class="fas fa-search fa-lg"></i>
           <input type="text" name="search" class="search-input" placeholder="Search movies...">
         </form>
@@ -49,7 +50,7 @@
 
       <div class="menu ml-4">
         <% if (!currentUser) { %>
-          <li><button class="btn-custom" data-toggle="modal" data-target="#authModal">LOGIN</button></li>
+          <li><button class="btn-custom" data-toggle="modal" data-target="#tabsModal">LOGIN</button></li>
         <% } else { %>
           <li>hi <a href="/profile/<%= currentUser._id %>"><strong><%= currentUser.username %></strong></a></li>
           <li><a href="/logout">LOGOUT</a></li>
@@ -60,11 +61,14 @@
   </div>
 </nav>
 
-<!-- Auth Modal -->
+
+
+<!-- --------------------------------------------------------------------------------------------------------- -->
+<!-- Auth Modal
 <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-login">
   <!-- <div class="modal-dialog modal-dialog-centered modal-login"> -->
-    <div class="modal-content">
+    <!-- <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title" id="exampleModalLabel">Sign In</h3>
 
@@ -100,12 +104,11 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Register Modal -->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-login">
-  <!-- <div class="modal-dialog modal-dialog-centered modal-login"> -->
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title" id="exampleModalLabel">Register</h3>
@@ -118,7 +121,7 @@
 
       </div>
       <div class="modal-body">
-        <form class="form-login" action="/register" method="post">
+        <form id="register-form" class="form-login" action="/register" method="post">
           <div class="form-group">
             <label for="username2" class="sr-only">Email or phone</label>
             <input type="text" class="form-control" id="username2" name="username" placeholder="Email or phone" required>
@@ -133,6 +136,103 @@
       </div>
       <div class="modal-footer">
         <p class="pw-message mt-4"><a href="javascript:void(0)" data-dismiss="modal" data-toggle="modal" data-target="#authModal">Back to SIGN IN</a></p> 
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- -------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+<!-- Auth Modal -->
+<div class="modal fade" id="tabsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-login">
+    <div class="modal-content">
+
+      <a href="javascript:void(0)" class="link-close" data-dismiss="modal" aria-label="Close">
+        <svg width="3rem" height="3rem" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      </a>
+
+      <!-- Tab control -->
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login-tab-page" role="tab" aria-controls="login" aria-selected="true"></a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="register-tab" data-toggle="tab" href="#register-tab-page" role="tab" aria-controls="register" aria-selected="false"></a>
+        </li>
+      </ul>
+
+      <!-- Tab Contents -->
+      <div class="tab-content" id="myTabContent">
+
+        <!-- Login Tab -->
+        <div class="tab-pane fade show active" id="login-tab-page" role="tabpanel" aria-labelledby="login-p">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Sign In</h3>
+          </div>
+          <div class="modal-body">
+            <form class="form-login" action="/login" method="post">
+              <div class="form-group">
+                <label for="username" class="sr-only">Email or phone</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Email or phone" required>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+              </div>
+              <div class="form-group login-button">
+                <button type="submit" class="btn-custom btn-signin">SIGN IN</button>
+              </div>
+              <div class="form-group">
+                <span class="pw-message"><a href="#">Forgot Password?</a></span>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <span class="pw-message mb-3">or login with </span>
+            <a href="" class="btn btn-danger btn-lg btn-block">Google</a>
+            <a href="" class="btn btn-primary btn-lg btn-block">Facebook</a>
+            <!-- <p class="pw-message mt-4">Don't have an account? <a href="#profile" data-toggle="tab">Create one</a></p>  -->
+            <p class="pw-message mt-4">Don't have an account? <a href="javascript:void(0)" id="register-link">Create one</a></p> 
+          </div>
+        </div>
+
+        <!-- Register Tab -->
+        <div class="tab-pane fade" id="register-tab-page" role="tabpanel" aria-labelledby="register-tab">
+          <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Register</h3>
+          </div>
+          <div class="modal-body">
+            <form id="register-form" class="form-login" action="/register" method="post">
+              <div class="form-group">
+                <label for="reg-username" class="sr-only">Email or phone</label>
+                <input type="text" id="reg-username" class="form-control" name="username" placeholder="Email or phone" required>
+              </div>
+              <div class="form-group">
+                <input type="password" id="reg-password" class="form-control" name="password" placeholder="Password" required>
+              </div>
+              <div class="form-group">
+                <div class="g-recaptcha" data-sitekey="6LcM8tYZAAAAABvmpocwIUdhXPESv96MNbmKBddC"></div>
+              </div>
+              <div class="form-group login-button">
+                <button type="submit" class="btn-custom btn-signin">REGISTER</button>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <p class="pw-message mt-4"><a href="javascript:void(0)" id="login-link">Back to SIGN IN</a></p> 
+          </div>
+
+        </div>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@ require('dotenv').config();
 // Import packages
 const express           = require("express");
 const mongoose          = require("mongoose");
-const bodyParser        = require("body-parser");
+const fetch             = require("node-fetch");
 const expressSanitizer  = require("express-sanitizer");
 const methodOverride    = require("method-override");
 const passport          = require("passport");
@@ -15,7 +15,7 @@ const movieRoutes   = require("./routes/movies");
 const commentRoutes = require("./routes/comments");
 const indexRoutes   = require("./routes/index");
 const searchRoutes  = require("./routes/searchfast");
-const profileRoutes  = require("./routes/profile");
+const profileRoutes = require("./routes/profile");
 
 const app           = express();
 const PORT          = process.env.PORT || 5800;
@@ -26,7 +26,8 @@ const User          = require("./models/user");
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 mongoose.connect(DBURL, { useNewUrlParser: true, useUnifiedTopology: true })

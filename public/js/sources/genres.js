@@ -94,5 +94,39 @@ const getGenres = (genres) => {
   return genresarr.join(', ');
 };
 
+
+const movieData = {
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    }
+  ],
+}
+
+const getMovieGenres = (genres) => {
+  const list = genres;
+  let genresarr = [];
+    list.map(item => {
+      genresarr.push(item.name);
+    });
+  return genresarr.join(', ');
+};
+
+
+
+
+
+
+
+
 // console.log(getGenres(genreCodes));
 // let parsed = JSON.parse(data);

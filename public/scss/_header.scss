@@ -162,8 +162,8 @@ nav {
   top: -10px;
   right: -10px;
   svg {
-    margin-top: -1rem;
-    margin-right: -1rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
     opacity: 0.6;
     transition: opacity 75ms;
   }
@@ -238,4 +238,23 @@ nav {
 
 .modal-login a:hover {
   text-decoration: underline;
+}
+
+.g-recaptcha {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-tabs {
+  border: none;
+  .nav-link {
+  border: none;
+  outline: none;
+  border-radius: 0;
+  &.active {
+    background-color: unset;
+    color: $pt-primary-color;
+    font-size: 2rem;
+  }
+}
 }

@@ -1,4 +1,5 @@
 const express = require("express");
+const fetch = require('node-fetch');
 const router = express.Router();
 const passport = require("passport");
 const User = require("../models/user");
@@ -13,11 +14,41 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
+
+  console.log(req.body);
+  
+  const secretKey = process.env.CAPTCHA_SECRET_KEY;
+  console.log(secretKey);
+
+  if(!req.body.captcha) {
+    return res.json({ message: "Please select captcha" });
+  }
+
+  // Verify URL
+  const verifyUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body.captcha + "&remoteip=" + req.connection.remoteAddress;
+
+  // Make Request to VerifyURL
+  const body = await fetch(verifyUrl).then(res => res.json());
+
+  // If not successful
+  if(body.success !== undefined && !body.success) {
+    return res.json({ message: "Failed captca verification" });
+  }
+
+
+  // If Successful
+  res.json({ message: "Captcha passed" });
+
+  console.log(req.body.username);
+  console.log(req.body.password);
+
   const newUser = new User({ username: req.body.username });
+  console.log(newUser);
+  console.log(req.body.password);
   User.register(newUser, req.body.password, err => {
     if (err) {
-      console.log(err);
+      console.log("THIS CRAZY ERROR", err);
       return res.render("register");
     }
     passport.authenticate("local")(req, res, () => {
