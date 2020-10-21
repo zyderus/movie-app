@@ -160,7 +160,7 @@
 /* end carousel */
 
 
-// MAIN section
+/* Main Section */
 main {
   position: relative;
   display: flex;
@@ -187,7 +187,7 @@ main {
   width: 50%;
   top: 7.4rem;
   margin-left: 18rem;
-  border-bottom: 1px solid rgba(100, 100, 100, 0.7);
+  border-bottom: 1px solid rgba(153, 105, 105, 0.7);
 }
 .section-backlogo {
   font-size: 15rem;
@@ -372,17 +372,6 @@ main {
 
 .page-film-stats_rating h2, h4 {
   display: inline;
-}
-
-
-
-
-
-
-
-footer {
-  margin-top: 3em;
-  background-color:  #131A22;
 }
 
 @media (max-width: 600px) {

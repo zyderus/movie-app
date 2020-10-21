@@ -1,3 +1,5 @@
+console.log('connected genres.js');
+
 const data = {
   "genres": [
     {

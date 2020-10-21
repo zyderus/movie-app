@@ -1,3 +1,5 @@
+console.log('connected marquee.js');
+
 function infiniteMarquee() {
   const root = document.documentElement;
   const marqueeElementsDisplayed = getComputedStyle(root).getPropertyValue('--marquee-elements-displayed');

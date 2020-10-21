@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+  
+
+  <h1>test form</h1>
+
+  <form id="theForm" action="/test" method="POST">
+    <input id="username" type="text" name="username" placeholder="username"><p></p>
+
+    <div class="g-recaptcha" data-sitekey="6LcM8tYZAAAAABvmpocwIUdhXPESv96MNbmKBddC" 
+      data-theme="dark">
+    </div><p></p>
+
+    <button>submit</button>
+  </form>
+  
+<script>
+
+  document.querySelector('#theForm').addEventListener('submit', e => {
+    e.preventDefault();
+    
+    const captcha = document.querySelector('#g-recaptcha-response').value;
+    const username = document.querySelector('#username').value;
+
+    console.log('captcha: \n', captcha);
+    console.log('firstname: \n', username);
+
+    // Send the Form Data
+    return fetch('/test', {
+      method: "POST",
+      headers: { 'Content-type':'application/json' },
+      body: JSON.stringify({ username, captcha })
+    })
+    .then(res => res.json())
+    .then(data => {
+      // View response from server, which in turn is from google verification api
+      console.log(data);
+      // if(data.success) return location.reload();
+    });
+  });
+</script>  
+</body>
+</html>

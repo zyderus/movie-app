@@ -135,6 +135,7 @@ nav {
   background-color: var(--bg-secondary);
 }
 
+/* Login modal */
 .modal-login {
   width: 400px;
   margin: 30px auto;
@@ -240,6 +241,10 @@ nav {
   text-decoration: underline;
 }
 
+#register-link {
+  font-weight: bold;
+}
+
 .g-recaptcha {
   display: flex;
   justify-content: center;
@@ -248,13 +253,116 @@ nav {
 .nav-tabs {
   border: none;
   .nav-link {
-  border: none;
-  outline: none;
-  border-radius: 0;
-  &.active {
-    background-color: unset;
-    color: $pt-primary-color;
-    font-size: 2rem;
+    border: none;
+    outline: none;
+    border-radius: 0;
+    &.active {
+      background-color: unset;
+      color: $pt-primary-color;
+      font-size: 2rem;
+    }
   }
 }
+
+/* Register form modal */
+.form-errors {
+  padding: 0.3rem 1rem;
+  margin-bottom: 1.5rem;
+  background-color: $pt-secondary-bgcolor;
 }
+
+#register-form {
+  .form-group {
+    position: relative;
+  }
+  .form-group is, ie {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    visibility: hidden;
+  }
+  .form-group .small {
+    font-size: 0.8rem;
+    visibility: hidden;
+  }
+  .form-group.success input {
+    border-bottom: 1px solid green;
+  }
+  .form-group.success is {
+    color: teal;
+    visibility: visible;
+  }
+  .form-group.error input {
+    border-bottom: 1px solid coral;
+  }
+  .form-group.error ie {
+    color: coral;
+    visibility: visible;
+  }
+  .form-group.error .small {
+    color: coral;
+    visibility: visible;
+  }
+}
+
+/* Show Hide Password */
+.toggle-hide {
+  font-size: 1rem;
+  font-weight: 800;
+  color: $pt-secondary-color;
+  cursor: pointer;
+  position: absolute;
+  right: 5%;
+  top: .8rem;
+}
+.toggle-hide-show {
+  color: $pt-secondary-color !important;
+}
+.toggle-hide-hide {
+  color: coral !important;
+}
+/* end show hide password */
+
+/* Scaled feedback */
+.pwmeter-container {
+  text-align: center;
+}
+
+.pwmeter {
+  display: flex;
+  justify-content: space-between;
+  height: 8px;
+  margin: 0 auto;
+}
+.pwmeter span {
+  height: 7px;
+  width: 32.5%;
+  border-radius: 4px;
+  background-color: #888;
+  opacity: .2;
+  transition: opacity 300ms ease-in-out, background-color 300ms ease-in-out;
+}
+.meter-span-on {
+  opacity: 1 !important;
+}
+.meter-span-off {
+  background-color: #888 !important;
+  opacity: .2;
+}
+// .pwmeter .one {
+//   background-color: red;
+// }
+// .pwmeter .two {
+//   background-color: orange;
+// }
+// .pwmeter .three {
+//   background-color: green;
+// }
+
+.pwmessage-container {
+  height: 1.9rem;
+}
+#passwordmessage {
+  font-weight: 600;
+}
+/* end scaled feedback */

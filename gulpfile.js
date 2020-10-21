@@ -10,6 +10,20 @@ const concat = require('gulp-concat');
 const terser = require('gulp-terser');
 const imagemin = require('gulp-imagemin');
 
+// Delay browsersync
+function delaySync(done) {
+  setTimeout(() => {
+    browserSync(done);
+  }, 300);
+}
+
+// Delay browsersync reload
+function delayBsreload() {
+  setTimeout(() => {
+    browsersync.reload();
+  }, 500);
+}
+
 // Transfer files
 const transfer = () => {
   return src([
@@ -49,7 +63,7 @@ const nodeMon = done => {
     env: { 'NODE_ENV': 'development' }
   })
   .on('start', () => {
-      browsersync.reload();
+    delayBsreload();
   })
   .on('crash', () => {
     console.log('App crashed \n');
@@ -113,12 +127,8 @@ const watchFiles = done => {
   done();
 }
 
-function delaySync(done) {
-  setTimeout(() => {
-    browserSync(done);
-  }, 300);
-}
-
 exports.default = parallel(series(nodeMon, delaySync), watchFiles);
 // exports.default = series(browserSync, nodeMon, watchFiles);
 exports.build = series(clean, transfer);
+
+exports.js = js;

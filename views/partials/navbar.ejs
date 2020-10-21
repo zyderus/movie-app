@@ -183,8 +183,8 @@
           <div class="modal-body">
             <form class="form-login" action="/login" method="post">
               <div class="form-group">
-                <label for="username" class="sr-only">Email or phone</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Email or phone" required>
+                <label for="username" class="sr-only">Email</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Email" required>
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
@@ -211,20 +211,62 @@
           <div class="modal-header">
             <h3 class="modal-title" id="exampleModalLabel">Register</h3>
           </div>
+
           <div class="modal-body">
+            <% if(typeof errors != 'undefined') { %> 
+              <div class="form-errors" style="color: red;">
+                <% errors.forEach((error) => { %>
+                  <%= `* ${error}` %><br>
+                <% }) %>
+              </div>
+            <% } %>
+
             <form id="register-form" class="form-login" action="/register" method="post">
+
               <div class="form-group">
-                <label for="reg-username" class="sr-only">Email or phone</label>
-                <input type="text" id="reg-username" class="form-control" name="username" placeholder="Email or phone" required>
+                <label for="reg-email" class="sr-only">Email</label>
+                <input 
+                  type="text" 
+                  id="reg-email" 
+                  class="form-control" 
+                  name="email" 
+                  placeholder="Email" 
+                  value="<%= typeof email != 'undefined' ? email : '' %>" 
+                  required
+                >
+                <div class="small email-small">Error message</div>
               </div>
+
               <div class="form-group">
-                <input type="password" id="reg-password" class="form-control" name="password" placeholder="Password" required>
+                <input 
+                  type="password" 
+                  id="reg-password" 
+                  class="form-control" 
+                  name="password" 
+                  placeholder="Password" 
+                  value="<%= typeof password != 'undefined' ? password : '' %>" 
+                  required
+                >
+                <div class="toggle-hide">SHOW</div>
+                <div class="small">Error message</div>  
+                <div class="pwmeter-container">
+                  <div class="pwmessage-container">
+                    <span id="passwordmessage" aria-live="polite"></span>
+                  </div>
+                  <div class="pwmeter">
+                    <span class="one"></span>
+                    <span class="two"></span>
+                    <span class="three"></span>
+                  </div>
+                </div>
               </div>
+
               <div class="form-group">
-                <div class="g-recaptcha" data-sitekey="6LcM8tYZAAAAABvmpocwIUdhXPESv96MNbmKBddC"></div>
+                <div class="g-recaptcha" data-callback="recaptchaCheck" data-expired-callback="recaptchaCheckExp" data-sitekey="<%= gCaptchaKey %>" data-theme="light"></div>
               </div>
+
               <div class="form-group login-button">
-                <button type="submit" class="btn-custom btn-signin">REGISTER</button>
+                <button type="submit" id="btn-register" class="btn-custom btn-signin">REGISTER</button>
               </div>
             </form>
           </div>

@@ -1,46 +1,9 @@
-console.log('hi');
+console.log('connected main.js');
 
 // Go back in browser history
 function goBack() {
   window.history.back();
 }
-
-// Links to Login and Register tabs in Modal Window
-const reglink = document.querySelector('#register-link');
-const loginlink = document.querySelector('#login-link');
-
-const triggerEl = document.querySelector('#myTab a[href="#register-tab-page"]');
-const triggerEl2 = document.querySelector('#myTab a[href="#login-tab-page"]');
-const tabTrigger = new bootstrap.Tab(triggerEl);
-const tabTrigger2 = new bootstrap.Tab(triggerEl2);
-
-reglink.addEventListener('click', function (e) {
-  e.preventDefault()
-  tabTrigger.show()
-});
-loginlink.addEventListener('click', function (e) {
-  e.preventDefault()
-  tabTrigger2.show()
-});
-
-const api_key = 'f23a624fd8704f7b8261ca835ef4e069';
-const api_url = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&include_adult=false&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
-const img_path = 'https://image.tmdb.org/t/p/w300';
-const search_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&include_adult=false&language=en-US&query=`;
-const trending_url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${api_key}`;
-const img_path_hires = 'https://image.tmdb.org/t/p/w1280';
-const movie_url = `https://api.themoviedb.org/3/movie/`
-const movie_url_options = `?api_key=${api_key}&language=en-US`;
-
-const marqueeReel = document.querySelector('.marquee-content');
-const gallery = document.querySelector('.carousel-inner');
-const galleryThumbnails = document.querySelector('.carousel-indicators');
-const main = document.querySelector('main');
-const section = document.querySelector('section');
-const searchContainerMain = document.querySelector('#search-container-main');
-const searchForm = document.querySelector('.search-form');
-const searchInput = document.querySelector('.search-input');
-const header = document.querySelector('header');
 
 // Initiate Data Fetch
 getTrending(trending_url);
@@ -367,6 +330,61 @@ document.querySelector("main").addEventListener('click', function(e) {
 		console.log("listener attached to <main>");
 	}
 });
+
+// Modal form links between Login and Register modals
+reglink.addEventListener('click', function (e) {
+  e.preventDefault()
+  tabTrigger.show()
+});
+loginlink.addEventListener('click', function (e) {
+  e.preventDefault()
+  tabTrigger2.show()
+});
+
+// Toggle Password Visibility
+hideBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    toggleShow(btn);    
+  });
+});
+
+function toggleShow(element) {
+  if (element.previousElementSibling.type === "password") {
+    element.previousElementSibling.type = "text";
+    element.className = 'toggle-hide toggle-hide-hide';
+    element.innerText = 'HIDE';
+  } else {
+    element.previousElementSibling.type = "password";
+    element.className = 'toggle-hide toggle-hide-show';
+    element.innerText = 'SHOW';
+  }
+}
+// end toggle password visibility
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // document.addEventListener('click', (e) => {
 //   if(e.target && e.target.id == 'movie-link') {

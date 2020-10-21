@@ -24,6 +24,8 @@ const Movie         = require("./models/movie");
 const Comment       = require("./models/comment");
 const User          = require("./models/user");
 
+
+
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
@@ -48,6 +50,7 @@ passport.deserializeUser(User.deserializeUser());
 // Add user to all routes (req.user)
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.gCaptchaKey = process.env.CAPTCHA_SITE_KEY;
   next();
 });
 

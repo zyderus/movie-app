@@ -1,3 +1,5 @@
+console.log('connected security.js');
+
 // Google reCaptcha v2 & form
 document.getElementById('register-form').addEventListener('submit', e => {
   e.preventDefault();
@@ -16,7 +18,8 @@ document.getElementById('register-form').addEventListener('submit', e => {
     console.log(data);
     if(data.success) {
       console.log('successfully registered');
-      return window.location.href = '/movies';
+      registrationErrors.recaptca = false;
+      return window.location.href = '/';
     }
   });
 });
