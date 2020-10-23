@@ -1,0 +1,50 @@
+// Marquee
+@media (max-width: 600px) {
+  html { font-size: 12px; }
+  :root {
+    --marquee-width: 100vw;
+    --marquee-height: 30vh;
+    --marquee-elements-displayed: 3;
+
+  }
+
+  .marquee:before, .marquee:after {
+    width: 5rem; 
+  }
+}
+
+// Auth Modal Window
+@media (max-width: 420px) {
+  .modal-login {
+    width: 100%;
+  }
+}
+
+// Auth Modal Window
+@media (max-width: 991px) {
+  .navbar-nav {
+    width: 100%;
+  }
+
+  .ml-4 {
+    margin-left: 0!important;
+  }
+
+  #search-container-nav {
+    padding-bottom: 7px;
+  }
+
+  .menu {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-item {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+
+

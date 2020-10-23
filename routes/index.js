@@ -48,9 +48,22 @@ router.post('/register', [
     .trim()
     .withMessage('Password must be at least 6 chars')
 ], async (req, res) => {
-  const captcha = req.body['g-recaptcha-response'];
+  // Check for validation Errors
+  const validationErrors = validationResult(req);
   let errors = [];
+  
+  if(!validationErrors.isEmpty()) {
+    Object.keys(validationErrors.array()).forEach(field => {
+      errors.push(validationErrors.array()[field]['msg']);
+    });
+  }
 
+  if(errors.length){
+    return res.render('register', { errors });
+  }
+
+  // Recaptcha Verification
+  const captcha = req.body['g-recaptcha-response'];
   if(!captcha) {
     console.log("Please select captcha");
     errors.push("Please select captcha");

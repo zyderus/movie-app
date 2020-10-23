@@ -50,7 +50,7 @@
 
       <div class="menu ml-4">
         <% if (!currentUser) { %>
-          <li><button class="btn-custom" data-toggle="modal" data-target="#tabsModal">LOGIN</button></li>
+          <li><button class="btn-custom login-btn" data-toggle="modal" data-target="#tabsModal">LOGIN</button></li>
         <% } else { %>
           <li>hi <a href="/profile/<%= currentUser._id %>"><strong><%= currentUser.username %></strong></a></li>
           <li><a href="/logout">LOGOUT</a></li>
@@ -145,7 +145,7 @@
 
 <!-- Auth Modal -->
 <div class="modal fade" id="tabsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-login">
+  <div class="modal-dialog modal-dialog-centered modal-login">
     <div class="modal-content">
 
       <a href="javascript:void(0)" class="link-close" data-dismiss="modal" aria-label="Close">
@@ -191,8 +191,8 @@
           </div>
           <div class="modal-footer">
             <span class="pw-message mb-3">or login with </span>
-            <a href="" class="btn btn-danger btn-lg btn-block">Google</a>
-            <a href="" class="btn btn-primary btn-lg btn-block">Facebook</a>
+            <a href="javascript:void(0)" class="btn btn-danger btn-lg btn-block">Google</a>
+            <a href="javascript:void(0)" class="btn btn-primary btn-lg btn-block">Facebook</a>
             <!-- <p class="pw-message mt-4">Don't have an account? <a href="#profile" data-toggle="tab">Create one</a></p>  -->
             <p class="pw-message mt-4">Don't have an account? <a href="javascript:void(0)" id="register-link">Create one</a></p> 
           </div>
