@@ -2,74 +2,9 @@ const express = require("express");
 const fetch = require('node-fetch');
 const router = express.Router();
 const passport = require("passport");
+const { check, validationResult } = require('express-validator');
 const User = require("../models/user");
 const captchaSecretKey = process.env.CAPTCHA_SECRET_KEY;
-
-
-
-
-
-
-
-
-
-router.get('/test', (req, res) => {
-  res.render('test-form');
-});
-
-router.post('/test', async (req, res) => {
-  // Data received from a form with recaptcha
-  console.log('REQ.BODY: \n', req.body);
-  console.log('REQ.CONNECTION.REMOTEADDRESS: \n', req.connection.remoteAddress);
-
-  // const captcha = req.body['g-recaptcha-response'];    // If data comes-in from form submit
-  const captcha = req.body.captcha;                    // If data comes-in from fetch
-  console.log('captcha: \n', captcha);
-  if(!captcha) {
-    return res.json({ success: false, message: "Please select captcha" });
-  }
-
-  // Secret Key
-  const secretKey = "6LcM8tYZAAAAAGlfF4sLptdM6TeK55IgyJK3DqSe";
-
-  // Verify URL (Constcruct a request for google recaptcha api)
-  const verifyUrl = "https://www.google.com/recaptcha/api/siteverify?secret="
-     + secretKey 
-     //  + "&response=" + req.body['g-recaptcha-response']       // If data comes-in from form submit
-     + "&response=" + req.body.captcha                         // If data comes-in from fetch
-     + "&remoteip=" + req.connection.remoteAddress;
-
-     console.log('VERIFY URL: ', verifyUrl);
-
-  // Make Request to VerifyURL (Send to google and await verification response)
-  const body = await fetch(verifyUrl).then(res => res.json());
-  // Response
-  console.log('Response from google: \n', body);
-  /* {
-      success: true,
-      challenge_ts: '2020-10-21T15:27:33Z',
-      hostname: 'localhost'
-    } */
-
-  // If not successful
-  if(body.success !== undefined && !body.success) {
-    return res.json({ success: false, message: "Failed captca verification" });
-  }
-  // If Successful
-  if(body.success === true) {
-    return res.json({ success: true, message: "Captcha passed" });
-  }
-  // Otherwise
-  return res.json({ success: false, message: "Captca verification unavailable" });
-});
-
-
-
-
-
-
-
-
 
 
 // Homepage
@@ -82,36 +17,77 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 
-router.post("/register", async (req, res) => {
+router.post('/register', [
+  // Check Username
+  check('username', 'Email is not valid')
+    .not()
+    .isEmpty()
+    .withMessage('Email is required')
+    .isLength({ min: 7 })
+    .withMessage('Email should be 7+ characters')
+    .isEmail()
+    .bail()
+    .trim()
+    .normalizeEmail()
+    .withMessage('Not a valid email address')
+    // Check if exists in the database
+    .custom(email => {
+      return User.findOne({ email }).then((user) => {
+        // console.log(user.email);
+        if (user) {
+          return Promise.reject('Email already in use');
+        }
+      });
+    }),
+  // Check Password
+  check('password')
+    .not()
+    .isEmpty()
+    .withMessage('Password is required')
+    .isLength({ min: 6 })
+    .trim()
+    .withMessage('Password must be at least 6 chars')
+], async (req, res) => {
+  const captcha = req.body['g-recaptcha-response'];
+  let errors = [];
 
-  if(!req.body.captcha) {
-    return res.json({ message: "Please select captcha" });
+  if(!captcha) {
+    console.log("Please select captcha");
+    errors.push("Please select captcha");
+    return res.render('register', { errors });
   }
 
-  // Verify URL
-  const verifyUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + captchaSecretKey + "&response=" + req.body.captcha + "&remoteip=" + req.connection.remoteAddress;
+  // Verify URL (Constcruct a request for google recaptcha api)
+  const verifyUrl = "https://www.google.com/recaptcha/api/siteverify?secret="
+    + captchaSecretKey 
+    + "&response=" + captcha
+    + "&remoteip=" + req.connection.remoteAddress;
 
-  // Make Request to VerifyURL
+  // Make Request to VerifyURL (Send to google and await verification response)
   const body = await fetch(verifyUrl).then(res => res.json());
+  // Response
+  console.log('Response from google: \n', body);
 
   // If not successful
   if(body.success !== undefined && !body.success) {
-    return res.json({ message: "Failed captca verification" });
+    console.log("Failed captca verification");
+    errors.push("Failed captca verification");
+    return res.render('register', { errors });
   }
 
-  // If Successful
-  res.json({ success: true, message: "Captcha passed" });
-
-  const newUser = new User({ username: req.body.username });
-
+  console.log("Captcha passed....");
+  // User create and login
+  const newUser = new User({ username: req.body.username, email: req.body.username });
   User.register(newUser, req.body.password, err => {
     if (err) {
-      console.log("THIS CRAZY ERROR", err);
-      // return res.render("register");
+      console.log("User registration failed, ", err);
+      errors.push(err);
+      return res.render('register', { errors });
     }
+    console.log("User registered....");
     passport.authenticate("local")(req, res, () => {
-      console.log("user registered...");
-      // res.redirect("/movies");
+      console.log("user logged in....");
+      return res.redirect("/");
     });
   });
 });
@@ -132,6 +108,34 @@ router.get("/logout", (req, res) => {
   req.logout();
   console.log('user logged out');
   res.redirect("/");
+});
+
+// Check if Email present in database
+router.post('/usercheck', [  
+  check('email', 'Email is not valid')
+    .not()
+    .isEmpty()
+    .withMessage('Email is required')
+    .isLength({ min: 7 })
+    .isEmail()
+    .normalizeEmail()
+    .withMessage('Not a valid email address')
+    .custom(email => {
+      return User.findOne({ email }).then((user) => {
+        // console.log(user.email);
+        if (user) {
+          return Promise.reject('Email already in use');
+        }
+      });
+    }), 
+  ], (req, res) => {
+  // Output express-validator results
+  const errors = validationResult(req);
+
+  if(!errors.isEmpty()) {
+    return res.json({ message: errors.mapped().email.msg });
+  }
+  res.json({ message: 'success' });
 });
 
 module.exports = router;

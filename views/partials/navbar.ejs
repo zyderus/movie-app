@@ -143,14 +143,6 @@
 <!-- -------------------------------------------------------------------- -->
 
 
-
-
-
-
-
-
-
-
 <!-- Auth Modal -->
 <div class="modal fade" id="tabsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-login">
@@ -220,6 +212,8 @@
                 <% }) %>
               </div>
             <% } %>
+          
+            <div class="email-error" style="color: red;"></div>
 
             <form id="register-form" class="form-login" action="/register" method="post">
 
@@ -229,7 +223,7 @@
                   type="text" 
                   id="reg-email" 
                   class="form-control" 
-                  name="email" 
+                  name="username" 
                   placeholder="Email" 
                   value="<%= typeof email != 'undefined' ? email : '' %>" 
                   required

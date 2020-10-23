@@ -3,12 +3,31 @@
 
 <div class="login-form">
   <h2>Register</h2>
-  <form action="/register" method="post">
-    <p><input type="text" name="username" placeholder="username" required autofocus></p>
-    <p><input type="password" name="password" placeholder="password" required></p>
-    <button>Register</button>
+
+  <% if(typeof errors != 'undefined') { %> 
+    <div class="form-errors" style="color: red;">
+      <% errors.forEach((error) => { %>
+        <%= `* ${error}` %><br>
+      <% }) %>
+    </div>
+  <% } else if(typeof errors == 'success') { %>
+    <div class="form-errors" style="color: green;">
+        <%= `Registered successfully` %><br>
+    </div>
+  <% } %>
+
+  <form id="reg-form-static" action="/register" method="post">
+    <div class="form-group mb-3">
+      <input type="text" class="form-control" name="username" placeholder="username" autofocus>
+    </div>
+    <div class="form-group mb-3">
+      <input type="password" class="form-control" name="password" placeholder="password" >
+    </div>
+    <div class="form-group mb-3">
+      <button class="btn btn-primary">Register</button>
+    </div>
   </form>
-  <a href="/movies"><button>Back</button></a>
+  <a href="/movies" class="btn btn-primary">Back</a>
 </div>
 
 

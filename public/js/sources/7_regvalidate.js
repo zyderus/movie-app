@@ -1,23 +1,21 @@
 console.log('connected regvalidate.js');
 
-// Check if all errors cleared
-function allFalse(obj) {
-  for(let item in obj)
-    if(obj[item]) return false;
-    
-  return true;
-}
+// Log Errors status on button click
+regbutton.addEventListener('click', () => {
+  console.log(registrationErrors);
+  console.log(allFalse(registrationErrors));
+});
+
+// Email field error set True on focus in
+regemail.addEventListener('focusin', () => {
+  registrationErrors.emailbackend = true;
+});
 
 // If errors prevent form submit
 regform.addEventListener('submit', (e) => {
   if(!allFalse(registrationErrors)) {
     e.preventDefault();
   }
-});
-
-regbutton.addEventListener('click', () => {
-  console.log(registrationErrors);
-  console.log(allFalse(registrationErrors));
 });
 
 // Email presence in database validation 
@@ -107,9 +105,8 @@ function checkEmail() {
       registrationErrors.emailbackend = true;
     } else {
       emailerr.innerHTML = '';
-      RegistrationErrors.emailbackend = false;
+      registrationErrors.emailbackend = false;
     }
-    // if(data.status === 'success') return window.location.href = '/verify';
   });
 }
 
@@ -118,4 +115,12 @@ function recaptchaCheck() {
 }
 function recaptchaCheckExp() {
   registrationErrors.recaptcha = true;
+}
+
+// Check if all errors cleared
+function allFalse(obj) {
+  for(let item in obj)
+    if(obj[item]) return false;
+    
+  return true;
 }
