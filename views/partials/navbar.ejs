@@ -1,3 +1,11 @@
+<% if(typeof errors != 'undefined') { %> 
+  <script>sessionStorage.setItem('regformErrors', true);</script>
+<% } %>
+
+<% if(typeof loginErrors != 'undefined') { %> 
+  <script>sessionStorage.setItem('loginErrors', true);</script>
+<% } %>
+  
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
   <div class="container-fluid">
@@ -50,7 +58,7 @@
 
       <div class="menu ml-4">
         <% if (!currentUser) { %>
-          <li><button class="btn-custom login-btn" data-toggle="modal" data-target="#tabsModal">LOGIN</button></li>
+          <li><button id="auth-btn" class="btn-custom login-btn" data-toggle="modal" data-target="#auth-modal">LOGIN</button></li>
         <% } else { %>
           <li>hi <a href="/profile/<%= currentUser._id %>"><strong><%= currentUser.username %></strong></a></li>
           <li><a href="/logout">LOGOUT</a></li>
@@ -61,91 +69,9 @@
   </div>
 </nav>
 
-
-
-<!-- --------------------------------------------------------------------------------------------------------- -->
-<!-- Auth Modal
-<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-login">
-  <!-- <div class="modal-dialog modal-dialog-centered modal-login"> -->
-    <!-- <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">Sign In</h3>
-
-        <a href="javascript:void(0)" class="link-close" data-dismiss="modal" aria-label="Close">
-          <svg width="3rem" height="3rem" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-          </svg>
-        </a>
-
-      </div>
-      <div class="modal-body">
-        <form class="form-login" action="/login" method="post">
-          <div class="form-group">
-            <label for="username" class="sr-only">Email or phone</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Email or phone" required>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-          </div>
-          <div class="form-group login-button">
-            <button type="submit" class="btn-custom btn-signin">SIGN IN</button>
-          </div>
-          <div class="form-group">
-            <span class="pw-message"><a href="#">Forgot Password?</a></span>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <span class="pw-message mb-3">or login with </span>
-        <a href="" class="btn btn-danger btn-lg btn-block">Google</a>
-        <a href="" class="btn btn-primary btn-lg btn-block">Facebook</a>
-        <p class="pw-message mt-4">Don't have an account? <a href="javascript:void(0)" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">Create one</a></p> 
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- Register Modal -->
-<!-- <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-login">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">Register</h3>
-
-        <a href="javascript:void(0)" class="link-close" data-dismiss="modal" aria-label="Close">
-          <svg width="3rem" height="3rem" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-          </svg>
-        </a>
-
-      </div>
-      <div class="modal-body">
-        <form id="register-form" class="form-login" action="/register" method="post">
-          <div class="form-group">
-            <label for="username2" class="sr-only">Email or phone</label>
-            <input type="text" class="form-control" id="username2" name="username" placeholder="Email or phone" required>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required>
-          </div>
-          <div class="form-group login-button">
-            <button type="submit" class="btn-custom btn-signin">REGISTER</button>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <p class="pw-message mt-4"><a href="javascript:void(0)" data-dismiss="modal" data-toggle="modal" data-target="#authModal">Back to SIGN IN</a></p> 
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- -------------------------------------------------------------------- -->
-
-
 <!-- Auth Modal -->
-<div class="modal fade" id="tabsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-login">
+<div class="modal fade" id="auth-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog auth-modal">
     <div class="modal-content">
 
       <a href="javascript:void(0)" class="link-close" data-dismiss="modal" aria-label="Close">
@@ -155,7 +81,7 @@
       </a>
 
       <!-- Tab control -->
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <ul class="nav nav-tabs" id="authTab" role="tablist">
         <li class="nav-item" role="presentation">
           <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login-tab-page" role="tab" aria-controls="login" aria-selected="true"></a>
         </li>
@@ -173,16 +99,28 @@
             <h3 class="modal-title" id="exampleModalLabel">Sign In</h3>
           </div>
           <div class="modal-body">
-            <form class="form-login" action="/login" method="post">
+
+            <% if(typeof loginErrors != 'undefined' ) { %> 
+              <div style="font-weight: 500; color: coral;">* Email and Password do not match</div>
+            <% } %>
+
+            <form id="login-form" class="form-login" action="/login" method="post" novalidate>
               <div class="form-group">
-                <label for="username" class="sr-only">Email</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Email" required>
+                <label for="login-email" class="sr-only">Email</label>
+                <input type="email" class="form-control" id="login-email" 
+                    name="username" placeholder="Email" autocomplete="username" required>
+                <div class="small email-small"></div>
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                <input type="password" class="form-control" id="login-password" 
+                    name="password" placeholder="Password" autocomplete="current-password" required>
+                <div class="small"></div>
               </div>
               <div class="form-group login-button">
-                <button type="submit" class="btn-custom btn-signin">SIGN IN</button>
+                <button type="submit" id="login-btn" class="btn-custom auth-btn">
+                  SIGN IN
+                  <span class="reg-loader"></span>
+                </button>
               </div>
               <div class="form-group">
                 <span class="pw-message"><a href="#">Forgot Password?</a></span>
@@ -205,17 +143,16 @@
           </div>
 
           <div class="modal-body">
-            <% if(typeof errors != 'undefined') { %> 
-              <div class="form-errors" style="color: red;">
-                <% errors.forEach((error) => { %>
-                  <%= `* ${error}` %><br>
-                <% }) %>
+            <% if(typeof errors != 'undefined' ) { %> 
+              <div class="form-errors">
+                <div style="font-weight: 500;">CLIENTSIDE VALIDATION FAIL: </div>
+                <span>Is JavaScript enabled?</span>
               </div>
             <% } %>
-          
-            <div class="email-error" style="color: red;"></div>
 
-            <form id="register-form" class="form-login" action="/register" method="post">
+            <form id="reg-form" action="/register" method="post" autocomplete="off" novalidate>
+
+              <input type="hidden" name="step" value="1">
 
               <div class="form-group">
                 <label for="reg-email" class="sr-only">Email</label>
@@ -225,10 +162,17 @@
                   class="form-control" 
                   name="username" 
                   placeholder="Email" 
-                  value="<%= typeof email != 'undefined' ? email : '' %>" 
+                  value 
+                  autocomplete="new-password" 
                   required
                 >
-                <div class="small email-small">Error message</div>
+                <div class="small email-small">
+                  <% if(typeof errors != 'undefined') { %> 
+                    <% errors.forEach((error) => { %>
+                      <%= `* ${error.username}` %><br>
+                    <% }) %>  
+                  <% } %>
+                </div>
               </div>
 
               <div class="form-group">
@@ -238,29 +182,49 @@
                   class="form-control" 
                   name="password" 
                   placeholder="Password" 
-                  value="<%= typeof password != 'undefined' ? password : '' %>" 
+                  autocomplete="new-password"
                   required
                 >
                 <div class="toggle-hide">SHOW</div>
-                <div class="small">Error message</div>  
                 <div class="pwmeter-container">
-                  <div class="pwmessage-container">
-                    <span id="passwordmessage" aria-live="polite"></span>
-                  </div>
                   <div class="pwmeter">
                     <span class="one"></span>
                     <span class="two"></span>
                     <span class="three"></span>
                   </div>
+                  <div class="pwmessage-container">
+                    <span id="passwordmessage" aria-live="polite"></span>
+                  </div>
+                </div>
+                <div class="small password-small">
+                  <% if(typeof errors != 'undefined') { %> 
+                    <div class="form-errors">
+                      <% errors.forEach((error) => { %>
+                        <% if(error.password != undefined) { %> 
+                          <%= `* ${error.password}` %><br>
+                        <% } %>
+                      <% }) %>
+                    </div>
+                  <% } %>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="g-recaptcha" data-callback="recaptchaCheck" data-expired-callback="recaptchaCheckExp" data-sitekey="<%= gCaptchaKey %>" data-theme="light"></div>
+                <div class="small captcha-small">
+                  Are you human?
+                  <% if(typeof errors != 'undefined') { %> 
+                    <% errors.forEach((error) => { %>
+                      <%= `* ${error.captcha}` %><br>
+                    <% }) %>  
+                  <% } %>
+                </div>
               </div>
 
               <div class="form-group login-button">
-                <button type="submit" id="btn-register" class="btn-custom btn-signin">REGISTER</button>
+                <button type="submit" id="btn-register" class="btn-custom auth-btn">REGISTER
+                  <span class="reg-loader"></span>
+                </button>
               </div>
             </form>
           </div>

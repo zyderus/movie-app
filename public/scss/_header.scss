@@ -136,10 +136,11 @@ nav {
 }
 
 /* Login modal */
-.modal-login {
+.auth-modal {
   min-width: 305px;
   width: 380px;
   margin: 0 auto;
+  margin-top: 8%;
 }
 
 .modal-content {
@@ -148,23 +149,17 @@ nav {
   color: $pt-primary-color;
   border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  padding: 25px;
+  padding: 0 25px;
 }
 
-.modal-login .modal-header {
-  border-bottom: none;
-  position: relative;
-  margin-bottom: 0.5rem;
-}
-
-.modal-login .link-close {
+.auth-modal .link-close {
   color: $pt-primary-color;
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: 0;
+  right: 0;
+  text-align: right;
+  z-index: 1;
   svg {
-    margin-top: 1rem;
-    margin-right: 1rem;
     opacity: 0.6;
     transition: opacity 75ms;
   }
@@ -173,13 +168,73 @@ nav {
   }
 }
 
-.modal-login h3 {
+#authTab {
+  padding-top: 0;
+  margin-top: 0;
+  height: 0;
+}
+
+.auth-modal .modal-header {
+  border-bottom: none;
+  position: relative;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.auth-modal .modal-body {
+  padding: 0 1rem;
+}
+
+.auth-modal form {
+  margin-top: 2rem;
+}
+
+.auth-modal h3 {
   font-size: 26px;
   margin-top: 0;
 }
 
-.modal-login .form-group {
-  margin-bottom: 1.5rem;
+.auth-modal .form-group {
+  margin-bottom: .5rem;
+}
+
+.auth-modal .form-control {
+  background-color: inherit;
+  color: inherit;
+  font-size: inherit;
+  height: 40px;
+  padding: 0;
+  box-shadow: none !important;
+  border: 1px solid #888;
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+  &:focus {
+    border-color: #ddd;
+  }
+}
+
+.auth-modal .auth-btn {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.auth-modal .btn {        
+  font-size: inherit;
+  font-weight: bold;
+}
+
+.auth-modal .modal-footer {
+  text-align: center;
+  border-top: 1px solid rgba(gray, 0.5);
+}
+
+.auth-modal a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.auth-modal a:hover {
+  text-decoration: underline;
 }
 
 .pw-message {
@@ -191,55 +246,6 @@ nav {
     margin: 0 auto;
   }
 } 
-
-.modal-login .form-control {
-  background-color: inherit;
-  color: inherit;
-  font-size: inherit;
-  min-height: 40px;
-  padding: 0 2rem;
-  box-shadow: none !important;
-  border: 1px solid #888;
-  border-width: 0 0 1px 0;
-  border-radius: 0;
-  &:focus {
-    border-color: #ddd;
-  }
-}
-
-.modal-login .btn-signin {
-  width: 100%;
-}
-
-.modal-login .btn {        
-  font-size: inherit;
-  font-weight: bold;
-  // border-radius: 3px;
-  // border: none;
-  // min-width: 140px;
-  // outline: none !important;
-}
-
-.modal-login .hint-text {
-  text-align: center;
-  padding-top: 5px;
-  font-size: 2.2rem;
-}
-
-.modal-login .modal-footer {
-  text-align: center;
-  border-top: 1px solid rgba(gray, 0.5);
-  // display: i;
-}
-
-.modal-login a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.modal-login a:hover {
-  text-decoration: underline;
-}
 
 #register-link {
   font-weight: bold;
@@ -267,42 +273,29 @@ nav {
 /* Register form modal */
 .form-errors {
   padding: 0.3rem 1rem;
-  margin-bottom: 1.5rem;
-  background-color: $pt-secondary-bgcolor;
+  margin-top: 3px;
+  background-color: rgb(112, 19, 19);
+  border-radius: 5px;
 }
 
-#register-form {
-  .form-group {
-    position: relative;
-  }
-  .form-group is, ie {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    visibility: hidden;
-  }
-  .form-group .small {
-    font-size: 0.8rem;
-    visibility: hidden;
-  }
-  .form-group.success input {
-    border-bottom: 1px solid green;
-  }
-  .form-group.success is {
-    color: teal;
-    visibility: visible;
-  }
-  .form-group.error input {
-    border-bottom: 1px solid coral;
-  }
-  .form-group.error ie {
-    color: coral;
-    visibility: visible;
-  }
-  .form-group.error .small {
-    color: coral;
-    visibility: visible;
-  }
+.form-group {
+  position: relative;
+}
+.form-group .small {
+  min-height: 22px;
+  font-size: 1rem;
+  font-weight: 500;
+  visibility: hidden;
+}
+.form-group.success input {
+  border-bottom: 1px solid green !important;
+}
+.form-group.error input {
+  border-bottom: 1px solid coral !important;
+}
+.form-group.error .small {
+  color: coral;
+  visibility: visible;
 }
 
 /* Show Hide Password */
@@ -312,7 +305,7 @@ nav {
   color: $pt-secondary-color;
   cursor: pointer;
   position: absolute;
-  right: 5%;
+  right: 2px;
   top: .8rem;
 }
 .toggle-hide-show {
@@ -325,50 +318,48 @@ nav {
 
 /* Scaled feedback */
 .pwmeter-container {
-  text-align: center;
+  margin-top: 2px;
 }
 
 .pwmeter {
   display: flex;
   justify-content: space-between;
-  height: 8px;
+  height: 1px;
   margin: 0 auto;
 }
 .pwmeter span {
-  height: 7px;
-  width: 32.5%;
-  border-radius: 4px;
-  background-color: #888;
-  opacity: .2;
+  height: 1px;
+  width: 33.3%;
+  // background-color: #888;
+  opacity: 0;
   transition: opacity 300ms ease-in-out, background-color 300ms ease-in-out;
 }
 .meter-span-on {
   opacity: 1 !important;
 }
 .meter-span-off {
-  background-color: #888 !important;
-  opacity: .2;
+  background-color: none !important;
 }
-// .pwmeter .one {
-//   background-color: red;
-// }
-// .pwmeter .two {
-//   background-color: orange;
-// }
-// .pwmeter .three {
-//   background-color: green;
-// }
 
 .pwmessage-container {
-  height: 1.9rem;
+  display: flex;
+  margin: 0;
 }
 #passwordmessage {
-  font-weight: 600;
+  margin-top: 0.3rem;
+  line-height: .8rem;
+  font-size: 1rem;
+  font-weight: 500;
 }
 /* end scaled feedback */
 
-
-// Modal window remove scrollbar
-.modal-open .modal {
-  // overflow-y: hidden;
+#btn-register {
+  position: relative;
+  .reg-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
 }
+

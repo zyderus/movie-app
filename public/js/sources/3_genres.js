@@ -1,4 +1,4 @@
-console.log('connected genres.js');
+console.log('connected 3_genres.js');
 
 const data = {
   "genres": [

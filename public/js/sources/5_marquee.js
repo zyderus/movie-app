@@ -1,4 +1,4 @@
-console.log('connected marquee.js');
+console.log('connected 5_marquee.js');
 
 function infiniteMarquee() {
   const root = document.documentElement;

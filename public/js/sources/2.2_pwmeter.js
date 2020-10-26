@@ -1,4 +1,4 @@
-console.log('connected pwmeter.js');
+console.log('connected 2.2_pwmeter.js');
 
 document.querySelector('#reg-password').addEventListener('keyup', function() {
   const msg = document.getElementById('passwordmessage');
@@ -15,7 +15,7 @@ document.querySelector('#reg-password').addEventListener('keyup', function() {
     meters[0].className = 'meter-span-on';
     meters[1].className = 'meter-span-off';
     meters[2].className = 'meter-span-off';
-    msg.style.color = 'red';
+    msg.style.color = 'coral';
     msg.innerHTML = 'Weak password';
   } else if (passwordScore <= 77) {
     meters[1].style.backgroundColor = 'orange';

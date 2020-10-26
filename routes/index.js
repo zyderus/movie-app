@@ -12,11 +12,6 @@ router.get("/", (req, res) => {
   res.render("index");
 });
 
-// Register
-router.get("/register", (req, res) => {
-  res.render("register");
-});
-
 router.post('/register', [
   // Check Username
   check('username', 'Email is not valid')
@@ -25,8 +20,8 @@ router.post('/register', [
     .withMessage('Email is required')
     .isLength({ min: 7 })
     .withMessage('Email should be 7+ characters')
-    .isEmail()
     .bail()
+    .isEmail()
     .trim()
     .normalizeEmail()
     .withMessage('Not a valid email address')
@@ -52,24 +47,32 @@ router.post('/register', [
   const validationErrors = validationResult(req);
   let errors = [];
   
+  // Extract necessary properties from an array of error objects
   if(!validationErrors.isEmpty()) {
-    Object.keys(validationErrors.array()).forEach(field => {
-      errors.push(validationErrors.array()[field]['msg']);
+    validationErrors.errors.map(err => {
+      const obj = {};
+      obj[err.param] = err.msg;
+      errors.push(obj);
     });
-  }
 
-  if(errors.length){
-    return res.render('register', { errors });
+    // Object.keys(validationErrors.array()).forEach(field => {
+    //   errors.push(validationErrors.array()[field]['msg']);
+    // });
   }
 
   // Recaptcha Verification
   const captcha = req.body['g-recaptcha-response'];
   if(!captcha) {
-    console.log("Please select captcha");
-    errors.push("Please select captcha");
-    return res.render('register', { errors });
+    console.log("Check captcha: Are you human?");
+    errors.push({ captcha: "Check captcha: Are you human?" });
+    return res.render('index', { errors });
   }
-
+  
+  // // If errors respond with errors
+  // if(errors.length){
+  //   return res.render('index', { errors });
+  // }
+  
   // Verify URL (Constcruct a request for google recaptcha api)
   const verifyUrl = "https://www.google.com/recaptcha/api/siteverify?secret="
     + captchaSecretKey 
@@ -84,8 +87,8 @@ router.post('/register', [
   // If not successful
   if(body.success !== undefined && !body.success) {
     console.log("Failed captca verification");
-    errors.push("Failed captca verification");
-    return res.render('register', { errors });
+    errors.push({ captcha: "Failed captcha verification" });
+    return res.render('index', { errors });
   }
 
   console.log("Captcha passed....");
@@ -106,14 +109,15 @@ router.post('/register', [
 });
 
 // Login
-router.get("/login", (req, res) => {
-  res.render("login");
+router.post("/login", passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/loginfail"
+}), (req, res) => {
 });
 
-router.post("/login", passport.authenticate("local", {
-  successRedirect: "/movies",
-  failureRedirect: "/login"
-}), (req, res) => {
+// Failed login route
+router.get("/loginfail", (req, res) => {
+  res.render('index', { loginErrors: '* Email and Password do not match' });
 });
 
 // Logout

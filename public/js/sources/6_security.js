@@ -1,4 +1,4 @@
-console.log('connected security.js');
+console.log('connected 6_security.js');
 
 // Google reCaptcha v2 & form
 // document.getElementById('register-form').addEventListener('submit', e => {
