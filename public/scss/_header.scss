@@ -2,6 +2,10 @@ nav {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  font-weight: 500;
+  a {
+    color: var(--text-primary);
+  }
 }
 
 .navbar-brand {
@@ -20,14 +24,25 @@ nav {
   }
 }
 
+.navbar li {
+  list-style: none;
+}
+
 .navbar-nav {
   white-space: nowrap;
-  width: 335px;
+  // width: 335px;
+  align-items: center;
+}
+
+.nav-link {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .navbar-nav li,
 .menu li {
-  font-size: 0.98rem;
+  list-style: none;
+  font-size: .98rem;
 }
 
 .icon-bar {
@@ -42,6 +57,34 @@ nav {
 .navbar-toggler {
   border: none;
   background: transparent !important;
+}
+
+.menu {
+  display: flex;
+  justify-content: end !important;
+  .nav-link {
+    padding-left: 2rem !important;
+    padding-right: 0 !important;
+  }
+  i {
+    position: relative;
+    font-size: 1.2rem;
+    transform: translateY(.1rem);
+    .badge {
+      font-size: .8rem;
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+    }
+  }
+  #lang img {
+    width: 25px;
+  }
+}
+
+// Avatar
+#avatar {
+  height: 35px;
 }
 
 /* Burger menu Animation */
@@ -104,14 +147,14 @@ nav {
   background-color: var(--bg-primary);
 }
 
-.menu {
-  white-space: nowrap;
-  li {
-    display: inline;
-    list-style: none;
-    padding: 0;
-  }
-}
+// .menu {
+//   white-space: nowrap;
+//   li {
+//     display: inline;
+//     list-style: none;
+//     padding: 0;
+//   }
+// }
 
 .btn-custom {
   border: 2px solid var(--bg-secondary);
@@ -287,6 +330,7 @@ nav {
   font-weight: 500;
   visibility: hidden;
 }
+
 .form-group.success input {
   border-bottom: 1px solid green !important;
 }
@@ -353,9 +397,9 @@ nav {
 }
 /* end scaled feedback */
 
-#btn-register {
+.auth-btn {
   position: relative;
-  .reg-loader {
+  .submit-loader {
     position: absolute;
     top: 50%;
     left: 50%;

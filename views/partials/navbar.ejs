@@ -9,7 +9,6 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
   <div class="container-fluid">
-
     <a class="navbar-brand" href="/">
       <div class="logo">
         <div class="brand-icon"><i class="fas fa-film"></i></div>
@@ -27,16 +26,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2 mb-lg-0 mr-4">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">GENRE</a>
+          <a class="nav-link" aria-current="page" href="#">IN THEATERS</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="/movies">MOVIES</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="/movies/new">ADD MOVIE</a>
-        </li>
+        </li> -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
             TV SHOWS
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -56,14 +55,51 @@
         </form>
       </div>
 
-      <div class="menu ml-4">
+      <!-- <div class="menu ml-4"> -->
         <% if (!currentUser) { %>
-          <li><button id="auth-btn" class="btn-custom login-btn" data-toggle="modal" data-target="#auth-modal">LOGIN</button></li>
+          <li class="btn-box"><button id="auth-btn" class="btn-custom login-btn ml-4" data-toggle="modal" data-target="#auth-modal">LOGIN</button></li>
         <% } else { %>
-          <li>hi <a href="/profile/<%= currentUser._id %>"><strong><%= currentUser.username %></strong></a></li>
-          <li><a href="/logout">LOGOUT</a></li>
+          <ul class="navbar-nav menu mb-lg-0">
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">EN</a>
+              <ul id="lang" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#"><img src="../../img/en.svg"> English</a></li>
+                <li><a class="dropdown-item" href="#"><img src="../../img/es.svg"> Español</a></li>
+                <li><a class="dropdown-item" href="#"><img src="../../img/ru.svg"> Русский</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown waves-effect waves-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"  aria-expanded="false">
+                <i class="fas fa-envelope">
+                  <span class="badge rounded-pill bg-danger">8</span>
+                </i>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Message</a>
+                <a class="dropdown-item" href="#">Message</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Clear</a>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                <%= // currentUser.username %>
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" id="avatar" class="rounded-circle z-depth-0"
+                  alt="avatar image">
+                </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/profile/<%= currentUser._id %>">Dashboard</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/logout">LOGOUT</a></li>
+              </ul>
+            </li>
+          </ul>
         <% } %>
-      </div>
+      <!-- </div> -->
 
     </div>
   </div>
@@ -104,22 +140,26 @@
               <div style="font-weight: 500; color: coral;">* Email and Password do not match</div>
             <% } %>
 
-            <form id="login-form" class="form-login" action="/login" method="post" novalidate>
+            <form id="login-form" class="auth-form form-login" action="/login" method="post" novalidate>
               <div class="form-group">
                 <label for="login-email" class="sr-only">Email</label>
                 <input type="email" class="form-control" id="login-email" 
-                    name="username" placeholder="Email" autocomplete="username" required>
+                  name="username" 
+                  placeholder="Email" 
+                  autocomplete="new-password" 
+                  required 
+                >
                 <div class="small email-small"></div>
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" id="login-password" 
-                    name="password" placeholder="Password" autocomplete="current-password" required>
+                    name="password" placeholder="Password" autocomplete="new-password" required>
                 <div class="small"></div>
               </div>
               <div class="form-group login-button">
-                <button type="submit" id="login-btn" class="btn-custom auth-btn">
+                <button type="submit" id="btn-login" class="btn-custom auth-btn">
                   SIGN IN
-                  <span class="reg-loader"></span>
+                  <span class="submit-loader"></span>
                 </button>
               </div>
               <div class="form-group">
@@ -150,9 +190,14 @@
               </div>
             <% } %>
 
-            <form id="reg-form" action="/register" method="post" autocomplete="off" novalidate>
+            <form id="reg-form" class="auth-form" action="/register" method="post" autocomplete="off" novalidate>
 
+              <!-- Fighting browser's autocomplete & autofill -->
               <input type="hidden" name="step" value="1">
+              <div style="display: none;">
+                <input type="password" autocomplete="password" tabindex="-1">
+              </div>
+
 
               <div class="form-group">
                 <label for="reg-email" class="sr-only">Email</label>
@@ -222,8 +267,9 @@
               </div>
 
               <div class="form-group login-button">
-                <button type="submit" id="btn-register" class="btn-custom auth-btn">REGISTER
-                  <span class="reg-loader"></span>
+                <button type="submit" id="btn-register" class="btn-custom auth-btn">
+                  REGISTER
+                  <span class="submit-loader"></span>
                 </button>
               </div>
             </form>

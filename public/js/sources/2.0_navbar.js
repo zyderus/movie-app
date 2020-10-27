@@ -4,22 +4,17 @@ console.log('connected 2.0_navbar.js');
 const searchContainerMain = document.querySelector('#search-container-main');
 const searchForm = document.querySelector('.search-form');
 const searchInput = document.querySelector('.search-input');
-
 // Authorization
 const authBtn = document.querySelector('#auth-btn');
-
 // Modals
 const authModal = new bootstrap.Modal(document.getElementById('auth-modal')); 
 const registerTab = new bootstrap.Tab(document.querySelector('#authTab a[href="#register-tab-page"]'));
 const loginTab = new bootstrap.Tab(document.querySelector('#authTab a[href="#login-tab-page"]'));
-
 // Links to Login and Register tabs in Modal Window
 const regbutton = document.querySelector('#btn-register');
+const loginbutton = document.querySelector('#btn-login');
 const reglink = document.querySelector('#register-link');
 const loginlink = document.querySelector('#login-link');
-
-
-
 // Register form password visibility toggle
 const hideBtns = document.querySelectorAll('.toggle-hide');
 

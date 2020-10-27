@@ -36,16 +36,24 @@
   }
 
   .menu {
-    margin: 0.5rem 0;
     display: flex;
-    justify-content: center;
+    flex-direction: unset;
+    justify-content: center !important;
+    align-items: center;
+    margin: 1rem 0;
+    transition: all 500ms ease-in;
   }
+
   
-  .nav-item {
-    text-align: center;
+  li {
+    margin: 1rem 1rem;
+    display: block;
+  }
+
+  .btn-box {
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 }
-
-
 

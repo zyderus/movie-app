@@ -33,6 +33,15 @@
   --marquee-animation-duration: calc(var(--marquee-elements) * 10s);
 }
 
+// Input Autofill backgrounds transparent
+// input:-webkit-autofill,
+// input:-webkit-autofill:hover, 
+// input:-webkit-autofill:focus, 
+// input:-webkit-autofill:active  {
+//   transition: background-color 5000s;
+//   -webkit-text-fill-color: #fff !important;
+// }
+
 * {
   margin: 0;
   padding: 0;
@@ -43,7 +52,6 @@ body {
   min-width: 320px;
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  font-size: 1.2rem;
   font-family: 'Montserrat', sans-serif;
   // letter-spacing: 0.05rem;
   font-weight: 300;

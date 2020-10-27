@@ -31,9 +31,12 @@ searchForm.addEventListener('submit', (e) => {
   }
 });
 
-// Initiate Data Fetch
-getTrending(trending_url);
-getMovies(api_url);
+// Initiate Data Fetch if main section exists
+if(main) {
+  getTrending(trending_url);
+  getMovies(api_url);
+}
+
 
 // Fetch Trending Movies
 async function getTrending(url) {
