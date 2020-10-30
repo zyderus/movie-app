@@ -55,3 +55,11 @@ function toggleShow(element) {
   }
 }
 // end toggle password visibility
+
+// Day & Night theme toggle
+const themeCheckbox = document.querySelector('.theme-checkbox');
+
+themeCheckbox.addEventListener('change', () => {
+  // change theme of the website
+  document.body.classList.toggle('light');
+});

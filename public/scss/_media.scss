@@ -5,9 +5,7 @@
     --marquee-width: 100vw;
     --marquee-height: 30vh;
     --marquee-elements-displayed: 3;
-
   }
-
   .marquee:before, .marquee:after {
     width: 5rem; 
   }
@@ -22,38 +20,28 @@
 
 // Auth Modal Window
 @media (max-width: 991px) {
-  .navbar-nav {
-    width: 100%;
+  #site-menu {
+    display: block;
+    margin: 0 auto;
+    .nav-item {
+      display: block;
+      text-align: center;
+    }
   }
-
-  .ml-4 {
-    margin-left: 0!important;
-  }
-
   #search-container-nav {
     width: 100%;
-    padding-bottom: 7px;
   }
-
-  .menu {
+  #user-menu {
     display: flex;
     flex-direction: unset;
-    justify-content: center !important;
-    align-items: center;
-    margin: 1rem 0;
-    transition: all 500ms ease-in;
-  }
-
-  
-  li {
-    margin: 1rem 1rem;
-    display: block;
-  }
-
-  .btn-box {
-    display: flex;
-    align-items: center;
     justify-content: center;
+    text-align: center;
+    .nav-item {
+      width: 10rem;
+      text-align: center;
+      .avatar-container {
+        margin: 0 auto;
+      }
+    }
   }
 }
-

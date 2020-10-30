@@ -11,7 +11,7 @@
 
 .carousel-inner,
 .carousel-item {
-  height: calc(100vh - var(--navbar-hight));
+  height: calc(100vh - var(--navbar-height));
 }
 
 .carousel-item {
@@ -122,7 +122,6 @@
 }
 
 .marquee-content li {
-  /* border: 3px solid teal; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,7 +177,7 @@ main {
   font-size: 4rem;
   font-weight: bold;
   line-height: 6rem;
-  color: #ccc;
+  color: var(--secondary-color);
   white-space: nowrap;
 }
 .section-title:after {
@@ -188,19 +187,20 @@ main {
   width: 50%;
   top: 7.4rem;
   margin-left: 18rem;
-  border-bottom: 1px solid rgba(153, 105, 105, 0.7);
+  border-bottom: 1px solid var(--secondary-color);
 }
 .section-backlogo {
   font-size: 15rem;
   position: absolute;
   top: -0.5rem;
   left: -13rem;
-  color: rgba(150, 150, 150, 0.03);
+  color: var(--primary-color);
+  opacity: 0.05;
 
 }
 
 .movie {
-  background-color: var(--bg-secondary);
+  background-color: var(--secondary-bg);
   border-radius: 8px;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -300,7 +300,6 @@ main {
 }
 
 .burger{
-  border: 1px solid yellow;
   cursor: pointer;
   position: absolute;
   left: 42%;
@@ -312,7 +311,7 @@ main {
 .burger div{
   width: 20px;
   height: 2px;
-  background-color: var(--text-primary);
+  background-color: var(--primary-color);
   margin: 2px;
   transition: all 0.3s ease;
 }
@@ -336,8 +335,8 @@ main {
 } */
 
 .play-screen {
-  position: relative;
   border: 1px solid green;
+  position: relative;
   height: calc(100vh - var(--navbar-hight));
   width: 100%;
 }
@@ -383,7 +382,7 @@ main {
   /* z-index: -1; */
 }
 .watch-movie-bg {
-  background-color: #19272e;
+  background-color: var(--watch-movie-bg);
   z-index: -2;
   position: absolute;
   top: 0;
@@ -407,7 +406,7 @@ main {
 }
 
 .suggest-movie {
-  background-color: #1c212e;
+  background-color: var(--suggest-movie-bg);
 }
 
 .row {
@@ -444,10 +443,6 @@ main {
 .film-page_title-stats span{
   font-size: 0.98rem;
   margin-right: .5rem;
-}
-
-.film-page_rating {
-
 }
 
 .rating-star {

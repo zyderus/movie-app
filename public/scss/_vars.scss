@@ -1,20 +1,37 @@
-/* Purple Theme */
-$pt-primary-color: #ececec;
-$pt-secondary-color: #b6b6b6;
-$pt-primary-bgcolor: #22254b;
-$pt-secondary-bgcolor: #373b69;
+/* Light theme Default */
+:root {
+  --primary-color: #424242;
+  --secondary-color: #536390;
+  --primary-bg: #fff;
+  --secondary-bg: #d3d3d3;
+  --hr-color: #444;
+  --mega-menu-bg: #e1e1e1;
+  
+  --error: orangered;
+  --success: green;
+
+  --watch-movie-bg: #19272e;
+  --suggest-movie-bg: #1c212e;
+
+  --footer-bg: #131A22;
+
+  --transition-speed: 200ms;
+  --navbar-height: 56px;
+  /* marquee */
+  --marquee-width: 60vw;
+  --marquee-height: 40vh;
+  /* --marquee-elements: 9; */
+  --marquee-elements-displayed: 5;
+  --marquee-element-width: calc(var(--marquee-width) / var(--marquee-elements-displayed));
+  --marquee-animation-duration: calc(var(--marquee-elements) * 10s);
+}
 
 /* Dark Theme */
-$dt-primary-color: #ececec;
-$dt-secondary-color: #b6b6b6;
-$dt-primary-bgcolor: #22254b;
-$dt-secondary-bgcolor: #373b69;
-
-/* Light Theme */
-$lt-primary-color: #1b1b1b;
-$lt-secondary-color: #555555;
-$lt-primary-bgcolor: #ffffff;
-$lt-secondary-bgcolor: #d3d3d3;
-
-/* Errors */
-$error: coral;
+[data-theme="dark"] {
+  --primary-color: #ececec;
+  --secondary-color: #b6b6b6;
+  --primary-bg: #22254b;
+  --secondary-bg: #373b69;
+  --hr-color: #ddd;
+  --mega-menu-bg: #212529;
+}

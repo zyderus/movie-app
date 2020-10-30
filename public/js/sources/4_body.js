@@ -31,11 +31,20 @@ searchForm.addEventListener('submit', (e) => {
   }
 });
 
-// Initiate Data Fetch if main section exists
-if(main) {
+// Initiate for all pages
+
+
+// Initiate Data Fetch if at root url
+// if(location.pathname == "/") {
   getTrending(trending_url);
   getMovies(api_url);
-}
+// }
+
+// Initiate on In Theaters page
+
+// Initiate on Movies page
+
+// Initiate on TV Shows page
 
 
 // Fetch Trending Movies
@@ -51,7 +60,11 @@ async function getMovies(url) {
   const resp = await fetch(url);
   const respData = await resp.json();
 
+  // Show movie cards in popular section
   showMovies(respData.results);
+  // Show movie card in Megamenu
+  const randMovie = Math.floor(Math.random() * 20);
+  showMegamenuMovie(respData.results[randMovie]);
 }
 
 // Fetch Movie Details by Id
@@ -136,6 +149,12 @@ function showTrending(films) {
 }
 
 function showMovies(movies) {
+  if(movies < 1) {
+    main.innerHTML = '';
+    main.innerHTML = `<div class="section-title">No Results Found<span class="section-backlogo">No Results Found</span></div>`;
+    return false;
+  }
+
   main.innerHTML = '';
   main.innerHTML = `<div class="section-title">POPULAR NOW<span class="section-backlogo">POPULAR</span></div>`
 
@@ -212,8 +231,6 @@ function watchMovie(movie) {
     <!-- <div class="section-title">Title<span class="section-backlogo">Title</span></div> -->
     <!-- <h1>Title</h1> -->
 
-
-
     <section class="watch-movie">
       <div class="watch-movie-bg-decor">${title}</div>
       <div class="watch-movie-bg"></div>
@@ -278,12 +295,9 @@ function watchMovie(movie) {
       </div>
     </section>
 
-
     <div class="container" style="padding-bottom: 10rem;">
       <button data-tooltip=" Tooltip">Submit Form</button>
     </div>
-    
-    
   `
 }
 
@@ -342,8 +356,6 @@ document.addEventListener('click', function(e){
 });
 
 
-
-
 // document.addEventListener('click', (e) => {
 //   if(e.target && e.target.id == 'movie-link') {
 //     console.log('clicked to fetch movie info');
@@ -358,3 +370,4 @@ document.addEventListener('click', function(e){
 //     }
 //   });
 // }
+

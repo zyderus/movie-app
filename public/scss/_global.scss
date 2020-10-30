@@ -18,19 +18,6 @@
 :root {
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
-  --text-primary: rgb(236, 236, 236);
-  --text-secondary: #b6b6b6;
-  --bg-primary: #22254b;
-  --bg-secondary: #373b69;
-  --transition-speed: 200ms;
-  --navbar-hight: 57px;
-  /* marquee */
-  --marquee-width: 60vw;
-  --marquee-height: 40vh;
-  /* --marquee-elements: 9; */
-  --marquee-elements-displayed: 5;
-  --marquee-element-width: calc(var(--marquee-width) / var(--marquee-elements-displayed));
-  --marquee-animation-duration: calc(var(--marquee-elements) * 10s);
 }
 
 // Input Autofill backgrounds transparent
@@ -50,11 +37,11 @@
 
 body {
   min-width: 320px;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
   font-family: 'Montserrat', sans-serif;
-  // letter-spacing: 0.05rem;
   font-weight: 300;
+  transition: background var(--transition-speed) linear;
+  background-color: var(--primary-bg);
+  color: var(--primary-color);
 }
 
 .center {
@@ -75,9 +62,63 @@ body {
 
 hr {
   border: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--hr-color);
 }
 
 .weather-icon {
   vertical-align: middle;
+}
+
+// Custom button Primary
+.btn-custom {
+  border: 2px solid var(--secondary-bg);
+  color: var(--primary-color);
+  height: 38px;
+  border-radius: 20px;
+  background-color: var(--secondary-bg);
+  padding: 0 1.8rem;
+  white-space: nowrap;
+  transition: all 100ms ease-in;
+}
+.btn-custom:hover {
+  background-color: var(--primary-bg);
+  border: 2px solid var(--primary-color);
+  color: var(--secondary-color);
+}
+.btn-custom:focus {
+  outline: none;
+}
+.btn-custom:active {
+  background-color: var(--secondary-bg);
+}
+
+// Custom button Secondary
+.btn-custom-sub {
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+  height: 38px;
+  border-radius: 20px;
+  background-color: unset;
+  padding: 0 1rem;
+  white-space: nowrap;
+  transition: all 100ms ease-in;
+}
+.btn-custom-sub:hover {
+  background-color: unset;
+  border: 2px solid var(--primary-bg);
+  color: var(--primary-color);
+}
+.btn-custom-sub:focus {
+  outline: none;
+}
+.btn-custom-sub:active {
+  background-color: var(--secondary-bg);
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  &:hover, &:active {
+    color: var(--primary-color);
+  }
 }
