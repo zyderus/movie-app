@@ -14,7 +14,7 @@ const img_path_highres = 'https://image.tmdb.org/t/p/w1280';
 const search_url = `/api/movies/search?query=`;
 const url_theatersNow = `/api/theaters/nowplaying?`;
 const url_theatersUpcoming = `/api/theaters/upcoming?`;
-const url_moviesTrend = `/api/movies/trending?`;
+const url_moviesTrend = `https://watch-movies-app.herokuapp.com/api/movies/trending?`;
 const url_moviesPopular = `/api/movies/popular?`;
 const url_movieInfo = `/api/movies/movieinfo/`
 
