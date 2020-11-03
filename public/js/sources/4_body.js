@@ -1,14 +1,22 @@
 console.log('connected 4_body.js');
 
-// API variables
-const api_key = 'f23a624fd8704f7b8261ca835ef4e069';
-const api_url = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&include_adult=false&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
+// const lang = 'en-US';
+const lang = 'ru-RU';
+
+// TMDb API via proxy
+const url_params = new URLSearchParams({
+  language: lang
+});
+
 const img_path = 'https://image.tmdb.org/t/p/w300';
-const search_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&include_adult=false&language=en-US&query=`;
-const trending_url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${api_key}`;
-const img_path_hires = 'https://image.tmdb.org/t/p/w1280';
-const movie_url = `https://api.themoviedb.org/3/movie/`
-const movie_url_options = `?api_key=${api_key}&language=en-US`;
+const img_path_highres = 'https://image.tmdb.org/t/p/w1280';
+
+const search_url = `/api/movies/search?query=`;
+const url_theatersNow = `/api/theaters/nowplaying?`;
+const url_theatersUpcoming = `/api/theaters/upcoming?`;
+const url_moviesTrend = `/api/movies/trending?`;
+const url_moviesPopular = `/api/movies/popular?`;
+const url_movieInfo = `/api/movies/movieinfo/`
 
 const marqueeReel = document.querySelector('.marquee-content');
 const gallery = document.querySelector('.carousel-inner');
@@ -26,61 +34,44 @@ searchForm.addEventListener('submit', (e) => {
     header.innerHTML = '';
     main.innerHTML = '';
     document.querySelector('header').innerHTML = '';
-    getMovies(search_url + searchValue);
+    fetchData(search_url + searchValue + '&', showMP);
     searchInput.value = '';
   }
 });
 
 // Initiate for all pages
-
+  // 1. assign one of movies in theaters to megamenu > in theaters
+  // 2. assign one of popular moivies to show in megamenu > movies
+  // 3. assign a tv show to a variable to use in megamenu > tv shows
 
 // Initiate Data Fetch if at root url
-// if(location.pathname == "/") {
-  getTrending(trending_url);
-  getMovies(api_url);
-// }
+// fetchData(url_theatersNow, showTN);
+// fetchData(url_theatersUpcoming, showTU);
+fetchData(url_moviesTrend, toCarousel);
+fetchData(url_moviesPopular, toMain);
 
-// Initiate on In Theaters page
-
-// Initiate on Movies page
-
-// Initiate on TV Shows page
-
-
-// Fetch Trending Movies
-async function getTrending(url) {
-  const response = await fetch(url);
+// Fetch list of movies
+async function fetchData(url, output) {
+  const response = await fetch(url + url_params);
   const data = await response.json();
 
-  showTrending(data.results);
+  output(data);
 }
 
-// Fetch Currently Popular Movies
-async function getMovies(url) {
-  const resp = await fetch(url);
-  const respData = await resp.json();
-
-  // Show movie cards in popular section
-  showMovies(respData.results);
-  // Show movie card in Megamenu
-  const randMovie = Math.floor(Math.random() * 20);
-  showMegamenuMovie(respData.results[randMovie]);
-}
-
-// Fetch Movie Details by Id
+// Fetch movie details by Id
 async function fetchMovie(movieId) {
-  const response = await fetch(movie_url + movieId + movie_url_options);
+  const response = await fetch(url_movieInfo + movieId + '?' + url_params);
   const data = await response.json();
 
   watchMovie(data);
-  console.log(data);
 }
 
-function showTrending(films) {
+// Populate Carousel
+function toCarousel(array) {
   gallery.innerHTML = '';
   galleryThumbnails.innerHTML = '';
 
-  films.forEach((film, index) => {
+  array.results.forEach((item, index) => {
     const { title,
             poster_path,
             vote_average,
@@ -89,12 +80,12 @@ function showTrending(films) {
             release_date,
             genre_ids,
             id
-          } = film;
+          } = item;
 
     const filmSlide = document.createElement('div');
     filmSlide.classList.add('carousel-item');
     index === 0 ? filmSlide.className += " active" : '';
-    filmSlide.style.backgroundImage = `url("${img_path_hires + backdrop_path}")`;
+    filmSlide.style.backgroundImage = `url("${img_path_highres + backdrop_path}")`;
     
     // Slides output
     filmSlide.innerHTML = `
@@ -148,8 +139,9 @@ function showTrending(films) {
   infiniteMarquee();
 }
 
-function showMovies(movies) {
-  if(movies < 1) {
+// Populate Main Div
+function toMain(movies) {
+  if(movies.length < 1) {
     main.innerHTML = '';
     main.innerHTML = `<div class="section-title">No Results Found<span class="section-backlogo">No Results Found</span></div>`;
     return false;
@@ -158,7 +150,7 @@ function showMovies(movies) {
   main.innerHTML = '';
   main.innerHTML = `<div class="section-title">POPULAR NOW<span class="section-backlogo">POPULAR</span></div>`
 
-  movies.forEach((movie, index) => {
+  movies.results.forEach((movie, index) => {
     const { title, 
             poster_path,
             vote_average, 
@@ -301,9 +293,6 @@ function watchMovie(movie) {
   `
 }
 
-// click on #burger will now work
-// document.querySelector("#burger").click();
-
 function getClassByRate(rate) {
   if (rate == 0) {
     return {
@@ -327,6 +316,22 @@ function getClassByRate(rate) {
   }
 }
 
+// event added to the #burger parent element
+document.addEventListener('click', function(e){
+  if(e.target && e.target.id == 'burger'){
+    console.log('listener attached to document');
+   }
+});
+
+
+// click on #burger will now work
+// document.querySelector("#burger").click();
+
+//   // Show movie card in Megamenu
+//   const randMovie = Math.floor(Math.random() * 20);
+//   showMegamenuMovie(respData.results[randMovie]);
+
+
 // Loop search inputs for value
 // searchForms.forEach((form) => {
 //   form.addEventListener('submit', (e) => {
@@ -347,13 +352,6 @@ function getClassByRate(rate) {
 //   console.log('hi');
 //   document.querySelector('.movie-info').className = 'movie-info-active';
 // }
-
-// event added to the #burger parent element
-document.addEventListener('click', function(e){
-  if(e.target && e.target.id == 'burger'){
-    console.log('listener attached to document');
-   }
-});
 
 
 // document.addEventListener('click', (e) => {

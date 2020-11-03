@@ -29,7 +29,7 @@ function goBack() {
   window.history.back();
 }
 
-// Prevent closing from click inside dropdown
+// Prevent closing on click inside dropdown
 document.querySelectorAll('.dropdown-menu').forEach(menu => {
   menu.addEventListener('click', (e) => {
     e.stopPropagation();
