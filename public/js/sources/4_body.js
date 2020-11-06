@@ -1,11 +1,12 @@
 console.log('connected 4_body.js');
 
-// const lang = 'en-US';
-const lang = 'ru-RU';
+const interval = 15 * 1000;   // 15s
+const language = 'en-US';
+// const language = 'ru-RU' || null;
 
 // TMDb API via proxy
 const url_params = new URLSearchParams({
-  language: lang
+  language,
 });
 
 const img_path = 'https://image.tmdb.org/t/p/w300';
@@ -14,7 +15,7 @@ const img_path_highres = 'https://image.tmdb.org/t/p/w1280';
 const search_url = `/api/movies/search?query=`;
 const url_theatersNow = `/api/theaters/nowplaying?`;
 const url_theatersUpcoming = `/api/theaters/upcoming?`;
-const url_moviesTrend = `https://watch-movies-app.herokuapp.com/api/movies/trending?`;
+const url_moviesTrend = `/api/movies/trending?`;
 const url_moviesPopular = `/api/movies/popular?`;
 const url_movieInfo = `/api/movies/movieinfo/`
 
@@ -25,46 +26,73 @@ const main = document.querySelector('main');
 const section = document.querySelector('section');
 const header = document.querySelector('header');
 
-// Search
+
+// Read and Write data to local storage cache
+const writeToCache = (url, data) => localStorage.setItem(url, JSON.stringify(data));
+const readFromCache = url => JSON.parse(localStorage.getItem(url)) || null;
+
+// Fetch fresh data from API and cache
+const getFreshData = async (url) => {
+  const response = await fetch(url);
+  let data = await response.json();
+  data.time = Date.now();
+
+  return data;
+};
+
+// Fetch data with cache by default
+const fetchData = async (url, output, cache = true) => {
+  if(readFromCache(url) && readFromCache(url).time > Date.now() - interval) {
+
+    console.log('cached Data with time: ', readFromCache(url).time);
+    output(readFromCache(url));
+  } else {
+    const data = await getFreshData(url);
+
+    if(cache) {
+      writeToCache(url, data);
+      console.log('fetch cached.........');
+    }
+
+    console.log('fresh data from API with time: ', data.time);
+    output(data);
+  }
+};
+
+// Search movies (w/o caching)
 searchForm.addEventListener('submit', (e) => {
-  const searchValue = searchInput.value;
   e.preventDefault();
+  const searchValue = searchInput.value;
+  const url = search_url + searchValue + "&" + url_params;
   
   if (searchValue) {
     header.innerHTML = '';
     main.innerHTML = '';
     document.querySelector('header').innerHTML = '';
-    fetchData(search_url + searchValue + '&', showMP);
+
+    fetchData(url, toMain, 0);
     searchInput.value = '';
   }
 });
 
-// Initiate for all pages
-  // 1. assign one of movies in theaters to megamenu > in theaters
-  // 2. assign one of popular moivies to show in megamenu > movies
-  // 3. assign a tv show to a variable to use in megamenu > tv shows
-
-// Initiate Data Fetch if at root url
-// fetchData(url_theatersNow, showTN);
-// fetchData(url_theatersUpcoming, showTU);
-fetchData(url_moviesTrend, toCarousel);
-fetchData(url_moviesPopular, toMain);
-
-// Fetch list of movies
-async function fetchData(url, output) {
-  const response = await fetch(url + url_params);
-  const data = await response.json();
-
-  output(data);
-}
-
-// Fetch movie details by Id
+// Fetch movie details by Id (w/o caching)
 async function fetchMovie(movieId) {
-  const response = await fetch(url_movieInfo + movieId + '?' + url_params);
+  const url = url_movieInfo + movieId + '?' + url_params;
+  // const data = await getFreshData(url);
+  // const response = await fetch(url_movieInfo + movieId + '?' + url_params);
   const data = await response.json();
 
   watchMovie(data);
 }
+
+
+// Initiate Data Fetch if at root url
+// fetchData(url_theatersNow, showTN);
+// fetchData(url_theatersUpcoming, showTU);
+fetchData(url_moviesTrend + url_params, toCarousel);
+fetchData(url_moviesPopular + url_params, toMain);
+
+
 
 // Populate Carousel
 function toCarousel(array) {
@@ -139,7 +167,7 @@ function toCarousel(array) {
   infiniteMarquee();
 }
 
-// Populate Main Div
+// Populate Main div
 function toMain(movies) {
   if(movies.length < 1) {
     main.innerHTML = '';
@@ -206,6 +234,7 @@ function toMain(movies) {
   });
 }
 
+// Movie Details
 function watchMovie(movie) {
   const { 
     title, 
@@ -293,6 +322,7 @@ function watchMovie(movie) {
   `
 }
 
+// Evaluate movie rating scores
 function getClassByRate(rate) {
   if (rate == 0) {
     return {
@@ -316,7 +346,7 @@ function getClassByRate(rate) {
   }
 }
 
-// event added to the #burger parent element
+// event added to target if = #burger
 document.addEventListener('click', function(e){
   if(e.target && e.target.id == 'burger'){
     console.log('listener attached to document');
@@ -324,7 +354,7 @@ document.addEventListener('click', function(e){
 });
 
 
-// click on #burger will now work
+// burger menu listener assigned to parent
 // document.querySelector("#burger").click();
 
 //   // Show movie card in Megamenu
@@ -368,4 +398,3 @@ document.addEventListener('click', function(e){
 //     }
 //   });
 // }
-

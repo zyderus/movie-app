@@ -122,13 +122,3 @@ const getMovieGenres = (genres) => {
     });
   return genresarr.join(', ');
 };
-
-
-
-
-
-
-
-
-// console.log(getGenres(genreCodes));
-// let parsed = JSON.parse(data);
