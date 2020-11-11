@@ -14,7 +14,7 @@
     <a class="navbar-brand" href="/">
       <div class="logo">
         <div class="brand-icon"><i class="fas fa-film"></i></div>
-        <div>TRON</div>
+        <div><%= locale.brand %> </div>
       </div>
     </a>
 
@@ -31,7 +31,7 @@
 
         <li class="nav-item dropdown has-megamenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            IN THEATERS
+            <%= locale.menu_intheaters %> 
           </a>
           <ul id="theater-menu" class="dropdown-menu dropdown-menu-dark megamenu">
           <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
@@ -46,7 +46,7 @@
 
         <li class="nav-item dropdown has-megamenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            MOVIES
+            <%= locale.menu_movies %> 
           </a>
           <ul id="movie-menu" class="dropdown-menu dropdown-menu-dark sub-menu megamenu">
           <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
@@ -126,7 +126,7 @@
 
         <li class="nav-item dropdown has-megamenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            TV SHOWS
+            <%= locale.menu_tvshows %> 
           </a>
           <ul id="tv-menu" class="dropdown-menu dropdown-menu-dark megamenu">
           <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
@@ -147,7 +147,7 @@
         <form class="search-form" action="" method="get">
         <!-- <form class="search-form" action="/results" method="get"> -->
           <i class="fas fa-search fa-lg"></i>
-          <input type="text" name="search" class="search-input" placeholder="Search movies...">
+          <input type="text" name="search" class="search-input" placeholder="<%= locale.search_placeholder %> ">
         </form>
       </ul>
 
@@ -166,20 +166,20 @@
         </li>
 
         <!-- Select language -->
-        <li class="nav-item dropdown has-megamenu">
-          <a class="nav-link dropdown lang" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            EN
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle lang" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+            <%= locale.lang_display %> 
           </a>
-          <ul id="lang" class="dropdown-menu dropdown-menu-dark megamenu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#"><img src="../../img/en.svg"> English</a></li>
-            <li><a class="dropdown-item" href="#"><img src="../../img/es.svg"> Español</a></li>
-            <li><a class="dropdown-item" href="#"><img src="../../img/ru.svg"> Русский</a></li>
+          <ul id="lang" class="dropdown-menu dropdown-menu-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <li><a id="en" class="dropdown-item" href="#"><img src="../../img/en.svg"> English</a></li>
+            <li><a id="ru" class="dropdown-item" href="#"><img src="../../img/ru.svg"> Русский</a></li>
+            <li><a id="es" class="dropdown-item" href="#"><img src="../../img/es.svg"> Español</a></li>
           </ul>
         </li>
 
         <% if (!currentUser) { %>
           <li class="nav-item btn-box">
-            <button id="auth-btn" class="btn-custom login-btn" data-toggle="modal" data-target="#auth-modal">LOGIN</button>
+            <button id="auth-btn" class="btn-custom login-btn" data-toggle="modal" data-target="#auth-modal"><%= locale.btn_login %> </button>
           </li>
         <% } else { %>
 

@@ -1,63 +1,5 @@
 console.log('connected 4_body.js');
 
-const interval = 15 * 1000;   // 15s
-const language = 'en-US';
-// const language = 'ru-RU' || null;
-
-// TMDb API via proxy
-const url_params = new URLSearchParams({
-  language,
-});
-
-const img_path = 'https://image.tmdb.org/t/p/w300';
-const img_path_highres = 'https://image.tmdb.org/t/p/w1280';
-
-const search_url = `/api/movies/search?query=`;
-const url_theatersNow = `/api/theaters/nowplaying?`;
-const url_theatersUpcoming = `/api/theaters/upcoming?`;
-const url_moviesTrend = `/api/movies/trending?`;
-const url_moviesPopular = `/api/movies/popular?`;
-const url_movieInfo = `/api/movies/movieinfo/`
-
-const marqueeReel = document.querySelector('.marquee-content');
-const gallery = document.querySelector('.carousel-inner');
-const galleryThumbnails = document.querySelector('.carousel-indicators');
-const main = document.querySelector('main');
-const section = document.querySelector('section');
-const header = document.querySelector('header');
-
-
-// Read and Write data to local storage cache
-const writeToCache = (url, data) => localStorage.setItem(url, JSON.stringify(data));
-const readFromCache = url => JSON.parse(localStorage.getItem(url)) || null;
-
-// Fetch fresh data from API and cache
-const getFreshData = async (url) => {
-  const response = await fetch(url);
-  let data = await response.json();
-  data.time = Date.now();
-
-  return data;
-};
-
-// Fetch data with cache by default
-const fetchData = async (url, output, cache = true) => {
-  if(readFromCache(url) && readFromCache(url).time > Date.now() - interval) {
-
-    console.log('cached Data with time: ', readFromCache(url).time);
-    output(readFromCache(url));
-  } else {
-    const data = await getFreshData(url);
-
-    if(cache) {
-      writeToCache(url, data);
-      console.log('fetch cached.........');
-    }
-
-    console.log('fresh data from API with time: ', data.time);
-    output(data);
-  }
-};
 
 // Search movies (w/o caching)
 searchForm.addEventListener('submit', (e) => {
@@ -75,23 +17,25 @@ searchForm.addEventListener('submit', (e) => {
   }
 });
 
-// Fetch movie details by Id (w/o caching)
+// Fetch movie details by Id
 async function fetchMovie(movieId) {
-  const url = url_movieInfo + movieId + '?' + url_params;
-  // const data = await getFreshData(url);
-  // const response = await fetch(url_movieInfo + movieId + '?' + url_params);
-  const data = await response.json();
-
-  watchMovie(data);
+  const url = `${url_movieInfo + movieId}?${url_params}`;
+  const data = fetchData(url, watchMovie);
+  console.log('url: ', url);
 }
 
 
 // Initiate Data Fetch if at root url
-// fetchData(url_theatersNow, showTN);
-// fetchData(url_theatersUpcoming, showTU);
-fetchData(url_moviesTrend + url_params, toCarousel);
-fetchData(url_moviesPopular + url_params, toMain);
+const initMovieData = async () => {
+  const genresData = await fetchGenres(url_movie_genres + url_params);
+  sup_genres = genresData.genres;
 
+  // fetchData(url_theatersNow, showTN);
+  // fetchData(url_theatersUpcoming, showTU);
+  fetchData(url_moviesTrend + url_params, toCarousel);
+  fetchData(url_moviesPopular + url_params, toMain);
+};
+initMovieData();
 
 
 // Populate Carousel

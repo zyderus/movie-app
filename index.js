@@ -10,6 +10,9 @@ const passport          = require("passport");
 const LocalStrategy     = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 
+// Global functions
+const { getcookies, getLocale } = require("./functions/global");
+
 // Import routes
 const movieRoutes   = require("./routes/movies");
 const commentRoutes = require("./routes/comments");
@@ -46,6 +49,8 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+app.use(getcookies);
+app.use(getLocale);
 
 // Add user to all routes (req.user)
 app.use((req, res, next) => {

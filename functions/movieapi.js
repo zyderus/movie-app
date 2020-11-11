@@ -24,12 +24,12 @@ const fetchData = async (url) => {
   const cachedData = cache[index];
 
   if(cachedData && cachedData.data.proxy_time > Date.now() - cachingInterval) {
-    setTimeout(() => {console.log('timeout cache: ', cache)}, 2000);
+    // setTimeout(() => {console.log('timeout cache: ', cache)}, 2000);
 
     return cachedData.data;
   } else {
     const data = await getFreshData(url, index);
-    setTimeout(() => {console.log('timeout cache: ', cache)}, 2000);
+    // setTimeout(() => {console.log('timeout cache: ', cache)}, 2000);
 
     return data;
   }

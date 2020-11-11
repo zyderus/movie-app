@@ -4,6 +4,8 @@ console.log('connected 2.0_navbar.js');
 const searchContainerMain = document.querySelector('#search-container-main');
 const searchForm = document.querySelector('.search-form');
 const searchInput = document.querySelector('.search-input');
+// Select language options
+const langSelectors = document.querySelectorAll('#lang a');
 // Authorization
 const authBtn = document.querySelector('#auth-btn');
 // Modals
@@ -62,4 +64,13 @@ const themeCheckbox = document.querySelector('.theme-checkbox');
 themeCheckbox.addEventListener('change', () => {
   // change theme of the website
   document.body.classList.toggle('light');
+});
+
+// Select language dropdown
+const langCookieAge = 365 * 24 * 60 * 60;
+langSelectors.forEach(option => {
+  option.addEventListener('click', () => {
+    document.cookie = "language=" + option.id + "; " + "max-age=" +  langCookieAge + ";path=/";
+    location.reload();
+  });
 });

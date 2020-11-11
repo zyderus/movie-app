@@ -8,7 +8,7 @@ let { checkMovieOwnership, checkCommentOwnership, isLoggedIn, isAdmin, isSafe } 
 // Add new comment
 router.get("/new", isLoggedIn, (req, res) => {
   Movie.findById(req.params.id, (err, movie) => {
-    err ? console.log(err) : res.render("comments/new", { movie: movie });
+    err ? console.log(err) : res.render("comments/new", { locale: req.eval_language, movie: movie });
   });
 });
 
@@ -33,7 +33,7 @@ router.post("/", isLoggedIn, (req, res) => {
 router.get("/:comment_id/edit", checkCommentOwnership, (req, res) => {
   Comment.findById(req.params.comment_id, (err, comment) => {
     err ? console.log(err) : 
-      res.render("comments/edit", { movie_id: req.params.id, comment: comment });
+      res.render("comments/edit", { locale: req.eval_language, movie_id: req.params.id, comment: comment });
   });
 });
 

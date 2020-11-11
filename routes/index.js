@@ -9,7 +9,9 @@ const captchaSecretKey = process.env.CAPTCHA_SECRET_KEY;
 
 // Homepage
 router.get("/", (req, res) => {
-  res.render("index");
+  // Detect user language preferences
+  console.log(req.headers["accept-language"]);
+  res.render('index', { locale: req.eval_language });
 });
 
 router.post('/register', [
@@ -117,7 +119,7 @@ router.post("/login", passport.authenticate("local", {
 
 // Failed login route
 router.get("/loginfail", (req, res) => {
-  res.render('index', { loginErrors: '* Email and Password do not match' });
+  res.render('index', { locale: req.eval_language, loginErrors: '* Email and Password do not match',  });
 });
 
 // Logout

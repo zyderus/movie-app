@@ -1,18 +1,18 @@
 <%- include('../partials/header') %> 
 
-<h2>Hi, <%= user.username %> </h2>
+<h2>Hi, <%= user.username[0].toUpperCase() + user.username.substring(1, user.username.indexOf('@')) %></h2>
 
 <span>Your details:</span><br>
-<span><a href="tel:+15555555555">+1 (555) 555 5555</a></span><br>
-<span><a href = "mailto: some@email.com">rus@mail.org</a></span><br>
+<span><a href="tel:<%= user.phone || null %> "><%= user.phone || null %></a></span><br>
+<span><a href = "mailto: <%= user.email || null %>">email: <%= user.email || null %></a></span><br>
 <br>
 <!-- goBack: function in JS to go back in browser history. function in main.min.js -->
 <button onclick="goBack()">Back</button>
 
 <% if(!movies.length) { %>
-  <h3>You haven't published any movies yet</h3>
+  <h3>No saved movies in Playlist</h3>
 <% } else { %>
-  <h2>Your Movies</h2>
+  <h2>Your Movie Playlist</h2>
   <% movies.forEach(movie => { %>
     <div class="movie-box">
       <h3><%= movie.title %></h3>
@@ -25,7 +25,6 @@
 <% } %>
 
 <div>
-  <h2><%= user.username %> </h2>
 <% if (data) { %>
   <h3 class="weather">
     <%= data.name %> | 

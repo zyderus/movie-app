@@ -45,6 +45,29 @@ router.get('/movies/movieinfo/:id', async (req, res) => {
   }
 });
 
+// Movie Genres (TMDb)
+router.get('/movies/genres', async (req, res) => {
+
+  const language = req.query.language || null;
+  const params = new URLSearchParams({
+    api_key: process.env.TMDB_KEY,
+    language,
+    include_adult: false
+  });
+  const url_path = `https://api.themoviedb.org/3/genre/movie/list?`;
+  const url = url_path + params;
+
+  console.log(url)
+
+  // Receive data
+  try {
+    const data = await fetchData(url);
+    return res.json(data);
+  } catch (error) {
+    return console.log(error);
+  }
+});
+
 // Movies Trending (TMDb API)
 router.get('/movies/trending', async (req, res) => {
 
