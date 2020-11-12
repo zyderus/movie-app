@@ -122,3 +122,10 @@ a {
     color: var(--primary-color);
   }
 }
+
+.hide {
+  visibility: hidden;
+}
+.show {
+  visibility: visible;
+}

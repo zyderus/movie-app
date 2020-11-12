@@ -41,19 +41,20 @@ loginlink.addEventListener('click', function (e) {
 // Toggle Password Visibility
 hideBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    toggleShow(btn);    
+    toggleShow(btn);
   });
 });
 
 function toggleShow(element) {
   if (element.previousElementSibling.type === "password") {
+    
     element.previousElementSibling.type = "text";
-    element.className = 'toggle-hide toggle-hide-hide';
-    element.innerText = 'HIDE';
+    element.children[0].style.display = 'none';
+    element.children[1].style.display = 'block';
   } else {
     element.previousElementSibling.type = "password";
-    element.className = 'toggle-hide toggle-hide-show';
-    element.innerText = 'SHOW';
+    element.children[0].style.display = 'block';
+    element.children[1].style.display = 'none';
   }
 }
 // end toggle password visibility

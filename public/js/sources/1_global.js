@@ -1,5 +1,7 @@
 console.log('connected 1_global.js');
 
+// GeoIP provider
+const url_geoip = 'https://freegeoip.app/json/';        // 15 000 requests per hour
 // Toggle Day and Night mode
 const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
 const toggleSwitch = document.querySelector('.theme-checkbox');
@@ -30,47 +32,16 @@ toggleSwitch.addEventListener('change', switchTheme, false);
 const supportedLangs = ['en', 'ru', 'es'];    // List of site supported languages
 let locale = getLocale(supportedLangs);
 const language = locale;                      // TMDB API locale for fetch 
-                 
-                 
 
-/* ==================================================================================== */
-// Detect Location
-// ipLookup();
 
-// Lookup IP address via geoip service
-async function ipLookup() {
-  const url = 'https://freegeoip.app/json/';        // 15 000 requests per hour
-  const data = await fetchStartupData(url);
-  console.log(data);
-}
 
-// Collect weather information
-async function weatherLookup() {
-  const url = 'https://freegeoip.app/json/';        // 15 000 requests per hour
-}
+// Clean up Local Storage of old data on second reload of same session
+  // add flag if there is current session ip data
+  // if there is flag clean up local storage of data older than 1 month
 
-async function fetchStartupData(url) {
-  const response = await fetch(url);
-  const data = await response.json();
-  console.log(data);
-  return data;
-}
 
-// Set language based on Accept-Language request HTTP header
-let languageCodes = ['sv', 'en', 'es', 'fr', 'dk', 'de', 'cn', 'ru', 'el', 'no'];
-console.log('LOCALE: ', Intl.Collator.supportedLocalesOf(languageCodes) );
 
-// Set Language
-// const selectedLocale = localStorage.getItem('selectedLocale') ? localStorage.getItem('selectedLocale') : ipLocale;
-// const langSelector = document.querySelector('.lang');
-// console.log('selectedLocale: ', selectedLocale);
-
-// ------------
-
-// Local Client IP tracking
-trackIpHistory();
-
-// Go back in browser history
+  // Go back in browser history
 function goBack() {
   window.history.back();
 }
@@ -83,7 +54,29 @@ document.querySelectorAll('.dropdown-menu').forEach(menu => {
 });
 
 // Track IP locale
-function trackIpHistory() {
+const sessionIpData = async () => {
+  const sessionIpObj = sessionStorage.getItem('ipCurrent') || null;
+  // if no 'ipCurrent' item in current SESSION then create one
+  if (!sessionIpObj) {
+    const ipObj = await getFreshData(url_geoip);
+    sessionStorage.setItem('ipCurrent', JSON.stringify(ipObj));
+    addtoIpHistory(ipObj);
+    return ipObj;
+  } else {
+    const ipData = JSON.parse(sessionStorage.getItem('ipCurrent')) || null;
+    return ipData;
+  }
+}
+
+// View sessionIpData
+const ipData = async () => {
+  const ipdata = await sessionIpData();
+  console.log('from ipdata func: \n', ipdata);
+};
+ipData();
+
+// Add locale object to localstorage history array
+function addtoIpHistory(obj) {
   // If max items then push to last and delete first
   Array.prototype.pushMax = function(value, max) {
     if (this.length >= max) {
@@ -91,38 +84,19 @@ function trackIpHistory() {
     }
     this.push(value);
   }
-  
-  const ipObj = { ip: '23.89.183.80', country: 'Russia', city: 'Tashkent', pcname: 'BEAST', os: 'Windows', app: 'Chrome', time: Date.now() };
 
-  if (!sessionStorage.getItem('ipCurrent')) {
-    console.log('There is no ip Data for this session');
-    sessionStorage.setItem('ipCurrent', JSON.stringify(ipObj));
-
-    // extract ip history array from local storage and add new ip, resave
-    ipHistory(ipObj);
-  } else {
-    const ipData = JSON.parse(sessionStorage.getItem('ipCurrent')) || null;
-    console.log('there is IP data: ', ipData);
-  }
-}
-
-// Add locale object to localstorage history array
-async function ipHistory(obj) {
   const entries = JSON.parse(localStorage.getItem('ipHistory')) || [];
   entries.pushMax(obj, 10);
   localStorage.setItem('ipHistory', JSON.stringify(entries));
-
-  console.log('added.................');
 }
 
 // Evaluate preferred language
-function getLocale(langsArray) {
+function getLocale(langArray) {
   let lang;
-
   if(!getCookie('language')) {
     lang = navigator.languages[0].substring(0, 2);
   } else {
-    const index = supportedLangs.indexOf(getCookie('language'));
+    const index = langArray.indexOf(getCookie('language'));
     lang = index >= 0 ? getCookie('language') : 'en';  // default to english
   }
   return lang;
@@ -143,6 +117,31 @@ function getCookie(cname) {
   }
   return "";
 }
+
+// Use HTML5 Geolocation
+function geoLocate() {
+  if (!navigator.geolocation) {
+    console.log("Geolocation is not supported by your browser");
+    return;
+  }
+
+  function success(position) {
+    // for when getting location is a success
+    const lat  = position.coords.latitude;
+    const lon = position.coords.longitude;
+    console.log('latitude', lat, 'longitude', lon);
+    reverseGeocode(lat, lon);
+  }
+
+  function error() {
+    // for when getting location results in an error
+    console.error('Cannot retrieve your position. Please enable geolocation in your browser');
+    // get your location some other way
+  }
+
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+
 
 /* OPEN DROPDOWNS ON HOVER */
 // // Vars

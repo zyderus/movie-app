@@ -1,38 +1,60 @@
-<%- include('../partials/header') %> 
+<%- include('../partials/header') %>
 
-<h2>Hi, <%= user.username[0].toUpperCase() + user.username.substring(1, user.username.indexOf('@')) %></h2>
+<div class="container">
+  <h2>Hi, <%= user.username[0].toUpperCase() + user.username.substring(1, user.username.indexOf('@')) %></h2>
 
-<span>Your details:</span><br>
-<span><a href="tel:<%= user.phone || null %> "><%= user.phone || null %></a></span><br>
-<span><a href = "mailto: <%= user.email || null %>">email: <%= user.email || null %></a></span><br>
-<br>
-<!-- goBack: function in JS to go back in browser history. function in main.min.js -->
-<button onclick="goBack()">Back</button>
+  <p>
+    <button class="btn-custom get-nav-geolocation">Accuracy<%= // locale.btn_get_location %> </button> 
+    Click to allow accurate geolocation 
+  </p>
 
-<% if(!movies.length) { %>
-  <h3>No saved movies in Playlist</h3>
-<% } else { %>
-  <h2>Your Movie Playlist</h2>
-  <% movies.forEach(movie => { %>
-    <div class="movie-box">
-      <h3><%= movie.title %></h3>
-      <p><em><%= movie.created.toDateString() %></em></p>
-      <a href="/movies/<%= movie._id %> "><img src="<%= movie.poster %> " width="100"></a>
-      <p><%- movie.description.substring(0, 100) %>... </p>
+  <div class="user-details">
+    <span>Your details:</span>
+    <span><a href="tel:<%= user.phone || null %> "><%= user.phone || null %></a></span><br>
+    <span><a href = "mailto: <%= user.email || null %>">email: <%= user.email || null %></a></span>
+  </div><br>
+
+  <div class="client-data"></div><br>
+  <div class="backend-client-data">
+    <div><strong>Serverside Collected Info:</strong></div>
+    <div class="backend-client-info">
+      <%= 'lang.ipaddress' %>: <%= 'ipaddress' %><br>
+      <%= 'lang.proxy' %>: <%= 'proxy' %><br>
+      <%= 'lang.latitude' %>: <%= 'latitude' %><br>
+      <%= 'lang.longitude' %>: <%= 'longitude' %><br>
+      <%= 'lang.city' %>: <%= 'city' %><br>
+      <%= 'lang.country' %>: <%= 'country' %><br>
+      <%= 'lang.timezone' %>: <%= 'timezone' %><br>
+      <%= 'lang.os' %>: <%= 'os' %><br>
+      <%= 'lang.osarchitecture' %>: <%= 'osarchitecture' %><br>
+      <%= 'lang.os_ver' %>: <%= 'os_ver' %><br>
+      <%= 'lang.browser' %>: <%= 'browser' %><br>
+      <%= 'lang.browser_ver' %>: <%= 'browser_ver' %><br>
+      <%= 'lang.sessionsip' %>: <%= 'sessionsip' %><br>
+      <div id="map">MAP</div>
     </div>
-    <hr>
-  <% }) %>
-<% } %>
 
-<div>
-<% if (data) { %>
-  <h3 class="weather">
-    <%= data.name %> | 
-    <%= data.main.temp %>&deg;C | 
-    <img class="weather-icon" src="http://openweathermap.org/img/wn/<%= data.weather[0].icon %>@2x.png">
-    <%= data.weather[0].description %>
-  </h3>
-<% } %>
+
+  </div><br>
+  <div class="weather-data"></div><br>
+
+  <% if(!movies.length) { %>
+    <h3>No saved movies in Playlist</h3>
+  <% } else { %>
+    <h2>Your Movie Playlist</h2>
+    <% movies.forEach(movie => { %>
+      <div class="movie-box">
+        <h3><%= movie.title %></h3>
+        <p><em><%= movie.created.toDateString() %></em></p>
+        <a href="/movies/<%= movie._id %> "><img src="<%= movie.poster %> " width="100"></a>
+        <p><%- movie.description.substring(0, 100) %>... </p>
+      </div>
+      <hr>
+    <% }) %>
+  <% } %>
+
+  <button class="btn-custom get-nav-geolocation" onclick="goBack()">Back<%= // locale.btn_back %> </button>
+
 </div>
 
 <%- include('../partials/footer') %>

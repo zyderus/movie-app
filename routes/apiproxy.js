@@ -152,4 +152,30 @@ router.get('/theaters/upcoming', async (req, res) => {
   }
 });
 
+// OpenWeatherMap
+router.get('/weather', async (req, res) => {
+  
+  const lat = req.query.lat || null;
+  const lon = req.query.lon || null;
+  const lang = req.query.lang || null;
+  const units = req.query.units || null;
+  const params = new URLSearchParams({
+    lat,
+    lon,
+    units,
+    lang,
+    appid: process.env.OWM_KEY,
+  });
+  const url_path = `https://api.openweathermap.org/data/2.5/weather?`;
+  const url = url_path + params;
+
+  // Receive data
+  try {
+    const data = await fetchData(url);
+    return res.json(data);
+  } catch (error) {
+    return console.log(error);
+  }
+});
+
 module.exports = router;

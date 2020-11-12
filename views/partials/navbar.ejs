@@ -90,32 +90,14 @@
                       </div>
                     </div>
                     <div class="col-lg-3 movie-genres">
-                      <div class="megamenu-items-title">Genres</div>
-                      <ul>
-                        <a href="#"><li>genre 1</li></a>
-                        <a href="#"><li>genre 2</li></a>
-                        <a href="#"><li>genre 3</li></a>
-                        <a href="#"><li>genre 4</li></a>
-                        <a href="#"><li>genre 5</li></a>
-                        <a href="#"><li>genre 6</li></a>
-                        <a href="#"><li>genrsdfasdfasdfe 7</li></a>
-                        <a href="#"><li>genre 8</li></a>
-                        <a href="#"><li>genre 9</li></a>
-                        <a href="#"><li>genre 10</li></a>
-                        <a href="#"><li>genre 11</li></a>
-                        <a href="#"><li>genre 12</li></a>
-                        <a href="#"><li>genre 13</li></a>
-                        <a href="#"><li>genre 14</li></a>
-                        <a href="#"><li>genre 15</li></a>
-                      </ul>
+                      <div class="megamenu-items-title"><%= locale.genres %></div>
+                      <ul class="genres-list"></ul>
                     </div>
                   </div>
             
                 </div>
               <!-- </div> -->
             </div>
-
-            
             
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -247,20 +229,20 @@
         <!-- Login Tab -->
         <div class="tab-pane fade show active" id="login-tab-page" role="tabpanel" aria-labelledby="login-p">
           <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel">Sign In</h3>
+            <h3 class="modal-title" id="exampleModalLabel"><%= locale.modal_signin %> </h3>
           </div>
           <div class="modal-body">
 
             <% if(typeof loginErrors != 'undefined' ) { %> 
-              <div style="font-weight: 500; color: coral;">* Email and Password do not match</div>
+              <div style="font-weight: 500; color: coral;"><%= locale.modal_signin_errors %> </div>
             <% } %>
 
             <form id="login-form" class="auth-form form-login" action="/login" method="post" novalidate>
               <div class="form-group">
-                <label for="login-email" class="sr-only">Email</label>
+                <label for="login-email" class="sr-only"><%= locale.modal_email %> </label>
                 <input type="email" class="form-control" id="login-email" 
                   name="username" 
-                  placeholder="Email" 
+                  placeholder="<%= locale.modal_email %>" 
                   autocomplete="new-password" 
                   required 
                 >
@@ -268,33 +250,33 @@
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" id="login-password" 
-                    name="password" placeholder="Password" autocomplete="new-password" required>
+                    name="password" placeholder="<%= locale.modal_pass %>" autocomplete="new-password" required>
                 <div class="small"></div>
               </div>
               <div class="form-group login-button">
                 <button type="submit" id="btn-login" class="btn-custom auth-btn">
-                  SIGN IN
+                  <%= locale.modal_btn_signin %> 
                   <span class="submit-loader"></span>
                 </button>
               </div>
               <div class="form-group">
-                <span class="pw-message"><a href="#">Forgot Password?</a></span>
+                <span class="pw-message"><a href="#"><%= locale.modal_forgotpassword %> </a></span>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <span class="pw-message mb-3">or login with </span>
+            <span class="pw-message mb-3"><%= locale.modal_loginwith %> </span>
             <a href="javascript:void(0)" class="btn btn-danger btn-lg btn-block">Google</a>
             <a href="javascript:void(0)" class="btn btn-primary btn-lg btn-block">Facebook</a>
             <!-- <p class="pw-message mt-4">Don't have an account? <a href="#profile" data-toggle="tab">Create one</a></p>  -->
-            <p class="pw-message mt-4">Don't have an account? <a href="javascript:void(0)" id="register-link">Create one</a></p> 
+            <p class="pw-message mt-4"><%= locale.modal_noaccount %> <a href="javascript:void(0)" id="register-link"><%= locale.modal_createacc %> </a></p> 
           </div>
         </div>
 
         <!-- Register Tab -->
         <div class="tab-pane fade" id="register-tab-page" role="tabpanel" aria-labelledby="register-tab">
           <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel">Register</h3>
+            <h3 class="modal-title" id="exampleModalLabel"><%= locale.modal_register %> </h3>
           </div>
 
           <div class="modal-body">
@@ -315,13 +297,13 @@
 
 
               <div class="form-group">
-                <label for="reg-email" class="sr-only">Email</label>
+                <label for="reg-email" class="sr-only"><%= locale.modal_email %> </label>
                 <input 
                   type="text" 
                   id="reg-email" 
                   class="form-control" 
                   name="username" 
-                  placeholder="Email" 
+                  placeholder="<%= locale.modal_email %>" 
                   value 
                   autocomplete="new-password" 
                   required
@@ -341,11 +323,14 @@
                   id="reg-password" 
                   class="form-control" 
                   name="password" 
-                  placeholder="Password" 
+                  placeholder="<%= locale.modal_pass %>" 
                   autocomplete="new-password"
                   required
                 >
-                <div class="toggle-hide">SHOW</div>
+                <div id="pwshow" class="toggle-hide">
+                  <div id="pwshow" class="toggle-hide-show" style="display: block;"><%= locale.modal_pwshow %></div>
+                  <div id="pwhide" class="toggle-hide-hide" style="display: none;"><%= locale.modal_pwhide %></div>
+                </div>
                 <div class="pwmeter-container">
                   <div class="pwmeter">
                     <span class="one"></span>
@@ -372,7 +357,7 @@
               <div class="form-group">
                 <div class="g-recaptcha" data-callback="recaptchaCheck" data-expired-callback="recaptchaCheckExp" data-sitekey="<%= gCaptchaKey %>" data-theme="light"></div>
                 <div class="small captcha-small">
-                  Are you human?
+                  <%= locale.modal_captchaerr %>
                   <% if(typeof errors != 'undefined') { %> 
                     <% errors.forEach((error) => { %>
                       <%= `* ${error.captcha}` %><br>
@@ -383,14 +368,14 @@
 
               <div class="form-group login-button">
                 <button type="submit" id="btn-register" class="btn-custom auth-btn">
-                  REGISTER
+                  <%= locale.modal_btn_register %>
                   <span class="submit-loader"></span>
                 </button>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <p class="pw-message mt-4"><a href="javascript:void(0)" id="login-link">Back to SIGN IN</a></p> 
+            <p class="pw-message mt-4"><a href="javascript:void(0)" id="login-link"><%= locale.modal_back %></a></p> 
           </div>
 
         </div>

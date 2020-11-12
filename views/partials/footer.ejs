@@ -1,7 +1,17 @@
-<br>
-<p class="center">&copy; Movies <%= new Date().getFullYear() %></p>
-<br>
-<br>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 movie-genres">
+        <div class="megamenu-items-title"><%= locale.genres %> </div>
+        <ul class="genres-list"></ul>
+      </div>
+    </div>
+  </div>
+  <br>
+  <p class="center">&copy; <%= new Date().getFullYear() %> <%= locale.brand %>  <%= locale.initials %>. <%= locale.copyright %>. </p>
+  <br>
+  <br>
+</footer>
 <!-- Bootstrap 5 -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script>
 <!-- Font Awesome -->

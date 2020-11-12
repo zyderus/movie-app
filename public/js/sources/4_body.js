@@ -1,41 +1,102 @@
 console.log('connected 4_body.js');
 
+// Initialize sequence
+initData();
 
-// Search movies (w/o caching)
-searchForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const searchValue = searchInput.value;
-  const url = search_url + searchValue + "&" + url_params;
-  
-  if (searchValue) {
-    header.innerHTML = '';
-    main.innerHTML = '';
-    document.querySelector('header').innerHTML = '';
+// Collect initial TMDB data
+async function initData() {
+  await showGenres();
+  showMoviesTrending();
+  showMoviesPopular();
+  const ipdata = await sessionIpData();
+  showWeather(ipdata);
+  showClientside(ipdata);
+}
 
-    fetchData(url, toMain, 0);
-    searchInput.value = '';
+// Collect genres list
+async function showGenres() {
+  movieGenres = await fetchData(url_movie_genres + url_params, 24 * 60 * 60 * 1000);
+  document.querySelectorAll('.genres-list').forEach(list => {
+    toGenresList(movieGenres.genres, list);
+  });
+}
+
+// Display Popular movies
+async function showMoviesPopular() {
+  if(main) {
+    moviesPopular = await fetchData(url_moviesPopular + url_params);
+    toMain(moviesPopular);
   }
-});
+}
 
-// Fetch movie details by Id
-async function fetchMovie(movieId) {
-  const url = `${url_movieInfo + movieId}?${url_params}`;
-  const data = fetchData(url, watchMovie);
-  console.log('url: ', url);
+// Display Trending movies
+async function showMoviesTrending() {
+  if(gallery) {
+    moviesTrending = await fetchData(url_moviesTrend + url_params);
+    toCarousel(moviesTrending);
+  }
+}
+
+// Display Weather info
+async function showWeather(data) {
+  if(weather) {
+    const params = new URLSearchParams({ 
+      lat: data.latitude,
+      lon: data.longitude,
+      units: "metric",    // "metric", "imperial", "kelvin"
+      lang: language,
+    });    
+    const resdata = await fetchData(url_weatherInfo + params);
+    toWeather(resdata);
+    
+    console.log('received weather data: ', resdata);
+  }
 }
 
 
-// Initiate Data Fetch if at root url
-const initMovieData = async () => {
-  const genresData = await fetchGenres(url_movie_genres + url_params);
-  sup_genres = genresData.genres;
 
-  // fetchData(url_theatersNow, showTN);
-  // fetchData(url_theatersUpcoming, showTU);
-  fetchData(url_moviesTrend + url_params, toCarousel);
-  fetchData(url_moviesPopular + url_params, toMain);
-};
-initMovieData();
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Display Clientside info
+async function showClientside(data) {
+  if(clientInfo) {
+    let browser_geolocation = false;
+    
+    if(true) {
+
+    } else {
+
+    }
+
+    toClientInfo(data);
+      
+      // console.log('received weather data: ', "resdata");
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Populate Carousel
@@ -71,7 +132,7 @@ function toCarousel(array) {
             <span class="carousel-caption-overview">
               <i class="${vote_average == 0 ? "" : getClassByRate(vote_average).star}"></i> ${vote_average == 0 ? "" : vote_average} </span>
             <span class="pipe carousel-caption-overview">|</span> 
-            <span class="carousel-caption-overview">${getGenres(genre_ids)}</span>
+            <span class="carousel-caption-overview">${showMovieListGenres(genre_ids)}</span>
           </p>
         <div class="film-details">
           <a class="button-container-${index}" href="#"></a>
@@ -157,7 +218,7 @@ function toMain(movies) {
               <span class="${getClassByRate(vote_average).class}">
                 ${vote_average} <i class="${getClassByRate(vote_average).star}"></i></span>
               <span class="pipe">|</span> 
-              <span>${getGenres(genre_ids)}</span>
+              <span>${showMovieListGenres(genre_ids)}</span>
             </div>
           </div>
           
@@ -178,7 +239,7 @@ function toMain(movies) {
   });
 }
 
-// Movie Details
+// Populate Movie details
 function watchMovie(movie) {
   const { 
     title, 
@@ -223,7 +284,7 @@ function watchMovie(movie) {
                   <span class="reviews">87 875 <i class="fas fa-user-alt"></i></span>
                 </div>
                 <div class="film-page_genre">
-                  <span>${getMovieGenres(genres)}</span>
+                  <span>${showMovieGenres(genres)}</span>
                 </div>
               </div>
             </div>
@@ -266,28 +327,105 @@ function watchMovie(movie) {
   `
 }
 
-// Evaluate movie rating scores
-function getClassByRate(rate) {
-  if (rate == 0) {
-    return {
-      class: "hide",
-    }
-  } else if (rate >= 7) {
-    return {
-      class: "green",
-      star: "fas fa-star"
-    }
-  } else if (rate > 5) {
-    return {
-      class: "orange",
-      star: "fas fa-star-half"
-    }
-  } else {
-    return {
-      class: "red",
-      star: "far fa-star"
-    }
+// Populate Genre lists
+function toGenresList(genres, list) {
+  list.innerHTML = '';
+
+  genres.forEach((genre, index) => {
+    const { name } = genre;
+
+    const genreElement = document.createElement('li');
+    genreElement.classList.add('genre-list');
+
+    genreElement.innerHTML = `<a href="">${name}</a>`;
+
+    // On each forEach iteration attach the button to an element with 
+    list.appendChild(genreElement);
+    genreElement.addEventListener('click', function() {
+      // fetchMoviebyGenre(id);
+    });
+  });
+}
+
+function toWeather(data) {
+  if(data.length < 1) {
+    weather.innerHTML = '';
+    weather.innerHTML = `<div>No Weather Data</div>`;
+    return;
   }
+  weather.innerHTML = '';
+  weather.innerHTML = `<div><strong>Weather Info:</strong></div>`
+
+  const city = data.name;
+  const temp = data.main.temp;
+  const icon = data.weather[0].icon;
+  const desc = data.weather[0].description;
+
+  const weatherElement = document.createElement('div');
+  weatherElement.classList.add('weather');
+  weatherElement.innerHTML = `
+    ${'lang.city'}: ${city}<br>
+    ${'lang.temp'}: ${temp} &deg;C <br>
+    <img class="weather-icon" src="http://openweathermap.org/img/wn/${icon}@2x.png"> <br>
+    ${desc}
+  `;
+
+  // On each forEach iteration attach the button to an element with 
+  weather.appendChild(weatherElement);
+  weatherElement.addEventListener('click', function() {
+    // fetchMovie(id);
+  });
+}
+
+// Display ClienInfo
+function toClientInfo(data) {
+  if(data.length < 1) {
+    clientInfo.innerHTML = '';
+    clientInfo.innerHTML = `<div>No Client Data</div>`;
+    return;
+  }
+  clientInfo.innerHTML = '';
+  clientInfo.innerHTML = `<div><strong>Clientside Collected Info:</strong></div>`
+
+  // const ip = data.ip;
+  // const proxy = data.proxy;
+  // const latitude = data.lat;
+  // const longitude = data.lon;
+  // const city = data.city;
+  // const country = data.country;
+  // const timezone = data.timezone;
+  // const os = data.os;
+  // const osarchitecture = data.osarch;
+  // const os_ver = data.osversion;
+  // const browser = data.browser;
+  // const browser_ver = data.browser_ver;
+  // const sessionsip = data.sessionsip;
+
+
+  const clientInfoElement = document.createElement('div');
+  clientInfoElement.classList.add('client-info');
+  clientInfoElement.innerHTML = `
+    ${'lang.ipaddress'}: ${'ipaddress'}<br>
+    ${'lang.proxy'}: ${'proxy'}<br>
+    ${'lang.latitude'}: ${'latitude'}<br>
+    ${'lang.longitude'}: ${'longitude'}<br>
+    ${'lang.city'}: ${'city'}<br>
+    ${'lang.country'}: ${'country'}<br>
+    ${'lang.timezone'}: ${'timezone'}<br>
+    ${'lang.os'}: ${'os'}<br>
+    ${'lang.osarchitecture'}: ${'osarchitecture'}<br>
+    ${'lang.os_ver'}: ${'os_ver'}<br>
+    ${'lang.browser'}: ${'browser'}<br>
+    ${'lang.browser_ver'}: ${'browser_ver'}<br>
+    ${'lang.sessionsip'}: ${'sessionsip'}<br>
+    <div id="map">MAP</div>
+  `;
+
+  // On each forEach iteration attach the button to an element with 
+  clientInfo.appendChild(clientInfoElement);
+  clientInfoElement.addEventListener('click', function() {
+    // fetchMovie(id);
+  });
 }
 
 // event added to target if = #burger
