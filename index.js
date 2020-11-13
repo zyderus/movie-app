@@ -64,7 +64,7 @@ app.use("/movies", movieRoutes);
 app.use("/api", apiproxyRoutes);
 app.use("/movies/:id/comments", commentRoutes);
 app.use(indexRoutes);
-app.use(searchRoutes);
+// app.use(searchRoutes);
 app.use(profileRoutes);
 
 // Server

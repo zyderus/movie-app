@@ -8,9 +8,6 @@ async function initData() {
   await showGenres();
   showMoviesTrending();
   showMoviesPopular();
-  const ipdata = await sessionIpData();
-  showWeather(ipdata);
-  showClientside(ipdata);
 }
 
 // Collect genres list
@@ -36,68 +33,6 @@ async function showMoviesTrending() {
     toCarousel(moviesTrending);
   }
 }
-
-// Display Weather info
-async function showWeather(data) {
-  if(weather) {
-    const params = new URLSearchParams({ 
-      lat: data.latitude,
-      lon: data.longitude,
-      units: "metric",    // "metric", "imperial", "kelvin"
-      lang: language,
-    });    
-    const resdata = await fetchData(url_weatherInfo + params);
-    toWeather(resdata);
-    
-    console.log('received weather data: ', resdata);
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Display Clientside info
-async function showClientside(data) {
-  if(clientInfo) {
-    let browser_geolocation = false;
-    
-    if(true) {
-
-    } else {
-
-    }
-
-    toClientInfo(data);
-      
-      // console.log('received weather data: ', "resdata");
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Populate Carousel
 function toCarousel(array) {
@@ -347,86 +282,6 @@ function toGenresList(genres, list) {
   });
 }
 
-function toWeather(data) {
-  if(data.length < 1) {
-    weather.innerHTML = '';
-    weather.innerHTML = `<div>No Weather Data</div>`;
-    return;
-  }
-  weather.innerHTML = '';
-  weather.innerHTML = `<div><strong>Weather Info:</strong></div>`
-
-  const city = data.name;
-  const temp = data.main.temp;
-  const icon = data.weather[0].icon;
-  const desc = data.weather[0].description;
-
-  const weatherElement = document.createElement('div');
-  weatherElement.classList.add('weather');
-  weatherElement.innerHTML = `
-    ${'lang.city'}: ${city}<br>
-    ${'lang.temp'}: ${temp} &deg;C <br>
-    <img class="weather-icon" src="http://openweathermap.org/img/wn/${icon}@2x.png"> <br>
-    ${desc}
-  `;
-
-  // On each forEach iteration attach the button to an element with 
-  weather.appendChild(weatherElement);
-  weatherElement.addEventListener('click', function() {
-    // fetchMovie(id);
-  });
-}
-
-// Display ClienInfo
-function toClientInfo(data) {
-  if(data.length < 1) {
-    clientInfo.innerHTML = '';
-    clientInfo.innerHTML = `<div>No Client Data</div>`;
-    return;
-  }
-  clientInfo.innerHTML = '';
-  clientInfo.innerHTML = `<div><strong>Clientside Collected Info:</strong></div>`
-
-  // const ip = data.ip;
-  // const proxy = data.proxy;
-  // const latitude = data.lat;
-  // const longitude = data.lon;
-  // const city = data.city;
-  // const country = data.country;
-  // const timezone = data.timezone;
-  // const os = data.os;
-  // const osarchitecture = data.osarch;
-  // const os_ver = data.osversion;
-  // const browser = data.browser;
-  // const browser_ver = data.browser_ver;
-  // const sessionsip = data.sessionsip;
-
-
-  const clientInfoElement = document.createElement('div');
-  clientInfoElement.classList.add('client-info');
-  clientInfoElement.innerHTML = `
-    ${'lang.ipaddress'}: ${'ipaddress'}<br>
-    ${'lang.proxy'}: ${'proxy'}<br>
-    ${'lang.latitude'}: ${'latitude'}<br>
-    ${'lang.longitude'}: ${'longitude'}<br>
-    ${'lang.city'}: ${'city'}<br>
-    ${'lang.country'}: ${'country'}<br>
-    ${'lang.timezone'}: ${'timezone'}<br>
-    ${'lang.os'}: ${'os'}<br>
-    ${'lang.osarchitecture'}: ${'osarchitecture'}<br>
-    ${'lang.os_ver'}: ${'os_ver'}<br>
-    ${'lang.browser'}: ${'browser'}<br>
-    ${'lang.browser_ver'}: ${'browser_ver'}<br>
-    ${'lang.sessionsip'}: ${'sessionsip'}<br>
-    <div id="map">MAP</div>
-  `;
-
-  // On each forEach iteration attach the button to an element with 
-  clientInfo.appendChild(clientInfoElement);
-  clientInfoElement.addEventListener('click', function() {
-    // fetchMovie(id);
-  });
-}
 
 // event added to target if = #burger
 document.addEventListener('click', function(e){

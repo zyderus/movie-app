@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 const Movie = require("../models/movie");
 const Comment = require("../models/comment");
 const middleware = require("../middleware");
-let { checkMovieOwnership, checkCommentOwnership, isLoggedIn, isAdmin, isSafe } = middleware;
+const { checkMovieOwnership, checkCommentOwnership, isLoggedIn, isAdmin, isSafe } = middleware;
 
 // Add new comment
 router.get("/new", isLoggedIn, (req, res) => {

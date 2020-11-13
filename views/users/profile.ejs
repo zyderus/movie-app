@@ -18,20 +18,19 @@
   <div class="backend-client-data">
     <div><strong>Serverside Collected Info:</strong></div>
     <div class="backend-client-info">
-      <%= 'lang.ipaddress' %>: <%= 'ipaddress' %><br>
-      <%= 'lang.proxy' %>: <%= 'proxy' %><br>
-      <%= 'lang.latitude' %>: <%= 'latitude' %><br>
-      <%= 'lang.longitude' %>: <%= 'longitude' %><br>
-      <%= 'lang.city' %>: <%= 'city' %><br>
-      <%= 'lang.country' %>: <%= 'country' %><br>
-      <%= 'lang.timezone' %>: <%= 'timezone' %><br>
-      <%= 'lang.os' %>: <%= 'os' %><br>
-      <%= 'lang.osarchitecture' %>: <%= 'osarchitecture' %><br>
-      <%= 'lang.os_ver' %>: <%= 'os_ver' %><br>
-      <%= 'lang.browser' %>: <%= 'browser' %><br>
-      <%= 'lang.browser_ver' %>: <%= 'browser_ver' %><br>
-      <%= 'lang.sessionsip' %>: <%= 'sessionsip' %><br>
-      <div id="map">MAP</div>
+      <%= locale.ipaddress %>: <%= horde.ip %><br>
+      <%= locale.proxy %>: <%= horde.proxy %><br>
+      <%= locale.os %>: <%= horde.os.name %> <%= horde.os.version %> <%= horde.cpu.architecture %><br>
+      <%= locale.browser %>: <%= horde.browser.name %> <%= horde.browser.major %><br>
+      ---   ---   --- <br>
+      geoIP with ip-api.com: <br>
+      <%= locale.lat %>: <%= horde.latitude %><br>
+      <%= locale.lon %>: <%= horde.longitude %><br>
+      <%= locale.city %>: <%= horde.city %><br>
+      <%= locale.country %>: <%= horde.country %><br>
+      <%= locale.timezone %>: <%= horde.timezone %><br>
+      <%= locale.sessionip %>: <%= horde.sessionsip %><br>
+      <div id="map"><%= locale.map %></div>
     </div>
 
 

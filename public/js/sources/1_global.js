@@ -1,7 +1,5 @@
 console.log('connected 1_global.js');
 
-// GeoIP provider
-const url_geoip = 'https://freegeoip.app/json/';        // 15 000 requests per hour
 // Toggle Day and Night mode
 const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
 const toggleSwitch = document.querySelector('.theme-checkbox');
@@ -33,6 +31,10 @@ const supportedLangs = ['en', 'ru', 'es'];    // List of site supported language
 let locale = getLocale(supportedLangs);
 const language = locale;                      // TMDB API locale for fetch 
 
+// GeoIP providers
+const geoip_url = 'https://freegeoip.app/json/';        // 15 000 requests per hour
+
+
 
 
 // Clean up Local Storage of old data on second reload of same session
@@ -53,27 +55,20 @@ document.querySelectorAll('.dropdown-menu').forEach(menu => {
   });
 });
 
-// Track IP locale
-const sessionIpData = async () => {
-  const sessionIpObj = sessionStorage.getItem('ipCurrent') || null;
-  // if no 'ipCurrent' item in current SESSION then create one
+// Track IP lookup
+const sessionIpData = async (url) => {
+  const sessionIpObj = sessionStorage.getItem(url) || null;
+  // if no url-named item in current SESSION then create one
   if (!sessionIpObj) {
-    const ipObj = await getFreshData(url_geoip);
-    sessionStorage.setItem('ipCurrent', JSON.stringify(ipObj));
+    const ipObj = await getFreshData(url);
+    sessionStorage.setItem(url, JSON.stringify(ipObj));
     addtoIpHistory(ipObj);
     return ipObj;
   } else {
-    const ipData = JSON.parse(sessionStorage.getItem('ipCurrent')) || null;
+    const ipData = JSON.parse(sessionStorage.getItem(url)) || null;
     return ipData;
   }
 }
-
-// View sessionIpData
-const ipData = async () => {
-  const ipdata = await sessionIpData();
-  console.log('from ipdata func: \n', ipdata);
-};
-ipData();
 
 // Add locale object to localstorage history array
 function addtoIpHistory(obj) {

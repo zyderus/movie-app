@@ -172,7 +172,26 @@ router.get('/weather', async (req, res) => {
   // Receive data
   try {
     const data = await fetchData(url);
+    data.locale = req.eval_language;
     return res.json(data);
+  } catch (error) {
+    return console.log(error);
+  }
+});
+
+// Google Geocode proxy
+router.get('/geocode', async (req, res) => {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?`;
+  const params = new URLSearchParams({
+    latlng: req.query.latlng,
+    key: process.env.GOOGLE_GEOCODE_KEY,
+    language: req.query.language,
+  });
+
+  // Receive data
+  try {
+    const data = await fetchData(url + params);
+    return res.json(data.results[0]);
   } catch (error) {
     return console.log(error);
   }

@@ -1,11 +1,8 @@
 console.log('connected 3_data_prep.js');
 
-// TMDB api caching fetch interval
+// TMDb API parameters
 const cacheInterval = 20 * 1000;   // 15s
-// TMDb API url parameters
 const url_params = new URLSearchParams({ language });
-
-// TMDB images paths
 const img_path = 'https://image.tmdb.org/t/p/w300';
 const img_path_highres = 'https://image.tmdb.org/t/p/w1280';
 
@@ -17,7 +14,6 @@ const url_theatersUpcoming = `/api/theaters/upcoming?`;
 const url_moviesTrend = `/api/movies/trending?`;
 const url_moviesPopular = `/api/movies/popular?`;
 const url_movieInfo = `/api/movies/movieinfo/`;
-const url_weatherInfo = `/api/weather?`;
 
 const marqueeReel = document.querySelector('.marquee-content');
 const gallery = document.querySelector('.carousel-inner');
@@ -25,8 +21,6 @@ const galleryThumbnails = document.querySelector('.carousel-indicators');
 const main = document.querySelector('main');
 const section = document.querySelector('section');
 const header = document.querySelector('header');
-const weather = document.querySelector('.weather-data');
-const clientInfo = document.querySelector('.client-data');
 
 let movieGenres;
 

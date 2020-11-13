@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Movie = require("../models/movie");
 const middleware = require("../middleware");
-let { checkMovieOwnership, checkCommentOwnership, isLoggedIn, isAdmin, isSafe } = middleware;
+const { checkMovieOwnership, checkCommentOwnership, isLoggedIn, isAdmin, isSafe } = middleware;
 
 // List movies
 router.get("/", (req, res) => {
