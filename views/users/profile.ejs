@@ -14,27 +14,26 @@
     <span><a href = "mailto: <%= user.email || null %>">email: <%= user.email || null %></a></span>
   </div><br>
 
-  <div class="client-data"></div><br>
+  <div id="map"><%= locale.map %></div>
+  <p></p>
   <div class="backend-client-data">
-    <div><strong>Serverside Collected Info:</strong></div>
-    <div class="backend-client-info">
-      <%= locale.ipaddress %>: <%= horde.ip %><br>
-      <%= locale.proxy %>: <%= horde.proxy %><br>
-      <%= locale.os %>: <%= horde.os.name %> <%= horde.os.version %> <%= horde.cpu.architecture %><br>
-      <%= locale.browser %>: <%= horde.browser.name %> <%= horde.browser.major %><br>
-      ---   ---   --- <br>
-      geoIP with ip-api.com: <br>
-      <%= locale.lat %>: <%= horde.latitude %><br>
-      <%= locale.lon %>: <%= horde.longitude %><br>
-      <%= locale.city %>: <%= horde.city %><br>
-      <%= locale.country %>: <%= horde.country %><br>
-      <%= locale.timezone %>: <%= horde.timezone %><br>
-      <%= locale.sessionip %>: <%= horde.sessionsip %><br>
-      <div id="map"><%= locale.map %></div>
-    </div>
-
-
-  </div><br>
+    <div><strong>Client Serverside Info:</strong></div>
+    <%= locale.ipaddress %>: <%= horde.ip %><br>
+    <%= locale.proxy %>: <%= horde.proxy %><br>
+    <%= locale.os %>: <%= horde.os.name %> <%= horde.os.version %> <%= horde.cpu.architecture %><br>
+    <%= locale.browser %>: <%= horde.browser.name %> <%= horde.browser.major %><br>
+    <%= locale.sessionip %>: <%= horde.sessionsip %><br>
+  <p></p>
+  <div class="client-data">
+    <div><strong>Client Info:</strong></div>
+    <%= locale.ipaddress %>: <span></span><br>
+    <%= locale.lat %>: <span></span><br>
+    <%= locale.lon %>: <span></span><br>
+    <%= locale.city %>: <span></span><br>
+    <%= locale.country %>: <span></span><br>
+    <%= locale.timezone %>: <span></span><br>
+  </div>
+  <br>
   <div class="weather-data"></div><br>
 
   <% if(!movies.length) { %>

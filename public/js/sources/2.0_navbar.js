@@ -57,7 +57,6 @@ function toggleShow(element) {
     element.children[1].style.display = 'none';
   }
 }
-// end toggle password visibility
 
 // Day & Night theme toggle
 const themeCheckbox = document.querySelector('.theme-checkbox');

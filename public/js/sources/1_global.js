@@ -1,7 +1,9 @@
 console.log('connected 1_global.js');
 
+let now = new Date().getHours();
+
 // Toggle Day and Night mode
-const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+let currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
 const toggleSwitch = document.querySelector('.theme-checkbox');
 
 if(currentTheme) {
@@ -10,6 +12,8 @@ if(currentTheme) {
   if(currentTheme === 'dark') {
     toggleSwitch.checked = true;
   }
+} else {
+  autoThemeMode();
 }
 
 function switchTheme(e) {
@@ -24,6 +28,29 @@ function switchTheme(e) {
 };
 
 toggleSwitch.addEventListener('change', switchTheme, false);
+
+function autoThemeMode() {
+  now = new Date().getHours();
+
+  if (now > 19 || now < 7) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    toggleSwitch.checked = true;
+
+    console.log('auto night mode');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    toggleSwitch.checked = false;
+
+    console.log('auto day mode');
+  }
+}
+
+setInterval(() => {
+  currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if(!currentTheme) {
+    autoThemeMode();
+  }
+}, 1000 * 60 * 15);
 // ------------
 
 // Set Global frontend language locale
@@ -34,16 +61,11 @@ const language = locale;                      // TMDB API locale for fetch
 // GeoIP providers
 const geoip_url = 'https://freegeoip.app/json/';        // 15 000 requests per hour
 
-
-
-
 // Clean up Local Storage of old data on second reload of same session
   // add flag if there is current session ip data
   // if there is flag clean up local storage of data older than 1 month
 
-
-
-  // Go back in browser history
+// Go back in browser history
 function goBack() {
   window.history.back();
 }
@@ -125,16 +147,15 @@ function geoLocate() {
     const lat  = position.coords.latitude;
     const lon = position.coords.longitude;
     console.log('latitude', lat, 'longitude', lon);
-    reverseGeocode(lat, lon);
+    // reverseGeocode(lat, lon);
   }
 
   function error() {
-    // for when getting location results in an error
-    console.error('Cannot retrieve your position. Please enable geolocation in your browser');
-    // get your location some other way
+    console.error();
+    // get your location some other way with function
   }
 
-  navigator.geolocation.getCurrentPosition(success, error);
+  navigator.geolocation.getCurrentPosition(success, error);    // options: optional
 }
 
 
@@ -161,3 +182,6 @@ function geoLocate() {
 //   });
 // }
 /* ======================= */
+
+
+console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)

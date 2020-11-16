@@ -132,13 +132,7 @@ function toMain(movies) {
     const movieElement = document.createElement('div');
     movieElement.classList.add('movie');
 
-    movieElement.innerHTML = `
-      <div id="burger" class="burger">
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-      </div>
-      
+    movieElement.innerHTML = `      
       <div class="img-container">
         <div class="img" style="background-image: url('${img_path + poster_path}');"></div>
         <div class="overlay"></div>
@@ -152,13 +146,13 @@ function toMain(movies) {
               <span class="pipe">|</span> 
               <span class="${getClassByRate(vote_average).class}">
                 ${vote_average} <i class="${getClassByRate(vote_average).star}"></i></span>
-              <span class="pipe">|</span> 
-              <span>${showMovieListGenres(genre_ids)}</span>
+              </span><br>
+              <span class="genres">${showMovieListGenres(genre_ids)}</span>
             </div>
           </div>
           
           <div class="overview-body">
-            <p>${overview}</p>
+           <!-- <p>${overview}</p> -->
           </div>
           <div class="overview-footer">
           </div>          

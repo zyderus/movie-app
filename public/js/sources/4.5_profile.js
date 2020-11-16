@@ -1,23 +1,20 @@
 console.log('connected 4.5_profile.js');
 
-
 const url_weatherInfo = `/api/weather?`;
 const weather = document.querySelector('.weather-data');
 const clientInfo = document.querySelector('.client-data');
 
-// Init Profiles page
-const profileInit = async () => {
-  if (window.location.href.indexOf('/profile/') != -1) {
-    const ipdata = await sessionIpData(geoip_url);
-
-    console.log(ipdata);
-
-    showWeather(ipdata);
-    showClientside(ipdata);
-  }
+// Check if in Profiles page
+if (window.location.href.indexOf('/profile/') != -1) {
+  document.addEventListener('DOMContentLoaded', profileInit());
 }
 
-profileInit();
+// Init Profiles page
+async function profileInit() {
+  const ipdata = await sessionIpData(geoip_url);
+  showWeather(ipdata);
+  showClientside(ipdata);
+}
 
 // Display Weather info
 async function showWeather(data) {
@@ -73,8 +70,8 @@ function toWeather(data) {
   weatherElement.innerHTML = `
     ${lang.city}: ${city}<br>
     ${lang.temp}: ${temp} &deg;C <br>
+    ${desc}<br>
     <img class="weather-icon" src="http://openweathermap.org/img/wn/${icon}@2x.png"> <br>
-    ${desc}
   `;
 
   // On each forEach iteration attach the button to an element with 
@@ -86,53 +83,11 @@ function toWeather(data) {
 
 // Display ClienInfo
 function toClientInfo(data) {
-  if(data.length < 1) {
-    clientInfo.innerHTML = '';
-    clientInfo.innerHTML = `<div>No Client Data</div>`;
-    return;
-  }
-  clientInfo.innerHTML = '';
-  clientInfo.innerHTML = `<div><strong>Clientside Collected Info with freegeoip.app:</strong></div>`
-
-  const ip = data.ip;
-  const latitude = data.latitude;
-  const longitude = data.longitude;
-  const city = data.city;
-  const country = data.country_name;
-  const timezone = data.time_zone;
-
-  const os = data.os;
-  const osarchitecture = data.osarch;
-  const os_ver = data.osversion;
-  const browser = data.browser;
-  const browser_ver = data.browser_ver;
-  const sessionsip = data.sessionsip;
-  const proxy = data.proxy;
-
-
-  const clientInfoElement = document.createElement('div');
-  clientInfoElement.classList.add('client-info');
-  clientInfoElement.innerHTML = `
-    ${'lang.ipaddress'}: ${ip}<br>
-    ${'lang.latitude'}: ${latitude}<br>
-    ${'lang.longitude'}: ${longitude}<br>
-    ${'lang.city'}: ${city}<br>
-    ${'lang.country'}: ${country}<br>
-    ${'lang.timezone'}: ${timezone}<br>
-    ---  ---  --- <br>
-    ${'lang.proxy'}: ${'proxy'}<br>
-    ${'lang.os'}: ${'os'}<br>
-    ${'lang.osarchitecture'}: ${'osarchitecture'}<br>
-    ${'lang.os_ver'}: ${'os_ver'}<br>
-    ${'lang.browser'}: ${'browser'}<br>
-    ${'lang.browser_ver'}: ${'browser_ver'}<br>
-    ${'lang.sessionsip'}: ${'sessionsip'}<br>
-    <div id="map">MAP</div>
-  `;
-
-  // On each forEach iteration attach the button to an element with 
-  clientInfo.appendChild(clientInfoElement);
-  clientInfoElement.addEventListener('click', function() {
-    // fetchMovie(id);
-  });
+  const spans = document.querySelectorAll('.client-data span');
+  spans[0].innerHTML = data.ip;
+  spans[1].innerHTML = data.latitude;
+  spans[2].innerHTML = data.longitude;
+  spans[3].innerHTML = data.city;
+  spans[4].innerHTML = data.country_name;
+  spans[5].innerHTML = data.time_zone;
 }

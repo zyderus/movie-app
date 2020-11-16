@@ -174,9 +174,9 @@ main {
   width: 100%;
   margin: 2rem 1.5rem;
   padding: 0;
-  font-size: 4rem;
+  font-size: 2rem;
   font-weight: bold;
-  line-height: 6rem;
+  line-height: 1rem;
   color: var(--secondary-color);
   white-space: nowrap;
 }
@@ -185,35 +185,34 @@ main {
   content: '';
   display: block;
   width: 50%;
-  top: 7.4rem;
-  margin-left: 18rem;
+  top: 3.15rem;
+  margin-left: 17rem;
   border-bottom: 1px solid var(--secondary-color);
 }
 .section-backlogo {
-  font-size: 15rem;
+  font-size: 7rem;
   position: absolute;
-  top: -0.5rem;
+  top: 2rem;
   left: -13rem;
   color: var(--primary-color);
   opacity: 0.05;
-
 }
 
 .movie {
-  background-color: var(--secondary-bg);
-  border-radius: 8px;
+  background-color: var(--secondary-bg); 
+  // border-radius: 8px;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   position: relative;
   margin: 1rem;
-  width: 300px;
+  width: 250px;
 }
 
 .img-container{
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 450px;
+  height: 380px;
 }
 
 .img {
@@ -248,17 +247,17 @@ main {
 }
 
 .movie-info {
-  height: 4rem;
+  height: 4.3rem;
   margin: 0;
   padding-top: 0;
   transition: all var(--transition-speed) ease-in;
 }
 
 /* .movie:hover .movie-info { */
-.movie-info-active {
-  background-color: rgba(0, 0, 0, 0.8);
-  transform: translateY(-150px);
-}
+// .movie-info-active {
+//   background-color: rgba(0, 0, 0, 0.8);
+//   transform: translateY(-150px);
+// }
 
 /* 
 .overview {
@@ -275,15 +274,14 @@ main {
   transition: all var(--transition-speed) ease-in;
 } */
 .overview-header {
-  padding: 0 0.5rem;
+  padding: 0 0.3rem;
   align-items: start;
 }
 .overview-header h3 {
   margin: 0;
   font-weight: 600;
-  letter-spacing: 0.1rem;
-  font-size: 1.4rem;
-  line-height: 2.6rem;
+  font-size: 1.2rem;
+  line-height: 1.9rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -291,12 +289,16 @@ main {
 }
 .overview-header__stats {
   font-size: .9rem;
-  line-height: 1rem;
-  letter-spacing: 0.1rem;
+  line-height: 1.2rem;
   align-items: center;
-  white-space: nowrap;
   overflow: hidden;
+  font-weight: 600;
   text-overflow: ellipsis;
+}
+.genres {
+  font-size: .8rem;
+  font-weight: 400;
+  white-space: nowrap;
 }
 
 .burger{
@@ -308,13 +310,13 @@ main {
   /* transform: translateY(110%); */
   /* transition: transform 0.2s ease-in; */
 }
-.burger div{
-  width: 20px;
-  height: 2px;
-  background-color: var(--primary-color);
-  margin: 2px;
-  transition: all 0.3s ease;
-}
+// .burger div{
+//   width: 20px;
+//   height: 2px;
+//   background-color: var(--primary-color);
+//   margin: 2px;
+//   transition: all 0.3s ease;
+// }
 
 /* .movie:hover .overview {
   transform: translateY(0);
