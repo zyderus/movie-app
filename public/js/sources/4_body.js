@@ -116,7 +116,23 @@ function toMain(movies) {
   }
 
   main.innerHTML = '';
-  main.innerHTML = `<div class="section-title">POPULAR NOW<span class="section-backlogo">POPULAR</span></div>`
+  main.innerHTML = `
+  <div class="section-row">
+    <div class="section-title">POPULAR NOW<span class="section-backlogo">POPULAR</span></div>
+    <div class="view-icons-container">
+      <span class="view-icons btn-view-sm">
+        <svg class="btn-view-sm" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-grid-3x2-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path class="btn-view-sm" fill-rule="evenodd" d="M4 4H2v2h2V4zm1 7V9a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm5 5V9a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zM9 4H7v2h2V4zm5 0h-2v2h2V4zM4 9H2v2h2V9zm5 0H7v2h2V9zm5 0h-2v2h2V9zm-3-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V4zm1 4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1h-2z"/>
+        </svg>
+      </span>
+      <span class="view-icons btn-view-lg">
+        <svg class="btn-view-lg" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-grid" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path class="btn-view-lg" fill-rule="evenodd" d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+  `;
 
   movies.results.forEach((movie, index) => {
     const { title, 
@@ -130,7 +146,8 @@ function toMain(movies) {
           } = movie;
 
     const movieElement = document.createElement('div');
-    movieElement.classList.add('movie');
+    // movieElement.classList.add('movie');
+    movieElement.className = 'movie';
 
     movieElement.innerHTML = `      
       <div class="img-container">
@@ -140,7 +157,7 @@ function toMain(movies) {
       <div class="movie-info">
         <div class="overview">
           <div class="overview-header">
-            <h3>${title}</h3>
+            ${title}<br>
             <div class="overview-header__stats">
               <span>${new Date(release_date).getFullYear()}</span> 
               <span class="pipe">|</span> 
@@ -276,13 +293,34 @@ function toGenresList(genres, list) {
   });
 }
 
+// Click on view-icons for cards size
+document.addEventListener('click', (e) => {
+  if(e.target.classList == 'btn-view-sm') {
+    document.querySelector('.btn-view-sm').style.opacity = 1;
+    document.querySelector('.btn-view-lg').style.opacity = .6;
+    document.querySelectorAll('.movie').forEach(movie => {
+      
+      movie.className = 'movie-small';
+    });
+  }
+  if(e.target.classList == 'btn-view-lg') {
+    document.querySelector('.btn-view-sm').style.opacity = .6;
+    document.querySelector('.btn-view-lg').style.opacity = 1;
+    document.querySelectorAll('.movie-small').forEach(movie => {
 
-// event added to target if = #burger
-document.addEventListener('click', function(e){
-  if(e.target && e.target.id == 'burger'){
-    console.log('listener attached to document');
-   }
+      movie.className = 'movie';
+    });
+  }
 });
+
+
+
+// // event added to target if = #burger
+// document.addEventListener('click', function(e){
+//   if(e.target && e.target.id == 'burger'){
+//     console.log('listener attached to document');
+//    }
+// });
 
 
 // burger menu listener assigned to parent
@@ -314,13 +352,6 @@ document.addEventListener('click', function(e){
 //   document.querySelector('.movie-info').className = 'movie-info-active';
 // }
 
-
-// document.addEventListener('click', (e) => {
-//   if(e.target && e.target.id == 'movie-link') {
-//     console.log('clicked to fetch movie info');
-//     fetchMovie(497582);
-//   }
-// });
 
 // function clickWatch(index) {
 //   document.addEventListener('click', function(e) {

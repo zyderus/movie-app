@@ -1,7 +1,7 @@
 console.log('connected 3_data_prep.js');
 
 // TMDb API parameters
-const cacheInterval = 20 * 1000;   // 15s
+const cacheInterval = 10 * 60 * 1000;   // 10m
 const url_params = new URLSearchParams({ language });
 const img_path = 'https://image.tmdb.org/t/p/w300';
 const img_path_highres = 'https://image.tmdb.org/t/p/w1280';

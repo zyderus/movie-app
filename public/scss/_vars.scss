@@ -24,6 +24,11 @@
   --marquee-elements-displayed: 5;
   --marquee-element-width: calc(var(--marquee-width) / var(--marquee-elements-displayed));
   --marquee-animation-duration: calc(var(--marquee-elements) * 10s);
+
+  --movie-card-height: 380px;
+  --movie-card-width: 250px;
+  --movie-card-small-height: calc(var(--movie-card-height) * .72);
+  --movie-card-small-width: calc(var(--movie-card-width) * .72);
 }
 
 /* Dark Theme */
