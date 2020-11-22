@@ -14,12 +14,13 @@ const url_theatersUpcoming = `/api/theaters/upcoming?`;
 const url_moviesTrend = `/api/movies/trending?`;
 const url_moviesPopular = `/api/movies/popular?`;
 const url_movieInfo = `/api/movies/movieinfo/`;
+const url_similars = `/api/similar/`;
 
 const marqueeReel = document.querySelector('.marquee-content');
 const gallery = document.querySelector('.carousel-inner');
 const galleryThumbnails = document.querySelector('.carousel-indicators');
 const main = document.querySelector('main');
-const section = document.querySelector('section');
+const sections = document.querySelectorAll('section');
 const header = document.querySelector('header');
 
 let movieGenres;
@@ -121,4 +122,11 @@ function getClassByRate(rate) {
       star: "far fa-star"
     }
   }
+}
+
+function clearSections() {
+  sections.forEach(section => {
+    section.innerHTML = '';
+    section.style.display = 'none';
+  });
 }

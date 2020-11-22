@@ -22,6 +22,13 @@ module.exports = {
       sessionip: 'Session IP',
       map: 'Map',
       temp: 'Temperature',
+      // Sections
+      section_intheaters: "In Theaters Now",
+      section_intheaters_pick: "Buy Ticket",
+      section_moviespopular: "Popular Now",
+      section_moviespopular_pick: "Have you watched?..",
+      section_tvpopular: "Popular TV Shows",
+      section_tvpopular_pick: "Watch Right Now",
       // Navbar items
       menu_intheaters: 'IN THEATERS',
       menu_movies: 'MOVIES',
@@ -68,6 +75,13 @@ module.exports = {
       sessionip: 'IP-адрес сеанса',
       map: 'Карта',
       temp: 'Температура',
+      // Sections
+      section_intheaters: "Сейчас в кинотеатрах",
+      section_intheaters_pick: "Купить билет",
+      section_moviespopular: "Популярно сейчас",
+      section_moviespopular_pick: "Вы смотрели?..",
+      section_tvpopular: "Популярные телешоу",
+      section_tvpopular_pick: "Смотрите прямо сейчас",
       // Navbar items
       menu_intheaters: 'В КИНОТЕАТРЕ',
       menu_movies: 'ФИЛЬМЫ',
@@ -119,6 +133,13 @@ module.exports = {
       sessionip: 'IP de sesión',
       map: 'Mapa',
       temp: 'Temperatura',
+      // Sections
+      section_intheaters: "En cines ahora",
+      section_intheaters_pick: "Comprar entrada",
+      section_moviespopular: "Popular ahora",
+      section_moviespopular_pick: "Has visto?..",
+      section_tvpopular: "Programas de TV populares",
+      section_tvpopular_pick: "Ver ahora mismo",
       // Navbar items
       menu_intheaters: 'EN TEATROS',
       menu_movies: 'PELÍCULAS',

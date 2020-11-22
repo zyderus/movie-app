@@ -36,6 +36,8 @@ router.get('/movies/movieinfo/:id', async (req, res) => {
   const url_path = `https://api.themoviedb.org/3/movie/${req.params.id}?`;
   const url = url_path + params;
 
+  console.log('movie info: ', url);
+
   // Receive data
   try {
     const data = await fetchData(url);
@@ -47,7 +49,6 @@ router.get('/movies/movieinfo/:id', async (req, res) => {
 
 // Movie Genres (TMDb)
 router.get('/movies/genres', async (req, res) => {
-
   const language = req.query.language || null;
   const params = new URLSearchParams({
     api_key: process.env.TMDB_KEY,
@@ -56,12 +57,10 @@ router.get('/movies/genres', async (req, res) => {
   });
   const url_path = `https://api.themoviedb.org/3/genre/movie/list?`;
   const url = url_path + params;
-
-  console.log(url)
-
   // Receive data
   try {
-    const data = await fetchData(url);
+    const cacheInterval = 1000 * 60 * 60 * 24 * 10;
+    const data = await fetchData(url, cacheInterval);
     return res.json(data);
   } catch (error) {
     return console.log(error);
@@ -133,7 +132,6 @@ router.get('/theaters/nowplaying', async (req, res) => {
 
 // Theaters Upcoming Movies (TMDb API)
 router.get('/theaters/upcoming', async (req, res) => {
-  
   const language = req.query.language || null;
   const params = new URLSearchParams({
     api_key: process.env.TMDB_KEY,
@@ -142,6 +140,30 @@ router.get('/theaters/upcoming', async (req, res) => {
   });
   const url_path = `https://api.themoviedb.org/3/movie/upcoming?`;
   const url = url_path + params;
+
+  // Receive data
+  try {
+    const data = await fetchData(url);
+    return res.json(data);
+  } catch (error) {
+    return console.log(error);
+  }
+});
+
+// Similar Movies (TMDb API)
+router.get('/similar/:type/:showId', async (req, res) => {
+  const type = req.params.type;
+  const showId = req.params.showId;
+  const language = req.query.language || null;
+  const params = new URLSearchParams({
+    api_key: process.env.TMDB_KEY,
+    language,
+    include_adult: false
+  });
+  const url_path = `https://api.themoviedb.org/3/${type}/${showId}/similar?`;
+  const url = url_path + params;
+
+  console.log('similar movies url: ', url);
 
   // Receive data
   try {

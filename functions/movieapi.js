@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
-const cache = [];                     // Setup cache for requested API data
-const cachingInterval = 30 * 1000;    // 30s
+const cache = [];                           // Setup cache for requested API data
+const cachingInterval = 30 * 60 * 1000;     // 30m
 
 // Read and Write cache data
 const writeToCache = (url, data, index) => typeof index === 'undefined' || index < 0
@@ -19,7 +19,7 @@ const getFreshData = async (url, index) => {
 };
 
 // Fetch logic
-const fetchData = async (url) => {
+const fetchData = async (url, interval = cachingInterval) => {
   const index = readFromCache(url);
   const cachedData = cache[index];
 
