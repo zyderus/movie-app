@@ -1,0 +1,62 @@
+<%- include("./partials/header") %>
+
+<div class="container">
+  <div class="randombox">
+    <div class="row justify-content-center">
+      <h1>Ask a question</h1>
+      <div class="col-md-6">
+        <form id="contact-form" class="" role="form" action="/info/contact" method="post">
+          <div class="form-group">
+            <div class="col-sm-10"></div>
+          </div>
+          <div class="form-group">
+            <label for="contact-form-name">Name</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="contact-form-name"
+                name="inquiry[name]"
+                placeholder="Your Name"
+                value=""
+              />
+              <p class="text-danger"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contact-form-email">Email</label>
+            <div class="col-sm-10">
+              <input
+                type="email"
+                class="form-control"
+                id="contact-form-email"
+                name="inquiry[email]"
+                placeholder="example@domain.com"
+                value=""
+              />
+              <p class="text-danger"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contact-form-message" class="col-sm-2 control-label">Message</label>
+            <div class="col-sm-10">
+              <textarea id="contact-form-message" class="form-control" rows="4" name="inquiry[message]"></textarea>
+              <p class="text-danger"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <!-- Captcha -->
+            <p class="text-danger"></p>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-10">
+              <input id="submit" name="submit" type="submit" value="Send" class="btn btn-custom" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("./partials/footer") %>

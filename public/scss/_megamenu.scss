@@ -83,21 +83,20 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  // width: 300px;
-  height: 245px;
+  height: 17rem;
   li {
-    height: 2.2rem;
+    margin-bottom: .7rem;
     text-transform: capitalize;
     padding-right: 2rem;
   }
-  &::before{
-    position: absolute;
-    top: 0;
-    left: -15px;
-    transform: translateY(-2.7rem);
-    opacity: .3;
-    height: 112%;
-    content: "";
-    border-left: 1px solid var(--secondary-color);
-  }
+  // &::before{
+  //   position: absolute;
+  //   top: 0;
+  //   left: -15px;
+  //   transform: translateY(-2.7rem);
+  //   opacity: .3;
+  //   height: 112%;
+  //   content: "";
+  //   border-left: 1px solid var(--secondary-color);
+  // }
 }

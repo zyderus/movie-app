@@ -143,13 +143,13 @@ function toCarousel(array) {
 
 // Populate a section
 function toSection(section, movies) {
-  if(movies.length < 1) {
-    section.innerHTML = '';
+  section.innerHTML = '';
+  if(movies.length < 1) {   // Inform user if no results
     section.innerHTML = `<div class="section-title">No Results Found<span class="section-backlogo">No Results Found</span></div>`;
     return false;
   }
 
-  section.innerHTML = '';
+  // Show movie-cards size toggle icons
   section.innerHTML = `
   <div class="section-row">
     <div class="section-title">${section.getAttribute('data-desc')}<span class="section-backlogo">${section.getAttribute('data-desc')}</span></div>
@@ -180,7 +180,6 @@ function toSection(section, movies) {
           } = movie;
 
     const movieElement = document.createElement('div');
-    // movieElement.classList.add('movie');
     movieElement.className = 'movie';
 
     movieElement.innerHTML = `      
@@ -211,7 +210,7 @@ function toSection(section, movies) {
       </div>
     `
 
-    // On each forEach iteration attach the button to an element with 
+    // On each forEach iteration attach a button to an element with a watch movie link
     section.appendChild(movieElement);
     movieElement.addEventListener('click', function() {
       fetchMovie(id);
@@ -221,23 +220,13 @@ function toSection(section, movies) {
 
 // Pick a show from array
 function toTheaterPicked(section, movie) {
+  section.innerHTML = '';
   if(movie.length) {
-    section.innerHTML = '';
     section.innerHTML = `<div class="section-title">No Results Found<span class="section-backlogo">No Results Found</span></div>`;
     return false;
   }
 
-  section.innerHTML = '';
-  const { title, 
-    poster_path,
-    vote_average, 
-    backdrop_path,
-    overview,
-    release_date,
-    genre_ids,
-    id
-  } = movie;
-  
+  const { title, poster_path, vote_average, backdrop_path, overview, release_date, genre_ids, id } = movie;
   const movieElement = document.createElement('div');
   movieElement.className = 'pickedMovie';
   movieElement.style.backgroundImage = `url(${img_path_highres + backdrop_path})`;
@@ -267,15 +256,13 @@ function toTheaterPicked(section, movie) {
 
 // Display picked popular movie and similars
 function toMoviePicked(section, movie) {
-  if(movie.length) {
-    section.innerHTML = '';
+  section.innerHTML = '';
+  if(movie.length) {    // Inform user if no movie found
     section.innerHTML = `<div class="section-title">No Results Found<span class="section-backlogo">No Results Found</span></div>`;
-    return false;
+    return;
   }
 
-  section.innerHTML = '';
   const { title, poster_path, vote_average, backdrop_path, overview, release_date, genre_ids, id } = movie;
-  
   const movieElement = document.createElement('div');
   movieElement.className = 'picked-movie-similars';
   movieElement.style.backgroundImage = `url(${img_path_highres + backdrop_path})`;
@@ -295,10 +282,6 @@ function toMoviePicked(section, movie) {
   `;
 
   section.appendChild(movieElement);
-  // movieElement.addEventListener('click', function() {
-    //   fetchMovie(id);
-    // });  
-
   const infoBox = movieElement.querySelector('.info-box');
   infoBox.addEventListener('click', () => fetchMovie(id));
   const similarsBox = movieElement.querySelector('.similars-box');
@@ -351,8 +334,7 @@ function watchMovie(movie) {
     genres
   } = movie;
 
-  header.innerHTML = '';
-  clearSections();
+  clearPage();
   header.innerHTML = `
     <!-- <div class="section-title">Title<span class="section-backlogo">Title</span></div> -->
     <!-- <h1>Title</h1> -->
@@ -438,7 +420,7 @@ function toGenresList(genres, list) {
     const { name } = genre;
 
     const genreElement = document.createElement('li');
-    genreElement.classList.add('genre-list');
+    genreElement.classList.add('genre-li');
 
     genreElement.innerHTML = `<a href="">${name}</a>`;
 

@@ -12,8 +12,8 @@
     <span>Your details:</span>
     <span><a href="tel:<%= user.phone || null %> "><%= user.phone || null %></a></span><br>
     <span><a href = "mailto: <%= user.email || null %>">email: <%= user.email || null %></a></span>
-  </div><br>
-
+  </div>
+  <br>
   <div id="map"><%= locale.map %></div>
   <p></p>
   <div class="backend-client-data">
@@ -23,6 +23,7 @@
     <%= locale.os %>: <%= horde.os.name %> <%= horde.os.version %> <%= horde.cpu.architecture %><br>
     <%= locale.browser %>: <%= horde.browser.name %> <%= horde.browser.major %><br>
     <%= locale.sessionip %>: <%= horde.sessionsip %><br>
+  </div>
   <p></p>
   <div class="client-data">
     <div><strong>Client Info:</strong></div>
@@ -50,9 +51,8 @@
       <hr>
     <% }) %>
   <% } %>
-
-  <button class="btn-custom get-nav-geolocation" onclick="goBack()">Back<%= // locale.btn_back %> </button>
-
+  
+  <button class="btn-custom get-nav-geolocation" onclick="goBack()"><%= locale.btn_back %> </button>
 </div>
 
 <%- include('../partials/footer') %>

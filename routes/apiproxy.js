@@ -163,8 +163,6 @@ router.get('/similar/:type/:showId', async (req, res) => {
   const url_path = `https://api.themoviedb.org/3/${type}/${showId}/similar?`;
   const url = url_path + params;
 
-  console.log('similar movies url: ', url);
-
   // Receive data
   try {
     const data = await fetchData(url);

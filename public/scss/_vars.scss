@@ -1,19 +1,19 @@
 /* Light theme Default */
 :root {
-  --primary-color: #424242;
-  --secondary-color: #536390;
-  --primary-bg: #fff;
-  --secondary-bg: #d3d3d3;
-  --hr-color: #444;
-  --mega-menu-bg: #e1e1e1;
-  
+  --primary-color: #ececec;
+  --secondary-color: #b6b6b6;
+  --primary-bg: #22254b;
+  --secondary-bg: #373b69;
+  --hr-color: #ddd;
+  --mega-menu-bg: #212529;
+
   --error: orangered;
   --success: green;
 
   --watch-movie-bg: #19272e;
   --suggest-movie-bg: #1c212e;
 
-  --footer-bg: #131A22;
+  --footer-bg: #131a22;
 
   --transition-speed: 200ms;
   --navbar-height: 56px;
@@ -27,17 +27,17 @@
 
   --movie-card-height: 380px;
   --movie-card-width: 250px;
-  --movie-card-small-height: calc(var(--movie-card-height) * .72);
-  --movie-card-small-width: calc(var(--movie-card-width) * .72);
+  --movie-card-small-height: calc(var(--movie-card-height) * 0.72);
+  --movie-card-small-width: calc(var(--movie-card-width) * 0.72);
   --movie-card-transition-speed: 300ms;
 }
 
 /* Dark Theme */
-[data-theme="dark"] {
-  --primary-color: #ececec;
-  --secondary-color: #b6b6b6;
-  --primary-bg: #22254b;
-  --secondary-bg: #373b69;
-  --hr-color: #ddd;
-  --mega-menu-bg: #212529;
+[data-theme='light'] {
+  --primary-color: #424242;
+  --secondary-color: #536390;
+  --primary-bg: #fff;
+  --secondary-bg: #d3d3d3;
+  --hr-color: #444;
+  --mega-menu-bg: #e1e1e1;
 }

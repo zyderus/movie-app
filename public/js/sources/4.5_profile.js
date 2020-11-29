@@ -11,53 +11,50 @@ if (window.location.href.indexOf('/profile/') != -1) {
 
 // Init Profiles page
 async function profileInit() {
-  const ipdata = await sessionIpData(geoip_url);
+  const ipdata = await sessionIpData('https://freegeoip.app/json/');
   showWeather(ipdata);
   showClientside(ipdata);
 }
 
 // Display Weather info
 async function showWeather(data) {
-  if(weather) {
-    const params = new URLSearchParams({ 
+  if (weather) {
+    const params = new URLSearchParams({
       lat: data.latitude,
       lon: data.longitude,
-      units: "metric",    // "metric", "imperial", "kelvin"
+      units: 'metric', // "metric", "imperial", "kelvin"
       lang: language,
-    });    
+    });
     const resdata = await fetchData(url_weatherInfo + params);
     toWeather(resdata);
-    
+
     console.log('received weather data: ', resdata);
   }
 }
 
 // Display Clientside info
 async function showClientside(data) {
-  if(clientInfo) {
+  if (clientInfo) {
     let browser_geolocation = false;
-    
-    if(true) {
 
+    if (true) {
     } else {
-
     }
 
     toClientInfo(data);
-      
-      // console.log('received weather data: ', "resdata");
+
+    // console.log('received weather data: ', "resdata");
   }
 }
 
-
 function toWeather(data) {
-  if(data.length < 1) {
+  if (data.length < 1) {
     weather.innerHTML = '';
     weather.innerHTML = `<div>No Weather Data</div>`;
     return;
   }
   weather.innerHTML = '';
-  weather.innerHTML = `<div><strong>Weather Info with OpenWeatherMap:</strong></div>`
+  weather.innerHTML = `<div><strong>Weather Info with OpenWeatherMap:</strong></div>`;
 
   const lang = data.locale;
   const city = data.name;
@@ -74,9 +71,9 @@ function toWeather(data) {
     <img class="weather-icon" src="http://openweathermap.org/img/wn/${icon}@2x.png"> <br>
   `;
 
-  // On each forEach iteration attach the button to an element with 
+  // On each forEach iteration attach the button to an element with
   weather.appendChild(weatherElement);
-  weatherElement.addEventListener('click', function() {
+  weatherElement.addEventListener('click', function () {
     // fetchMovie(id);
   });
 }

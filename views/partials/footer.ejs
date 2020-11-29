@@ -1,17 +1,62 @@
 <footer>
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-between footer-categories">
       <div class="col-lg-3 movie-genres">
-        <div class="megamenu-items-title"><%= locale.genres %> </div>
+        <div class="title"><%= locale.genres %> </div>
         <ul class="genres-list"></ul>
+      </div>
+
+      <div class="col-lg-3 Categories">
+        <div class="title"><%= locale.categories %> </div>
+        <ul class="column-list">
+          <li><a href=""><%= 'locale.My Account' %></a></li>
+          <li><a href=""><%= 'locale.FAQ' %></a></li>
+          <li><a href=""><%= 'locale.Watch on TV' %></a></li>
+          <li><a href=""><%= 'locale.Help' %></a></li>
+          <li><a href=""><%= 'locale.Contact' %></a></li>
+          <li><a href=""><%= 'locale.My Account' %></a></li>
+          <li><a href=""><%= 'locale.FAQ' %></a></li>
+          <li><a href=""><%= 'locale.Watch on TV' %></a></li>
+          <li><a href=""><%= 'locale.Help' %></a></li>
+          <li><a href=""><%= 'locale.FAQ' %></a></li>
+          <li><a href=""><%= 'locale.Watch on TV' %></a></li>
+          <li><a href=""><%= 'locale.Help' %></a></li>
+          <li><a href=""><%= 'locale.Contact' %></a></li>
+        </ul>
+      </div>
+      
+      <div class="col-lg-3 support">
+        <div class="title"><%= locale.support %> </div>
+        <ul class="column-list">
+          <li><a href=""><%= locale.my_account %></a></li>
+          <li><a href=""><%= locale.faq %></a></li>
+          <li><a href=""><%= locale.watch_on_tv %></a></li>
+          <li><a href=""><%= locale.help %></a></li>
+          <li><a href=""><%= locale.contact %></a></li>
+        </ul>
       </div>
     </div>
   </div>
-  <br>
-  <p class="center">&copy; <%= new Date().getFullYear() %> <%= locale.brand %>. <%= locale.copyright %>. </p>
-  <br>
-  <br>
+  
+  <div class="container">
+    <div class="row justify-content-between base-line">
+      <hr>
+      <div class="col-sm-4 text-sm-left text-center">
+        <ul class="legal">
+          <li><a href="/info/docs/privacy_policy"><%= locale.privacy_policy %></a></li>
+          <li class="pipe">|</li>
+          <li><a href="/info/docs/dmca">DMCA</a></li>
+          <li class="pipe">|</li>
+          <li><a href="/info/contact"><%= locale.contact %></a></li>
+        </ul>
+      </div>
+      <div class="col-sm-4 text-sm-right text-center copyright">
+        <%= locale.copyright %> &copy; <%= new Date().getFullYear() %> <%= locale.brand %>.
+      </div>
+    </div>
+  </div>
 </footer>
+
 <!-- Bootstrap 5 -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script>
 <!-- Font Awesome -->

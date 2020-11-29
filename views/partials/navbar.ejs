@@ -1,125 +1,151 @@
-<% if(typeof errors != 'undefined') { %> 
-  <script>sessionStorage.setItem('regformErrors', true);</script>
+<% if(typeof errors != 'undefined') { %>
+<script>
+  sessionStorage.setItem('regformErrors', true);
+</script>
+<% } %> <% if(typeof loginErrors != 'undefined') { %>
+<script>
+  sessionStorage.setItem('loginErrors', true);
+</script>
 <% } %>
 
-<% if(typeof loginErrors != 'undefined') { %> 
-  <script>sessionStorage.setItem('loginErrors', true);</script>
-<% } %>
-  
 <!-- Navbar -->
 <!-- <nav class="navbar navbar-expand-lg navbar-dark navbar-custom"> -->
 <nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container-fluid">
-
     <a class="navbar-brand" href="/">
       <div class="logo">
         <div class="brand-icon"><i class="fas fa-film"></i></div>
-        <div><%= locale.brand %> </div>
+        <div><%= locale.brand %></div>
       </div>
     </a>
 
     <!-- Burger Menu -->
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler collapsed"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="icon-bar top-bar"></span>
       <span class="icon-bar middle-bar"></span>
-      <span class="icon-bar bottom-bar"></span>				
+      <span class="icon-bar bottom-bar"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Site menu -->
       <ul id="site-menu" class="navbar-nav mb-2 mb-lg-0 mr-lg-4">
-
         <li class="nav-item dropdown has-megamenu">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            <%= locale.menu_intheaters %> 
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <%= locale.menu_intheaters %>
           </a>
           <ul id="theater-menu" class="dropdown-menu dropdown-menu-dark megamenu">
-          <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
-            In Theaters Now<br>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima harum voluptate placeat illum, nostrum non totam soluta repellendus ipsa rerum, tempora sed hic.
+            <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+            In Theaters Now<br />
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima harum voluptate placeat illum, nostrum non
+            totam soluta repellendus ipsa rerum, tempora sed hic.
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown has-megamenu">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            <%= locale.menu_movies %> 
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <%= locale.menu_movies %>
           </a>
           <ul id="movie-menu" class="dropdown-menu dropdown-menu-dark sub-menu megamenu">
-          <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+            <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
             <a href="/movies">MOVIES</a>
-
-
 
             <div class="container-fluid">
               <!-- <div class="row justify-content-start"> -->
-                <div class="col-lg-10 offset-lg-1">
-            
-                  <div class="row justify-content-start section-movie">
-                    <div class="col-lg-3 poster-col">
-                      <div class="megamenu-items-title">Have you watched...</div>
-                      <div class="movie-poster"></div>
+              <div class="col-lg-10 offset-lg-1">
+                <div class="row justify-content-start section-movie">
+                  <div class="col-lg-3 poster-col">
+                    <div class="megamenu-items-title">Have you watched...</div>
+                    <div class="movie-poster"></div>
+                  </div>
+                  <div class="col-lg-3 movie-data">
+                    <div class="megamenu-items-title"></div>
+                    <div class="megamenu-items-small">DRAMA | MYSTERY | SCI-FI | WESTERN</div>
+                    <div class="megamenu-items-large">Red Chapter two</div>
+                    <div>2020</div>
+                    <div class="megamenu-items-rating">7 <i class="fas fa-star"></i></div>
+                    <div class="megamenu-items-small">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure repellat error iusto ipsam, atque
+                      sequi ducimus assumenda
                     </div>
-                    <div class="col-lg-3 movie-data">
-                      <div class="megamenu-items-title"></div>
-                      <div class="megamenu-items-small">DRAMA | MYSTERY | SCI-FI | WESTERN</div>
-                      <div class="megamenu-items-large">Red Chapter two</div>
-                      <div>2020</div>
-                      <div class="megamenu-items-rating">7 <i class="fas fa-star"></i></div>
-                      <div class="megamenu-items-small">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure repellat error iusto ipsam, atque sequi ducimus assumenda
-                      </div>
-                      <div class="megamenu-items-controls" style="display: flex;">
-                        <div>
-                          <button class="btn-custom"><i class="fas fa-play"></i> Play</button>
-            
-                          <!-- button.addEventListener('click', function() {
+                    <div class="megamenu-items-controls" style="display: flex">
+                      <div>
+                        <button class="btn-custom"><i class="fas fa-play"></i> Play</button>
+
+                        <!-- button.addEventListener('click', function() {
                             fetchMovie(id);
                           }); -->
-            
-                        </div>
-                        <div>
-                          <a href="">
-                            <i class="fas fa-plus"></i>
-                             Playlist
-                          </a>
-                        </div>
+                      </div>
+                      <div>
+                        <a href="">
+                          <i class="fas fa-plus"></i>
+                          Playlist
+                        </a>
                       </div>
                     </div>
-                    <div class="col-lg-3 movie-genres">
-                      <div class="megamenu-items-title"><%= locale.genres %></div>
-                      <ul class="genres-list"></ul>
-                    </div>
                   </div>
-            
+                  <div class="col-lg-3 movie-genres">
+                    <div class="megamenu-items-title"><%= locale.genres %></div>
+                    <ul class="genres-list"></ul>
+                  </div>
                 </div>
+              </div>
               <!-- </div> -->
             </div>
-            
+
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown has-megamenu">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            <%= locale.menu_tvshows %> 
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <%= locale.menu_tvshows %>
           </a>
           <ul id="tv-menu" class="dropdown-menu dropdown-menu-dark megamenu">
-          <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
-            This is content of megamenu. <br>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat.
+            <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+            This is content of megamenu.
+            <br />
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
@@ -127,21 +153,20 @@
 
       <ul id="search-container-nav" class="navbar-nav mb-2 mb-lg-0">
         <form class="search-form" action="" method="get">
-        <!-- <form class="search-form" action="/results" method="get"> -->
+          <!-- <form class="search-form" action="/results" method="get"> -->
           <i class="fas fa-search fa-lg"></i>
-          <input type="text" name="search" class="search-input" placeholder="<%= locale.search_placeholder %> ">
+          <input type="text" name="search" class="search-input" placeholder="<%= locale.search_placeholder %> " />
         </form>
       </ul>
 
       <ul id="user-menu" class="navbar-nav mb-2 mb-lg-0 ml-lg-4">
-
         <!-- Theme toggler -->
         <li class="nav-item dropdown">
           <div class="nav-link theme-toggle-container">
-            <input type="checkbox" name="" id="theme-checkbox" class="theme-checkbox">
+            <input type="checkbox" name="" id="theme-checkbox" class="theme-checkbox" />
             <label for="theme-checkbox" class="theme-checkbox-label">
-              <i class="fas fa-moon"></i>
               <i class="fas fa-sun"></i>
+              <i class="fas fa-moon"></i>
               <div class="theme-switch"></div>
             </label>
           </div>
@@ -149,53 +174,91 @@
 
         <!-- Select language -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle lang" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-            <%= locale.lang_display %> 
+          <a
+            class="nav-link dropdown-toggle lang"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <%= locale.lang_display %>
           </a>
           <ul id="lang" class="dropdown-menu dropdown-menu-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <li><a id="en" class="dropdown-item" href="#"><img src="../../img/en.svg"> English</a></li>
-            <li><a id="ru" class="dropdown-item" href="#"><img src="../../img/ru.svg"> Русский</a></li>
-            <li><a id="es" class="dropdown-item" href="#"><img src="../../img/es.svg"> Español</a></li>
+            <li>
+              <a id="en" class="dropdown-item" href="#"><img src="../../img/en.svg" /> English</a>
+            </li>
+            <li>
+              <a id="ru" class="dropdown-item" href="#"><img src="../../img/ru.svg" /> Русский</a>
+            </li>
+            <li>
+              <a id="es" class="dropdown-item" href="#"><img src="../../img/es.svg" /> Español</a>
+            </li>
           </ul>
         </li>
 
         <% if (!currentUser) { %>
-          <li class="nav-item btn-box">
-            <button id="auth-btn" class="btn-custom login-btn" data-toggle="modal" data-target="#auth-modal"><%= locale.btn_login %> </button>
-          </li>
+        <li class="nav-item btn-box">
+          <button id="auth-btn" class="btn-custom login-btn" data-toggle="modal" data-target="#auth-modal">
+            <%= locale.btn_login %>
+          </button>
+        </li>
         <% } else { %>
 
-          <li class="nav-item dropdown has-megamenu">
-            <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-bell">
-                <span class="badge rounded-pill bg-danger">8</span>
-              </i>
-            </a>
-            <ul id="msg" class="dropdown-menu dropdown-menu-dark megamenu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Message</a>
-              <a class="dropdown-item" href="#">Message</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Clear</a>
-            </ul>
-          </li>
+        <li class="nav-item dropdown has-megamenu">
+          <a
+            class="nav-link dropdown"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bell">
+              <span class="badge rounded-pill bg-danger">8</span>
+            </i>
+          </a>
+          <ul
+            id="msg"
+            class="dropdown-menu dropdown-menu-dark megamenu dropdown-menu-right"
+            aria-labelledby="navbarDropdown"
+          >
+            <a class="dropdown-item" href="#">Message</a>
+            <a class="dropdown-item" href="#">Message</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Clear</a>
+          </ul>
+        </li>
 
-          <li id="li-avatar" class="nav-item dropdown has-megamenu">
-            <a class="nav-link dropdown nav-link-avatar" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-              <div class="avatar-container">
-                <% if (currentUser.avatar) { %>
-                  <div class="avatar" style="background-image: url('https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg');"></div>
-                <% } else { %>
-                  <%= currentUser.username.substring(0, 1).toUpperCase() %> 
-                <% } %>
-              </div>
-            </a>
-            <ul id="profile" class="dropdown-menu dropdown-menu-dark megamenu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/profile/<%= currentUser._id %>">Dashboard</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/logout">LOGOUT</a></li>
-            </ul>
-          </li>
+        <li id="li-avatar" class="nav-item dropdown has-megamenu">
+          <a
+            class="nav-link dropdown nav-link-avatar"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <div class="avatar-container">
+              <% if (currentUser.avatar) { %>
+              <div
+                class="avatar"
+                style="background-image: url('https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg')"
+              ></div>
+              <% } else { %> <%= currentUser.username.substring(0, 1).toUpperCase() %> <% } %>
+            </div>
+          </a>
+          <ul
+            id="profile"
+            class="dropdown-menu dropdown-menu-dark megamenu dropdown-menu-right"
+            aria-labelledby="navbarDropdown"
+          >
+            <li><a class="dropdown-item" href="/profile/<%= currentUser._id %>">Dashboard</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="/logout">LOGOUT</a></li>
+          </ul>
+        </li>
         <% } %>
       </ul>
     </div>
@@ -206,56 +269,89 @@
 <div class="modal fade" id="auth-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog auth-modal">
     <div class="modal-content">
-
       <a href="javascript:void(0)" class="link-close" data-dismiss="modal" aria-label="Close">
-        <svg width="3rem" height="3rem" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+        <svg
+          width="3rem"
+          height="3rem"
+          viewBox="0 0 16 16"
+          class="bi bi-x"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+          />
         </svg>
       </a>
 
       <!-- Tab control -->
       <ul class="nav nav-tabs" id="authTab" role="tablist">
         <li class="nav-item" role="presentation">
-          <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login-tab-page" role="tab" aria-controls="login" aria-selected="true"></a>
+          <a
+            class="nav-link active"
+            id="login-tab"
+            data-toggle="tab"
+            href="#login-tab-page"
+            role="tab"
+            aria-controls="login"
+            aria-selected="true"
+          ></a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="nav-link" id="register-tab" data-toggle="tab" href="#register-tab-page" role="tab" aria-controls="register" aria-selected="false"></a>
+          <a
+            class="nav-link"
+            id="register-tab"
+            data-toggle="tab"
+            href="#register-tab-page"
+            role="tab"
+            aria-controls="register"
+            aria-selected="false"
+          ></a>
         </li>
       </ul>
 
       <!-- Tab Contents -->
       <div class="tab-content" id="myTabContent">
-
         <!-- Login Tab -->
         <div class="tab-pane fade show active" id="login-tab-page" role="tabpanel" aria-labelledby="login-p">
           <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel"><%= locale.modal_signin %> </h3>
+            <h3 class="modal-title" id="exampleModalLabel"><%= locale.modal_signin %></h3>
           </div>
           <div class="modal-body">
-
-            <% if(typeof loginErrors != 'undefined' ) { %> 
-              <div style="font-weight: 500; color: coral;"><%= locale.modal_signin_errors %> </div>
+            <% if(typeof loginErrors != 'undefined' ) { %>
+            <div style="font-weight: 500; color: coral"><%= locale.modal_signin_errors %></div>
             <% } %>
 
             <form id="login-form" class="auth-form form-login" action="/login" method="post" novalidate>
               <div class="form-group">
                 <label for="login-email" class="sr-only"><%= locale.modal_email %> </label>
-                <input type="email" class="form-control" id="login-email" 
-                  name="username" 
-                  placeholder="<%= locale.modal_email %>" 
-                  autocomplete="new-password" 
-                  required 
-                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="login-email"
+                  name="username"
+                  placeholder="<%= locale.modal_email %>"
+                  autocomplete="new-password"
+                  required
+                />
                 <div class="small email-small"></div>
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" id="login-password" 
-                    name="password" placeholder="<%= locale.modal_pass %>" autocomplete="new-password" required>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="login-password"
+                  name="password"
+                  placeholder="<%= locale.modal_pass %>"
+                  autocomplete="new-password"
+                  required
+                />
                 <div class="small"></div>
               </div>
               <div class="form-group login-button">
                 <button type="submit" id="btn-login" class="btn-custom auth-btn">
-                  <%= locale.modal_btn_signin %> 
+                  <%= locale.modal_btn_signin %>
                   <span class="submit-loader"></span>
                 </button>
               </div>
@@ -269,67 +365,66 @@
             <a href="javascript:void(0)" class="btn btn-danger btn-lg btn-block">Google</a>
             <a href="javascript:void(0)" class="btn btn-primary btn-lg btn-block">Facebook</a>
             <!-- <p class="pw-message mt-4">Don't have an account? <a href="#profile" data-toggle="tab">Create one</a></p>  -->
-            <p class="pw-message mt-4"><%= locale.modal_noaccount %> <a href="javascript:void(0)" id="register-link"><%= locale.modal_createacc %> </a></p> 
+            <p class="pw-message mt-4">
+              <%= locale.modal_noaccount %>
+              <a href="javascript:void(0)" id="register-link"><%= locale.modal_createacc %> </a>
+            </p>
           </div>
         </div>
 
         <!-- Register Tab -->
         <div class="tab-pane fade" id="register-tab-page" role="tabpanel" aria-labelledby="register-tab">
           <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel"><%= locale.modal_register %> </h3>
+            <h3 class="modal-title" id="exampleModalLabel"><%= locale.modal_register %></h3>
           </div>
 
           <div class="modal-body">
-            <% if(typeof errors != 'undefined' ) { %> 
-              <div class="form-errors">
-                <div style="font-weight: 500;">CLIENTSIDE VALIDATION FAIL: </div>
-                <span>Is JavaScript enabled?</span>
-              </div>
+            <% if(typeof errors != 'undefined' ) { %>
+            <div class="form-errors">
+              <div style="font-weight: 500">CLIENTSIDE VALIDATION FAIL:</div>
+              <span>Is JavaScript enabled?</span>
+            </div>
             <% } %>
 
             <form id="reg-form" class="auth-form" action="/register" method="post" autocomplete="off" novalidate>
-
               <!-- Fighting browser's autocomplete & autofill -->
-              <input type="hidden" name="step" value="1">
-              <div style="display: none;">
-                <input type="password" autocomplete="password" tabindex="-1">
+              <input type="hidden" name="step" value="1" />
+              <div style="display: none">
+                <input type="password" autocomplete="password" tabindex="-1" />
               </div>
-
 
               <div class="form-group">
                 <label for="reg-email" class="sr-only"><%= locale.modal_email %> </label>
-                <input 
-                  type="text" 
-                  id="reg-email" 
-                  class="form-control" 
-                  name="username" 
-                  placeholder="<%= locale.modal_email %>" 
-                  value 
-                  autocomplete="new-password" 
+                <input
+                  type="text"
+                  id="reg-email"
+                  class="form-control"
+                  name="username"
+                  placeholder="<%= locale.modal_email %>"
+                  value
+                  autocomplete="new-password"
                   required
-                >
+                />
                 <div class="small email-small">
-                  <% if(typeof errors != 'undefined') { %> 
-                    <% errors.forEach((error) => { %>
-                      <%= `* ${error.username}` %><br>
-                    <% }) %>  
-                  <% } %>
+                  <% if(typeof errors != 'undefined') { %> <% errors.forEach((error) => { %> <%= `* ${error.username}`
+                  %><br />
+                  <% }) %> <% } %>
                 </div>
               </div>
 
               <div class="form-group">
-                <input 
-                  type="password" 
-                  id="reg-password" 
-                  class="form-control" 
-                  name="password" 
-                  placeholder="<%= locale.modal_pass %>" 
+                <input
+                  type="password"
+                  id="reg-password"
+                  class="form-control"
+                  name="password"
+                  placeholder="<%= locale.modal_pass %>"
                   autocomplete="new-password"
                   required
-                >
+                />
                 <div id="pwshow" class="toggle-hide">
-                  <div id="pwshow" class="toggle-hide-show" style="display: block;"><%= locale.modal_pwshow %></div>
-                  <div id="pwhide" class="toggle-hide-hide" style="display: none;"><%= locale.modal_pwhide %></div>
+                  <div id="pwshow" class="toggle-hide-show" style="display: block"><%= locale.modal_pwshow %></div>
+                  <div id="pwhide" class="toggle-hide-hide" style="display: none"><%= locale.modal_pwhide %></div>
                 </div>
                 <div class="pwmeter-container">
                   <div class="pwmeter">
@@ -342,27 +437,28 @@
                   </div>
                 </div>
                 <div class="small password-small">
-                  <% if(typeof errors != 'undefined') { %> 
-                    <div class="form-errors">
-                      <% errors.forEach((error) => { %>
-                        <% if(error.password != undefined) { %> 
-                          <%= `* ${error.password}` %><br>
-                        <% } %>
-                      <% }) %>
-                    </div>
+                  <% if(typeof errors != 'undefined') { %>
+                  <div class="form-errors">
+                    <% errors.forEach((error) => { %> <% if(error.password != undefined) { %> <%= `* ${error.password}`
+                    %><br />
+                    <% } %> <% }) %>
+                  </div>
                   <% } %>
                 </div>
               </div>
 
               <div class="form-group">
-                <div class="g-recaptcha" data-callback="recaptchaCheck" data-expired-callback="recaptchaCheckExp" data-sitekey="<%= gCaptchaKey %>" data-theme="light"></div>
+                <div
+                  class="g-recaptcha"
+                  data-callback="recaptchaCheck"
+                  data-expired-callback="recaptchaCheckExp"
+                  data-sitekey="<%= gCaptchaKey %>"
+                  data-theme="light"
+                ></div>
                 <div class="small captcha-small">
-                  <%= locale.modal_captchaerr %>
-                  <% if(typeof errors != 'undefined') { %> 
-                    <% errors.forEach((error) => { %>
-                      <%= `* ${error.captcha}` %><br>
-                    <% }) %>  
-                  <% } %>
+                  <%= locale.modal_captchaerr %> <% if(typeof errors != 'undefined') { %> <% errors.forEach((error) => {
+                  %> <%= `* ${error.captcha}` %><br />
+                  <% }) %> <% } %>
                 </div>
               </div>
 
@@ -375,9 +471,8 @@
             </form>
           </div>
           <div class="modal-footer">
-            <p class="pw-message mt-4"><a href="javascript:void(0)" id="login-link"><%= locale.modal_back %></a></p> 
+            <p class="pw-message mt-4"><a href="javascript:void(0)" id="login-link"><%= locale.modal_back %></a></p>
           </div>
-
         </div>
       </div>
     </div>

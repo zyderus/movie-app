@@ -20,6 +20,7 @@ const indexRoutes   = require("./routes/index");
 const searchRoutes  = require("./routes/searchfast");
 const profileRoutes = require("./routes/profile");
 const apiproxyRoutes = require("./routes/apiproxy");
+const infoRoutes    = require("./routes/info");
 
 const app           = express();
 const PORT          = process.env.PORT || 5800;
@@ -27,6 +28,7 @@ const DBURL         = process.env.DATABASEURL || "mongodb://localhost/movies-db"
 const Movie         = require("./models/movie");
 const Comment       = require("./models/comment");
 const User          = require("./models/user");
+const Inquiry       = require("./models/contact_form");
 
 
 app.set("view engine", "ejs");
@@ -66,6 +68,7 @@ app.use("/movies/:id/comments", commentRoutes);
 app.use(indexRoutes);
 // app.use(searchRoutes);
 app.use(profileRoutes);
+app.use("/info", infoRoutes);
 
 // Server
 app.listen(PORT, () => {
