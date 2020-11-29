@@ -163,10 +163,14 @@
         <!-- Theme toggler -->
         <li class="nav-item dropdown">
           <div class="nav-link theme-toggle-container">
-            <input type="checkbox" name="" id="theme-checkbox" class="theme-checkbox" />
+            <input type="checkbox" name="" id="theme-checkbox" class="theme-checkbox" 
+              <% if(theme !="light" ) { %>                                                                        
+                <%= 'checked' %>                                            
+              <% } %> 
+            >
             <label for="theme-checkbox" class="theme-checkbox-label">
-              <i class="fas fa-sun"></i>
               <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
               <div class="theme-switch"></div>
             </label>
           </div>

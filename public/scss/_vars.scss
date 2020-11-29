@@ -1,11 +1,11 @@
 /* Light theme Default */
 :root {
-  --primary-color: #ececec;
-  --secondary-color: #b6b6b6;
-  --primary-bg: #22254b;
-  --secondary-bg: #373b69;
-  --hr-color: #ddd;
-  --mega-menu-bg: #212529;
+  --primary-color: #424242;
+  --secondary-color: #536390;
+  --primary-bg: #fff;
+  --secondary-bg: #d3d3d3;
+  --hr-color: #444;
+  --mega-menu-bg: #e1e1e1;
 
   --error: orangered;
   --success: green;
@@ -33,11 +33,11 @@
 }
 
 /* Dark Theme */
-[data-theme='light'] {
-  --primary-color: #424242;
-  --secondary-color: #536390;
-  --primary-bg: #fff;
-  --secondary-bg: #d3d3d3;
-  --hr-color: #444;
-  --mega-menu-bg: #e1e1e1;
+[data-theme='dark'] {
+  --primary-color: #ececec;
+  --secondary-color: #b6b6b6;
+  --primary-bg: #22254b;
+  --secondary-bg: #373b69;
+  --hr-color: #ddd;
+  --mega-menu-bg: #212529;
 }

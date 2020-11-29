@@ -4,7 +4,7 @@ console.log('utilities.js');
 const cacheInterval = 1000 * 60 * 60;
 
 // Format Date object to hrs mins integer (military format like)
-function timeFormat(ms) {
+const timeFormat = ms => {
   let h = ms.getHours().toString();
   let m = ms.getMinutes().toString();
   h = checkTime(h);
@@ -15,28 +15,28 @@ function timeFormat(ms) {
   function checkTime(i) {
     return i < 10 ? (i = '0' + i) : i;
   }
-}
+};
 
 // Set theme depending on sun position
-function conditionTheme(sunrise, sunset) {
+const conditionTheme = (sunrise, sunset) => {
   const now = timeFormat(new Date());
   const isDay = now > sunrise && now < sunset;
   isDay ? dayTheme() : nightTheme();
-}
+};
 
 // set Day Theme
-function dayTheme() {
+const dayTheme = () => {
   document.documentElement.setAttribute('data-theme', 'light');
-  toggleSwitch.checked = true;
+  toggleSwitch.checked = false;
   console.log('dayTheme');
-}
+};
 
 // set Night Theme
-function nightTheme() {
+const nightTheme = () => {
   document.documentElement.setAttribute('data-theme', 'dark');
-  toggleSwitch.checked = false;
+  toggleSwitch.checked = true;
   console.log('nightTheme');
-}
+};
 
 // Go back in browser history
 const goBack = () => {
@@ -77,11 +77,11 @@ const fetchData = async (url, interval = cacheInterval, cache = true) => {
 };
 
 // Fetch movie details by Id
-async function fetchMovie(movieId) {
+const fetchMovie = async movieId => {
   const url = `${url_movieInfo + movieId}?${url_params}`;
   const data = await fetchData(url);
   watchMovie(data);
-}
+};
 
 // Receive coordinates via GeoIP service
 const getGeoip = () => {
@@ -135,9 +135,7 @@ const getSunTimes = async () => {
       sunrise: timeFormat(new Date(weather.sys.sunrise * 1000)),
       sunset: timeFormat(new Date(weather.sys.sunset * 1000)),
     };
-
-    console.log(JSON.stringify(suntimes));
-    // document.cookie
+    document.cookie = 'suntimes=' + JSON.stringify(suntimes) + '; Max-Age=' + 60 * 60 * 24;
     return suntimes;
   } catch (err) {
     console.log('new ERRORs...', err.message);
@@ -153,7 +151,7 @@ const clearPage = () => {
 };
 
 // Evaluate movie rating scores
-function getClassByRate(rate) {
+const getClassByRate = rate => {
   if (rate == 0) {
     return {
       class: 'hide',
@@ -174,7 +172,7 @@ function getClassByRate(rate) {
       star: 'far fa-star',
     };
   }
-}
+};
 
 // Parse and get cookie data by keyname
 function getCookie(cname) {

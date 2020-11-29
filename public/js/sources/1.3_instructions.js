@@ -6,14 +6,13 @@ toggleSwitch.addEventListener('change', switchTheme, false);
 // Set Theme according to sunrise and sunset times
 const autoTheme = async () => {
   const suntimes = await getSunTimes();
-  console.log('suntimes:', suntimes);
   conditionTheme(suntimes.sunrise, suntimes.sunset);
 };
 
 // Set Theme
 const setTheme = (() => {
   if (!currentTheme) {
-    // autoTheme();
+    autoTheme();
   }
 })();
 
@@ -35,10 +34,12 @@ document.querySelectorAll('.dropdown-menu').forEach(menu => {
 function switchTheme(e) {
   document.querySelector('body').style.transition = 'background var(--transition-speed) linear';
   if (e.target.checked) {
-    document.documentElement.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
-  } else {
     document.documentElement.setAttribute('data-theme', 'dark');
-    localStorage.setItem('theme', 'dark');
+    // localStorage.setItem('theme', 'dark');
+    document.cookie = 'theme=dark';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    // localStorage.setItem('theme', 'light');
+    document.cookie = 'theme=light';
   }
 }
