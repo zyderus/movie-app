@@ -1,7 +1,32 @@
 console.log('utilities.js');
 
-// Default caching interval
-const cacheInterval = 1000 * 60 * 60;
+// Parse and get cookie data by keyname
+function getCookie(cname) {
+  const name = cname + '=';
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return '';
+}
+
+// Evaluate preferred language
+function getLocale(langArray) {
+  let lang;
+  if (!getCookie('language')) {
+    lang = navigator.languages[0].substring(0, 2);
+  } else {
+    const index = langArray.indexOf(getCookie('language'));
+    lang = index >= 0 ? getCookie('language') : 'en'; // default to english
+  }
+  return lang;
+}
 
 // Format Date object to hrs mins integer (military format like)
 const timeFormat = ms => {
@@ -28,14 +53,12 @@ const conditionTheme = (sunrise, sunset) => {
 const dayTheme = () => {
   document.documentElement.setAttribute('data-theme', 'light');
   toggleSwitch.checked = false;
-  console.log('dayTheme');
 };
 
 // set Night Theme
 const nightTheme = () => {
   document.documentElement.setAttribute('data-theme', 'dark');
   toggleSwitch.checked = true;
-  console.log('nightTheme');
 };
 
 // Go back in browser history
@@ -174,18 +197,57 @@ const getClassByRate = rate => {
   }
 };
 
-// Parse and get cookie data by keyname
-function getCookie(cname) {
-  const name = cname + '=';
-  const ca = document.cookie.split(';');
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
+// Track IP lookup
+const sessionIpData = async url => {
+  const sessionIpObj = sessionStorage.getItem(url) || null;
+  // if no url-named item in current SESSION then create one
+  if (!sessionIpObj) {
+    const ipObj = await fetchFresh(url);
+    sessionStorage.setItem(url, JSON.stringify(ipObj));
+    addtoIpHistory(ipObj);
+    return ipObj;
+  } else {
+    const ipData = JSON.parse(sessionStorage.getItem(url)) || null;
+    return ipData;
   }
-  return '';
+};
+
+// Add locale object to localstorage history array
+function addtoIpHistory(obj) {
+  // If max items then push to last and delete first
+  Array.prototype.pushMax = function (value, max) {
+    if (this.length >= max) {
+      this.shift();
+    }
+    this.push(value);
+  };
+
+  const entries = JSON.parse(localStorage.getItem('ipHistory')) || [];
+  entries.pushMax(obj, 10);
+  localStorage.setItem('ipHistory', JSON.stringify(entries));
 }
+
+// Loop genres for Movie list
+const showMovieListGenres = genres => {
+  const genresArr = movieGenres;
+  const list = movieGenres.genres;
+  let genresarr = [];
+  genres.map(genre => {
+    list.map(item => {
+      if (genre == item.id) {
+        genresarr.push(item.name);
+      }
+    });
+  });
+  return genresarr.join(', ');
+};
+
+// Loop genres for a movie
+const showMovieGenres = genres => {
+  const list = genres;
+  let genresarr = [];
+  list.map(item => {
+    genresarr.push(item.name);
+  });
+  return genresarr.join(', ');
+};

@@ -27,8 +27,6 @@ async function showWeather(data) {
     });
     const resdata = await fetchData(url_weatherInfo + params);
     toWeather(resdata);
-
-    console.log('received weather data: ', resdata);
   }
 }
 
