@@ -1,12 +1,13 @@
-@import "fonts";
-@import "vars";
-@import "libs";
+@import '01_fonts';
+@import '02_vars';
+@import '03_libs';
 
-@import "global";
+@import '04_global';
 
-@import "header";
-@import "megamenu";
-@import "body";
-@import "footer";
+@import '05_header';
+@import '06_megamenu';
+@import '07_body';
+@import '07.1_gmap';
+@import '08_footer';
 
-@import "media";
+@import '09_media';

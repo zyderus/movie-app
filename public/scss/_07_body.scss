@@ -301,26 +301,30 @@ section {
   background-repeat: no-repeat;
   background-position: center;
   .info-row {
-    border: 1px solid red;
+    position: absolute;
+    left: 0;
+    right: 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
     height: 20rem;
   }
   .info-box {
-    border: 1px solid yellow;
+    padding-top: 1rem;
     max-width: 600px;
+    text-align: center;
+    cursor: pointer;
   }
-  .purchase-box {
-    border: 1px solid yellow;
+  .map-box {
+    font-weight: 500;
     max-width: 600px;
     min-width: 300px;
   }
 }
 
 .picked-movie-similars {
-  position: relative;
   margin-top: 2rem;
+  position: relative;
   position: relative;
   height: 35rem;
   font-size: 1.5rem;

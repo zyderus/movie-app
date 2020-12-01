@@ -7,7 +7,7 @@ const secMoviesPick = document.querySelector('.moviespopular-pick');
 const secTv = document.querySelector('.tvpopular');
 
 // Check if in Profiles page
-if (window.location.pathname == "/") {
+if (window.location.pathname == '/') {
   document.addEventListener('DOMContentLoaded', initData());
 }
 
@@ -31,7 +31,7 @@ async function showGenres() {
 async function showInTheaters() {
   const moviesIntheaters = await fetchData(url_theatersNow + url_params).then(data => data.results);
   const picked = await pickShow(moviesIntheaters);
-  
+
   toSection(secTheaters, moviesIntheaters);
   toTheaterPicked(secTheatersPick, picked);
 }
@@ -41,7 +41,7 @@ async function showMoviesPopular() {
   const movies = await fetchData(url_moviesPopular + url_params).then(data => data.results);
   const picked = await pickShow(movies);
   const similars = await getSimilarShows(picked.id, 0);
-  
+
   toSection(secMovies, movies);
   const similarsBox = toMoviePicked(secMoviesPick, picked);
   toSimilars(similarsBox, similars);
@@ -55,7 +55,8 @@ function pickShow(shows) {
 }
 
 // Fetch similar shows
-async function getSimilarShows(id, type) {    // type 0:movie or 1:tv
+async function getSimilarShows(id, type) {
+  // type 0:movie or 1:tv
   type = type ? 'tv' : 'movie';
   const url = url_similars + `${type}/${id}?`;
   const similars = await fetchData(url + url_params).then(data => data.results.slice(0, 5));
@@ -74,21 +75,13 @@ function toCarousel(array) {
   galleryThumbnails.innerHTML = '';
 
   array.results.forEach((item, index) => {
-    const { title,
-            poster_path,
-            vote_average,
-            backdrop_path,
-            overview,
-            release_date,
-            genre_ids,
-            id
-          } = item;
+    const { title, poster_path, vote_average, backdrop_path, overview, release_date, genre_ids, id } = item;
 
     const filmSlide = document.createElement('div');
     filmSlide.classList.add('carousel-item');
-    index === 0 ? filmSlide.className += " active" : '';
+    index === 0 ? (filmSlide.className += ' active') : '';
     filmSlide.style.backgroundImage = `url("${img_path_highres + backdrop_path}")`;
-    
+
     // Slides output
     filmSlide.innerHTML = `
       <div class="fade-overlay"></div>
@@ -99,7 +92,9 @@ function toCarousel(array) {
             <span class="carousel-caption-overview">${new Date(release_date).getFullYear()}</span> 
             <span class="pipe carousel-caption-overview">|</span> 
             <span class="carousel-caption-overview">
-              <i class="${vote_average == 0 ? "" : getClassByRate(vote_average).star}"></i> ${vote_average == 0 ? "" : vote_average} </span>
+              <i class="${vote_average == 0 ? '' : getClassByRate(vote_average).star}"></i> ${
+      vote_average == 0 ? '' : vote_average
+    } </span>
             <span class="pipe carousel-caption-overview">|</span> 
             <span class="carousel-caption-overview">${showMovieListGenres(genre_ids)}</span>
           </p>
@@ -109,42 +104,43 @@ function toCarousel(array) {
         </div>
       </div>
       `;
-      
-      gallery.appendChild(filmSlide);
 
-      // Create a button and attach click event listener
-      const button = document.createElement("button");
-      button.classList.add('btn-custom');
-      button.className += ' mb-3'
-      button.innerHTML = '<i class="fas fa-play"></i> Play';
-      button.addEventListener('click', function() {
-        fetchMovie(id);
-      });
-      // On each forEach iteration attach the button to an element with 
-      // a unique id
-      document.querySelector(".button-container-" + index).appendChild(button);
+    gallery.appendChild(filmSlide);
+
+    // Create a button and attach click event listener
+    const button = document.createElement('button');
+    button.classList.add('btn-custom');
+    button.className += ' mb-3';
+    button.innerHTML = '<i class="fas fa-play"></i> Play';
+    button.addEventListener('click', function () {
+      fetchMovie(id);
+    });
+    // On each forEach iteration attach the button to an element with
+    // a unique id
+    document.querySelector('.button-container-' + index).appendChild(button);
 
     // Icons output
     const filmElement = document.createElement('li');
     // index === 0 ? filmElement.className += " active" : '';
-    filmElement.setAttribute("data-target", "#carousel-main");
-    filmElement.setAttribute("data-slide-to", `${index}`);
+    filmElement.setAttribute('data-target', '#carousel-main');
+    filmElement.setAttribute('data-slide-to', `${index}`);
     filmElement.innerHTML = `
       <div class="card-dummy">
         <img src="${img_path + poster_path}">
       </div>
-    `
+    `;
     marqueeReel.appendChild(filmElement);
   });
 
-  // Fill marquee space between last and first card 
+  // Fill marquee space between last and first card
   infiniteMarquee();
 }
 
 // Populate a section
 function toSection(section, movies) {
   section.innerHTML = '';
-  if(movies.length < 1) {   // Inform user if no results
+  if (movies.length < 1) {
+    // Inform user if no results
     section.innerHTML = `<div class="section-title">No Results Found<span class="section-backlogo">No Results Found</span></div>`;
     return false;
   }
@@ -152,7 +148,9 @@ function toSection(section, movies) {
   // Show movie-cards size toggle icons
   section.innerHTML = `
   <div class="section-row">
-    <div class="section-title">${section.getAttribute('data-desc')}<span class="section-backlogo">${section.getAttribute('data-desc')}</span></div>
+    <div class="section-title">${section.getAttribute(
+      'data-desc'
+    )}<span class="section-backlogo">${section.getAttribute('data-desc')}</span></div>
     <div class="view-icons-container">
       <span class="view-icons btn-view-sm">
         <svg class="btn-view-sm" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-grid-3x2-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -169,15 +167,7 @@ function toSection(section, movies) {
   `;
 
   movies.forEach((movie, index) => {
-    const { title, 
-            poster_path,
-            vote_average, 
-            backdrop_path,
-            overview,
-            release_date,
-            genre_ids,
-            id
-          } = movie;
+    const { title, poster_path, vote_average, backdrop_path, overview, release_date, genre_ids, id } = movie;
 
     const movieElement = document.createElement('div');
     movieElement.className = 'movie';
@@ -208,11 +198,11 @@ function toSection(section, movies) {
           </div>          
         </div>
       </div>
-    `
+    `;
 
     // On each forEach iteration attach a button to an element with a watch movie link
     section.appendChild(movieElement);
-    movieElement.addEventListener('click', function() {
+    movieElement.addEventListener('click', function () {
       fetchMovie(id);
     });
   });
@@ -221,7 +211,7 @@ function toSection(section, movies) {
 // Pick a show from array
 function toTheaterPicked(section, movie) {
   section.innerHTML = '';
-  if(movie.length) {
+  if (movie.length) {
     section.innerHTML = `<div class="section-title">No Results Found<span class="section-backlogo">No Results Found</span></div>`;
     return false;
   }
@@ -234,30 +224,40 @@ function toTheaterPicked(section, movie) {
     <div class="picked-overlay"></div>
     <div class="info-row">
       <div class="info-box">
-        ${title}<br>
-        <span class="${getClassByRate(vote_average).class}">
+        <div class="picked-title">${title} <span>(${new Date(release_date).getFullYear()})</span></div>
+        <span class="picked-rating">
           ${vote_average} <i class="${getClassByRate(vote_average).star}"></i></span>
         </span><br>
         <span class="genres">${showMovieListGenres(genre_ids)}</span>
-        <p>${overview}</p>
       </div>
-      <div class="purchase-box">
+      <div class="map-box">
         ${section.getAttribute('data-desc')}<br>
-        <div id="map-page">MAP</div>
+        <div id="map">MAP</div>
       </div>
     </div>
   `;
 
   section.appendChild(movieElement);
-  // movieElement.addEventListener('click', function() {
-  //   fetchMovie(id);
-  // });  
+  const infoBox = movieElement.querySelector('.info-box');
+  infoBox.addEventListener('click', () => fetchMovie(id));
+  // Show map if coordinates available, if not, try again
+  const showMap = () => {
+    if (!coordinates) {
+      setTimeout(() => {
+        showMap();
+      }, 200);
+    } else {
+      initMap(coordinates);
+    }
+  };
+  showMap();
 }
 
 // Display picked popular movie and similars
 function toMoviePicked(section, movie) {
   section.innerHTML = '';
-  if(movie.length) {    // Inform user if no movie found
+  if (movie.length) {
+    // Inform user if no movie found
     section.innerHTML = `<div class="section-title">No Results Found<span class="section-backlogo">No Results Found</span></div>`;
     return;
   }
@@ -314,9 +314,9 @@ function toSimilars(section, movies) {
       </div>
     `;
 
-    // On each forEach iteration attach the button to an element with 
+    // On each forEach iteration attach the button to an element with
     section.appendChild(movieElement);
-    movieElement.addEventListener('click', function() {
+    movieElement.addEventListener('click', function () {
       fetchMovie(id);
     });
   });
@@ -324,15 +324,7 @@ function toSimilars(section, movies) {
 
 // Populate Movie details
 function watchMovie(movie) {
-  const { 
-    title, 
-    poster_path,
-    vote_average, 
-    backdrop_path,
-    overview,
-    release_date,
-    genres
-  } = movie;
+  const { title, poster_path, vote_average, backdrop_path, overview, release_date, genres } = movie;
 
   clearPage();
   header.innerHTML = `
@@ -408,7 +400,7 @@ function watchMovie(movie) {
     <div class="container" style="padding-bottom: 10rem;">
       <button data-tooltip=" Tooltip">Submit Form</button>
     </div>
-  `
+  `;
   window.scrollTo(0, 0);
 }
 
@@ -424,35 +416,31 @@ function toGenresList(genres, list) {
 
     genreElement.innerHTML = `<a href="">${name}</a>`;
 
-    // On each forEach iteration attach the button to an element with 
+    // On each forEach iteration attach the button to an element with
     list.appendChild(genreElement);
-    genreElement.addEventListener('click', function() {
+    genreElement.addEventListener('click', function () {
       // fetchMoviebyGenre(id);
     });
   });
 }
 
 // Click on view-icons for cards size
-document.addEventListener('click', (e) => {
-  if(e.target.classList == 'btn-view-sm') {
+document.addEventListener('click', e => {
+  if (e.target.classList == 'btn-view-sm') {
     document.querySelector('.btn-view-sm').style.opacity = 1;
-    document.querySelector('.btn-view-lg').style.opacity = .6;
+    document.querySelector('.btn-view-lg').style.opacity = 0.6;
     document.querySelectorAll('.movie').forEach(movie => {
-      
       movie.className = 'movie-small';
     });
   }
-  if(e.target.classList == 'btn-view-lg') {
-    document.querySelector('.btn-view-sm').style.opacity = .6;
+  if (e.target.classList == 'btn-view-lg') {
+    document.querySelector('.btn-view-sm').style.opacity = 0.6;
     document.querySelector('.btn-view-lg').style.opacity = 1;
     document.querySelectorAll('.movie-small').forEach(movie => {
-
       movie.className = 'movie';
     });
   }
 });
-
-
 
 // // event added to target if = #burger
 // document.addEventListener('click', function(e){
@@ -461,7 +449,6 @@ document.addEventListener('click', (e) => {
 //    }
 // });
 
-
 // burger menu listener assigned to parent
 // document.querySelector("#burger").click();
 
@@ -469,13 +456,12 @@ document.addEventListener('click', (e) => {
 //   const randMovie = Math.floor(Math.random() * 20);
 //   showMegamenuMovie(respData.results[randMovie]);
 
-
 // Loop search inputs for value
 // searchForms.forEach((form) => {
 //   form.addEventListener('submit', (e) => {
 //     let searchValue = form.querySelector('.search-input').value;
 //     e.preventDefault();
-    
+
 //     if (searchValue) {
 //       main.innerHTML = '';
 //       document.querySelector('header').innerHTML = '';
@@ -490,7 +476,6 @@ document.addEventListener('click', (e) => {
 //   console.log('hi');
 //   document.querySelector('.movie-info').className = 'movie-info-active';
 // }
-
 
 // function clickWatch(index) {
 //   document.addEventListener('click', function(e) {

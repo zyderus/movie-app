@@ -10,3 +10,6 @@ const language = locale; // TMDB API locale for fetch
 
 // Default caching interval
 const cacheInterval = 1000 * 60 * 60;
+
+// Geo coordinates
+let coordinates;

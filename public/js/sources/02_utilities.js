@@ -144,6 +144,8 @@ const getCoords = async () => {
 // Collect local Weather data based on latitude and longitude from GeoIP data
 const getWeather = async data => {
   const coords = { lat: data.latitude, lon: data.longitude };
+  // save coordinates in variable
+  coordinates = coords;
   const key = '73ccfb39651ee95f5ba9a7a7ae60941a';
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&units=metric&lang=ru&appid=${key}`;
   return await fetchData(url);

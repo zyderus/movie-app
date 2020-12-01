@@ -21,7 +21,7 @@ module.exports = {
       sessionip: 'Session IP',
       map: 'Map',
       temp: 'Temperature',
-      btn_back: "Back",
+      btn_back: 'Back',
       // Footer
       genres: 'Genres',
       categories: 'Categories',
@@ -34,12 +34,12 @@ module.exports = {
       privacy_policy: 'Privacy Policy',
       dmca: 'DMCA',
       // Sections
-      section_intheaters: "In Theaters Now",
-      section_intheaters_pick: "Buy Ticket",
-      section_moviespopular: "Popular Now",
-      section_moviespopular_pick: "Have you watched?..",
-      section_tvpopular: "Popular TV Shows",
-      section_tvpopular_pick: "Watch Right Now",
+      section_intheaters: 'In Theaters Now',
+      section_intheaters_pick: 'Theaters Near You',
+      section_moviespopular: 'Popular Now',
+      section_moviespopular_pick: 'Have you watched?..',
+      section_tvpopular: 'Popular TV Shows',
+      section_tvpopular_pick: 'Watch Right Now',
       // Navbar items
       menu_intheaters: 'IN THEATERS',
       menu_movies: 'MOVIES',
@@ -55,7 +55,7 @@ module.exports = {
       modal_btn_signin: 'SIGN IN',
       modal_forgotpassword: 'Forgot Password?',
       modal_loginwith: 'or login with',
-      modal_noaccount: 'Don\'t have an account?',
+      modal_noaccount: "Don't have an account?",
       modal_createacc: 'Create one',
       // Register modal tab
       modal_register: 'Register',
@@ -85,7 +85,7 @@ module.exports = {
       sessionip: 'IP-адрес сеанса',
       map: 'Карта',
       temp: 'Температура',
-      btn_back: "Назад",
+      btn_back: 'Назад',
       // Footer
       genres: 'Жанры',
       categories: 'Категории',
@@ -98,12 +98,12 @@ module.exports = {
       privacy_policy: 'Политика конфиденциальности',
       dmca: 'DMCA',
       // Sections
-      section_intheaters: "Сейчас в кинотеатрах",
-      section_intheaters_pick: "Купить билет",
-      section_moviespopular: "Популярно сейчас",
-      section_moviespopular_pick: "Вы смотрели?..",
-      section_tvpopular: "Популярные телешоу",
-      section_tvpopular_pick: "Смотрите прямо сейчас",
+      section_intheaters: 'Сейчас в кинотеатрах',
+      section_intheaters_pick: 'Кинотеатры рядом с вами',
+      section_moviespopular: 'Популярно сейчас',
+      section_moviespopular_pick: 'Вы смотрели?..',
+      section_tvpopular: 'Популярные телешоу',
+      section_tvpopular_pick: 'Смотрите прямо сейчас',
       // Navbar items
       menu_intheaters: 'В КИНОТЕАТРЕ',
       menu_movies: 'ФИЛЬМЫ',
@@ -130,10 +130,10 @@ module.exports = {
       modal_back: 'Назад',
       btn_home: 'Главная',
       btn_gallery: 'Галерея',
-      btn_aboutus: 'О нас', 
+      btn_aboutus: 'О нас',
       btn_contacts: 'Контакты',
       btn_reset: 'сброс',
-  },
+    },
     es: {
       copyright: 'Derechos de autor',
       initials: 'RZ',
@@ -154,7 +154,7 @@ module.exports = {
       sessionip: 'IP de sesión',
       map: 'Mapa',
       temp: 'Temperatura',
-      btn_back: "Atrás",
+      btn_back: 'Atrás',
       // Footer
       genres: 'Géneros',
       categories: 'Categorías',
@@ -167,12 +167,12 @@ module.exports = {
       privacy_policy: 'Política de Privacidad',
       dmca: 'DMCA',
       // Sections
-      section_intheaters: "En cines ahora",
-      section_intheaters_pick: "Comprar entrada",
-      section_moviespopular: "Popular ahora",
-      section_moviespopular_pick: "Has visto?..",
-      section_tvpopular: "Programas de TV populares",
-      section_tvpopular_pick: "Ver ahora mismo",
+      section_intheaters: 'En cines ahora',
+      section_intheaters_pick: 'Cines Cerca De Ti',
+      section_moviespopular: 'Popular ahora',
+      section_moviespopular_pick: 'Has visto?..',
+      section_tvpopular: 'Programas de TV populares',
+      section_tvpopular_pick: 'Ver ahora mismo',
       // Navbar items
       menu_intheaters: 'EN TEATROS',
       menu_movies: 'PELÍCULAS',
@@ -199,9 +199,9 @@ module.exports = {
       modal_back: 'Volver a INICIAR',
       btn_home: 'Hogar',
       btn_gallery: 'Galería',
-      btn_aboutus: 'Sobre nosotros', 
+      btn_aboutus: 'Sobre nosotros',
       btn_contacts: 'Contactos',
       btn_reset: 'reiniciar',
-    }
-  }
-} 
+    },
+  },
+};
