@@ -1,20 +1,23 @@
 /* Light theme Default */
 :root {
-  --primary-color: #424242;
+  --primary-color: #3b3b3b;
   --secondary-color: #536390;
   --primary-bg: #fff;
   --secondary-bg: #d3d3d3;
   --hr-color: #444;
   --mega-menu-bg: #e1e1e1;
-
+  --scrollbar-background: #fff;
+  --scrollbar-thumb: #bcbcbc;
+  --shadow-color: rgb(153, 152, 152);
+  
   --error: orangered;
   --success: green;
-
+  
   --watch-movie-bg: #19272e;
   --suggest-movie-bg: #1c212e;
-
+  
   --footer-bg: #131a22;
-
+  
   --transition-speed: 200ms;
   --navbar-height: 56px;
   /* marquee */
@@ -24,7 +27,7 @@
   --marquee-elements-displayed: 5;
   --marquee-element-width: calc(var(--marquee-width) / var(--marquee-elements-displayed));
   --marquee-animation-duration: calc(var(--marquee-elements) * 10s);
-
+  
   --movie-card-height: 380px;
   --movie-card-width: 250px;
   --movie-card-small-height: calc(var(--movie-card-height) * 0.72);
@@ -40,4 +43,7 @@
   --secondary-bg: #373b69;
   --hr-color: #ddd;
   --mega-menu-bg: #212529;
+  --scrollbar-background: #383838;
+  --scrollbar-thumb: #555;
+  --shadow-color: #000;
 }

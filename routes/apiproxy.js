@@ -36,8 +36,6 @@ router.get('/movies/movieinfo/:id', async (req, res) => {
   const url_path = `https://api.themoviedb.org/3/movie/${req.params.id}?`;
   const url = url_path + params;
 
-  console.log('movie info: ', url);
-
   // Receive data
   try {
     const data = await fetchData(url);
@@ -212,6 +210,26 @@ router.get('/geocode', async (req, res) => {
   try {
     const data = await fetchData(url + params);
     return res.json(data.results[0]);
+  } catch (error) {
+    return console.log(error);
+  }
+});
+
+// Google Places proxy
+router.get('/places', async (req, res) => {
+  const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?`;
+  const params = new URLSearchParams({
+    location: req.query.location,
+    radius: req.query.radius,
+    type: req.query.type,
+    key: process.env.GOOGLE_GEOCODE_KEY,
+    language: req.query.language,
+  });
+
+  // Receive data
+  try {
+    const data = await fetchData(url + params);
+    return res.json(data.results);
   } catch (error) {
     return console.log(error);
   }

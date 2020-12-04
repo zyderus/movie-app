@@ -8,14 +8,16 @@ const autoTheme = async () => {
 
 // Set Theme
 const setTheme = (() => {
-  if (!currentTheme) {
+  if (!userTheme) {
     autoTheme();
+  } else {
+    getSunTimes();
   }
 })();
 
 // Check if day or night every 15 mins. Sets theme in auto mode
 setInterval(() => {
-  if (!currentTheme) {
+  if (!userTheme) {
     autoTheme();
   }
 }, 1000 * 60 * 15);

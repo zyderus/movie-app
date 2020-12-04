@@ -53,12 +53,14 @@ const conditionTheme = (sunrise, sunset) => {
 const dayTheme = () => {
   document.documentElement.setAttribute('data-theme', 'light');
   toggleSwitch.checked = false;
+  currentTheme = 'light';
 };
 
 // set Night Theme
 const nightTheme = () => {
   document.documentElement.setAttribute('data-theme', 'dark');
   toggleSwitch.checked = true;
+  currentTheme = 'dark';
 };
 
 // Go back in browser history

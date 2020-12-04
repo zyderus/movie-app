@@ -62,7 +62,7 @@
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/6aaffaaa09.js" crossorigin="anonymous"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB75cf8nxDJ4VsOvrOlxshpptkQniEY2HA&libraries=&v=weekly&language=<%= lang %>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= process.env.GOOGLE_MAPS_KEY %> &libraries=places&v=weekly&language=<%= lang %>"></script>
 <script src="/js/main.min.js"></script>
 </body>
 </html>

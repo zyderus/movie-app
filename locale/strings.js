@@ -35,7 +35,7 @@ module.exports = {
       dmca: 'DMCA',
       // Sections
       section_intheaters: 'In Theaters Now',
-      section_intheaters_pick: 'Theaters Near You',
+      section_intheaters_pick: ['Theaters Near You', 'Click on movie-theater icon for more info and routes'],
       section_moviespopular: 'Popular Now',
       section_moviespopular_pick: 'Have you watched?..',
       section_tvpopular: 'Popular TV Shows',
@@ -99,7 +99,7 @@ module.exports = {
       dmca: 'DMCA',
       // Sections
       section_intheaters: 'Сейчас в кинотеатрах',
-      section_intheaters_pick: 'Кинотеатры рядом с вами',
+      section_intheaters_pick: ['Кинотеатры рядом с вами', 'Нажми на иконку кинотеатра и построй маршрут.'],
       section_moviespopular: 'Популярно сейчас',
       section_moviespopular_pick: 'Вы смотрели?..',
       section_tvpopular: 'Популярные телешоу',
@@ -168,7 +168,7 @@ module.exports = {
       dmca: 'DMCA',
       // Sections
       section_intheaters: 'En cines ahora',
-      section_intheaters_pick: 'Cines Cerca De Ti',
+      section_intheaters_pick: ['Teatros cerca de usted', 'Haga clic en el ícono de cine para ver información de ruta y tráfico'],
       section_moviespopular: 'Popular ahora',
       section_moviespopular_pick: 'Has visto?..',
       section_tvpopular: 'Programas de TV populares',

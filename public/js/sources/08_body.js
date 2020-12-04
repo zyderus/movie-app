@@ -233,6 +233,7 @@ function toTheaterPicked(section, movie) {
       <div class="map-box">
         ${section.getAttribute('data-desc')}<br>
         <div id="map">MAP</div>
+        <span class="notes">${section.getAttribute('data-desc-2')}</span><br>
       </div>
     </div>
   `;
@@ -240,9 +241,12 @@ function toTheaterPicked(section, movie) {
   section.appendChild(movieElement);
   const infoBox = movieElement.querySelector('.info-box');
   infoBox.addEventListener('click', () => fetchMovie(id));
-  // Show map if coordinates available, if not, try again
+
+  // Show map if coordinates available, if not, retry up to 10 times
+  let i = 0;
   const showMap = () => {
-    if (!coordinates) {
+    if (!coordinates && i < 10) {
+      i++;
       setTimeout(() => {
         showMap();
       }, 200);
