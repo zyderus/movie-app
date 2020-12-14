@@ -235,4 +235,24 @@ router.get('/places', async (req, res) => {
   }
 });
 
+// Youtube API Trailers
+router.get('/youtube/trailers', async (req, res) => {
+  const language = req.query.language || null;
+  const params = new URLSearchParams({
+    api_key: process.env.TMDB_KEY,
+    language,
+    include_adult: false
+  });
+  const url_path = `ttp://gdata.youtube.com/feeds/api/videos/-/${title_name}`;
+  const url = url_path + params;
+
+  // Receive data
+  try {
+    const data = await fetchData(url);
+    return res.json(data);
+  } catch (error) {
+    return console.log(error);
+  }
+});
+
 module.exports = router;
