@@ -236,16 +236,15 @@ router.get('/places', async (req, res) => {
 });
 
 // Youtube API Trailers
-router.get('/youtube/trailers/:movie_title', async (req, res) => {
-  const language = req.query.language || null;
-  const title = req.params.movie_title;
+router.get('/youtube/trailers', async (req, res) => {
   const params = new URLSearchParams({
-    api_key: process.env.YOUTUBE_KEY,
-    language,
+    key: process.env.YOUTUBE_KEY,
+    q: req.query.q,
+    maxResults: 1,
   });
-  const url_path = `https://gdata.youtube.com/feeds/api/videos/-/${title}`;
+  const url_path = 'https://youtube.googleapis.com/youtube/v3/search?';
   const url = url_path + params;
-
+  
   // Receive data
   try {
     const data = await fetchData(url);

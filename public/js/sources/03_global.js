@@ -26,6 +26,7 @@ const header = document.querySelector('header');
 const searchContainerMain = document.querySelector('#search-container-main');
 const searchForm = document.querySelector('.search-form');
 const searchInput = document.querySelector('.search-input');
+const elem = document.querySelector('elem');    // collection of translations from backend via data-... property
 
 let movieGenres;
 

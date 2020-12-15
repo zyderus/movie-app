@@ -64,6 +64,8 @@ module.exports = {
       modal_captchaerr: 'Are you human?',
       modal_btn_register: 'REGISTER',
       modal_back: 'Back to SIGN IN',
+      // Youtube
+      trailer: 'english trailer',
     },
     ru: {
       copyright: 'Все права защищены',
@@ -133,6 +135,8 @@ module.exports = {
       btn_aboutus: 'О нас',
       btn_contacts: 'Контакты',
       btn_reset: 'сброс',
+      // Youtube
+      trailer: 'русский трейлер',
     },
     es: {
       copyright: 'Derechos de autor',
@@ -202,6 +206,8 @@ module.exports = {
       btn_aboutus: 'Sobre nosotros',
       btn_contacts: 'Contactos',
       btn_reset: 'reiniciar',
+      // Youtube
+      trailer: 'trailer español',
     },
   },
 };

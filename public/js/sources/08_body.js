@@ -327,7 +327,7 @@ function toSimilars(section, movies) {
 }
 
 // Populate Movie details
-function watchMovie(movie) {
+async function watchMovie(movie) {
   const { title, poster_path, vote_average, backdrop_path, overview, release_date, genres } = movie;
 
   clearPage();
@@ -384,9 +384,7 @@ function watchMovie(movie) {
         <div class="row">
         
           <div class="iframe-container">
-            <iframe src="https://www.youtube.com/embed/ngWBddVNVZs?autoplay=1&start=13&mute=1" 
-            allow="autoplay; picture-in-picture;" frameborder="0" allowfullscreen>
-            </iframe>
+
           </div>
         
         </div>
@@ -406,7 +404,47 @@ function watchMovie(movie) {
     </div>
   `;
   window.scrollTo(0, 0);
+
+  const iframeContainer = document.querySelector('.iframe-container');
+  const trailer = elem.getAttribute("data-trailer");  // get trailer phrase in set language
+
+  const yturl = `/api/youtube/trailers?`;
+  const params = new URLSearchParams({ q: `${title} ${new Date(release_date).getFullYear()} ${trailer}` });
+  const ytData = await fetchData(yturl + params).then(data => data.items);
+  const videoId = ytData[0].id.videoId;
+
+  iframeContainer.innerHTML = `
+
+    <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&start=13&mute=1" 
+    allow="autoplay; picture-in-picture;" frameborder="0" allowfullscreen>
+    </iframe> 
+  
+  `;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Populate Genre lists
 function toGenresList(genres, list) {
