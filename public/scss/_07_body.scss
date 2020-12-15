@@ -224,9 +224,10 @@ section {
   position: relative;
   margin: 1rem;
   transition: all var(--movie-card-transition-speed) ease-in-out;
-  // background-color: var(--secondary-bg);
-  // border-radius: 8px;
+  border-radius: 5px;
+  box-shadow: 5px 0 15px rgba(5, 5, 5, 0.3);
   // box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  // background-color: var(--secondary-bg);
 }
 
 .img-container {
@@ -235,7 +236,7 @@ section {
   width: var(--movie-card-width);
   height: var(--movie-card-height);
   transition: width var(--movie-card-transition-speed) ease-in-out,
-    height var(--movie-card-transition-speed) ease-in-out;
+  height var(--movie-card-transition-speed) ease-in-out;
   .img {
     height: 100%;
     width: 100%;
