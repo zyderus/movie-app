@@ -432,39 +432,48 @@ async function watchMovie(movie) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Populate Genre lists
 function toGenresList(genres, list) {
   list.innerHTML = '';
 
+  console.log(genres);
+
   genres.forEach((genre, index) => {
-    const { name } = genre;
+    const { id, name } = genre;
 
     const genreElement = document.createElement('li');
     genreElement.classList.add('genre-li');
 
-    genreElement.innerHTML = `<a href="">${name}</a>`;
+    genreElement.innerHTML = `<a href="javascript:void(0)">${name.length > 16 ? name.substring(0, 16) + '...' : name}</a>`;
 
     // On each forEach iteration attach the button to an element with
     list.appendChild(genreElement);
-    genreElement.addEventListener('click', function () {
-      // fetchMoviebyGenre(id);
+    genreElement.addEventListener('click', async function () {
+      const params = new URLSearchParams({ language });
+      params.append('with_genres', id);
+      const url = `api/genres?`;
+      
+      const data = await fetch(url + params).then(res => res.json());
+      clearPage();
+      toSection(sections[0], data.results);
     });
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Click on view-icons for cards size
 document.addEventListener('click', e => {

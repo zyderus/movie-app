@@ -148,6 +148,33 @@ router.get('/theaters/upcoming', async (req, res) => {
   }
 });
 
+// Movies by Genre (TMDb API)
+router.get('/genres', async (req, res) => {
+  const language = req.query.language || null;
+  const with_genres = req.query.with_genres;
+  const params = new URLSearchParams({
+    api_key: process.env.TMDB_KEY,
+    language,
+    include_adult: false,
+    sort_by: 'popularity.desc',
+    include_video: false,
+    page: 1,
+    with_genres,
+    // vote_average.gte: 6,
+  });
+  
+  const url_path = `https://api.themoviedb.org/3/discover/movie?`;
+  const url = url_path + params;
+
+  // Receive data
+  try {
+    const data = await fetchData(url);
+    return res.json(data);
+  } catch (error) {
+    return console.log(error);
+  }
+});
+
 // Similar Movies (TMDb API)
 router.get('/similar/:type/:showId', async (req, res) => {
   const type = req.params.type;

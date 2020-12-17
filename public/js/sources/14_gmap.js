@@ -16,10 +16,11 @@ async function initMap(coords) {
 
   // Fetch nearby movie theater locations
   const url = '/api/places?';
-  url_params.append('location', `${coords.lat},${coords.lon}`);
-  url_params.append('radius', '2500');
-  url_params.append('type', 'movie_theater');
-  const theaters = await fetchData(url + url_params);
+  const params = new URLSearchParams({ language });
+  params.append('location', `${coords.lat},${coords.lon}`);
+  params.append('radius', '2500');
+  params.append('type', 'movie_theater');
+  const theaters = await fetchData(url + params);
 
   // Activate direction services
   directionsService = new google.maps.DirectionsService();
