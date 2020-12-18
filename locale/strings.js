@@ -66,6 +66,10 @@ module.exports = {
       modal_back: 'Back to SIGN IN',
       // Youtube
       trailer: 'english trailer',
+      // Footer
+      top_movies_by_rating: 'Top rated movies',
+      top_movies_by_revenue: 'Top box office revenue',
+      top_movies_this_year: 'Top movies in ' + new Date().getFullYear(),
     },
     ru: {
       copyright: 'Все права защищены',
@@ -137,6 +141,10 @@ module.exports = {
       btn_reset: 'сброс',
       // Youtube
       trailer: 'русский трейлер',
+      // Footer
+      top_movies_by_rating: 'Лучшие фильмы',
+      top_movies_by_revenue: 'Максимальные кассовые сборы',
+      top_movies_this_year: 'Лучшие фильмы в ' + new Date().getFullYear(),
     },
     es: {
       copyright: 'Derechos de autor',
@@ -208,6 +216,10 @@ module.exports = {
       btn_reset: 'reiniciar',
       // Youtube
       trailer: 'trailer español',
+      // Footer
+      top_movies_by_rating: 'Películas mejor calificadas',
+      top_movies_by_revenue: 'Principales ingresos de taquilla',
+      top_movies_this_year: 'Mejores películas en ' + new Date().getFullYear(),
     },
   },
 };
