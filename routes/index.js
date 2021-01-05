@@ -3,6 +3,9 @@ const fetch = require('node-fetch');
 const router = express.Router();
 const passport = require('passport');
 const { check, validationResult } = require('express-validator');
+const nodemailer = require('nodemailer');
+const async = require('async');
+const crypto = require('crypto');
 const User = require('../models/user');
 const captchaSecretKey = process.env.CAPTCHA_SECRET_KEY;
 
@@ -13,8 +16,7 @@ router.get('/', (req, res) => {
   res.render('index', {});
 });
 
-router.post(
-  '/register',
+router.post('/register',
   [
     // Check Username
     check('username', 'Email is not valid')
@@ -45,8 +47,7 @@ router.post(
       .isLength({ min: 6 })
       .trim()
       .withMessage('Password must be at least 6 chars'),
-  ],
-  async (req, res) => {
+  ], async (req, res) => {
     // Check for validation Errors
     const validationErrors = validationResult(req);
     let errors = [];
@@ -120,13 +121,10 @@ router.post(
 );
 
 // Login
-router.post(
-  '/login',
-  passport.authenticate('local', {
+router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/loginfail',
-  }),
-  (req, res) => {}
+  }), (req, res) => {}
 );
 
 // Failed login route
@@ -144,8 +142,7 @@ router.get('/logout', (req, res) => {
 });
 
 // Check if Email present in database
-router.post(
-  '/usercheck',
+router.post('/usercheck',
   [
     check('email', 'Email is not valid')
       .not()
@@ -174,5 +171,58 @@ router.post(
     res.json({ message: 'success' });
   }
 );
+
+router.get('/passwordreset', (req, res) => res.render('passwordreset'));
+
+router.post('/passwordreset', (req, res, next) => {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        const token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      User.findOne({email: req.body.email}, function(err, user) {
+        if(!user) {
+          console.log('No account with that email address');
+          return res.redirect('/passwordreset');
+        }
+
+        user.resetPasswordToken = token;
+        user.resetPasswordExprires = Date.now() + 3600000; // 1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+      const smtpTransport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: process.env.GMAIL_UN,
+          pass: process.env.GMAIL_PW
+        }
+      });
+      const mailOptions = {
+        to: user.email,
+        from: 'security@tron.ecom',
+        subject: 'Your password reset',
+        text: 'You are receiving this because you have requested the reset of the password for your account\n\n' +
+              'Please click on the following link, or paste this into your browser to complete the precess:\n\n' +
+              'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+              'If you did not request this, please ignore this email and your password will remain unchanged.'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        console.log('An e-mail has been sent to ' + user.email + ' with further instructions.');
+        done(err, 'done');
+      });
+    }
+  ], function(err) {
+    if (err) return next(err);
+    res.redirect('/passwordreset');
+  });
+});
 
 module.exports = router;

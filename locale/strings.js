@@ -123,7 +123,7 @@ module.exports = {
       modal_email: 'Эл. почта',
       modal_pass: 'Пароль',
       modal_btn_signin: 'ВОЙТИ',
-      modal_forgotpassword: 'Забыл пароль?',
+      modal_forgotpassword: 'Забыли пароль?',
       modal_loginwith: 'или войди через',
       modal_noaccount: 'Нет учетной записи?',
       modal_createacc: 'Создай',

@@ -45,6 +45,20 @@ body {
   // transition: background var(--transition-speed) linear;
 }
 
+/* Visible content wrapper aimed to keep footer where it belongs */
+#page-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Expand main section if page content less than full page */
+#main {
+  flex-grow: 1;
+}
+
 .center {
   text-align: center;
 }
