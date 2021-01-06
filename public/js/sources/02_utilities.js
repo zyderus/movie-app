@@ -173,7 +173,11 @@ const getSunTimes = async () => {
 const clearPage = () => {
   header.innerHTML = '';
   sections.forEach(section => {
-    section.innerHTML = '';
+
+    // avoid layout sections that don't have class attribute
+    if(section.hasAttribute('class')) {
+      section.innerHTML = '';
+    }
   });
 };
 

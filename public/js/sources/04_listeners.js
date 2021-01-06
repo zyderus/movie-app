@@ -20,7 +20,8 @@ searchForm.addEventListener('submit', async e => {
     clearPage();
 
     const data = await fetchData(url).then(res => res.results);
-    toSection(sections[0], data);
+    const searchSection = document.querySelector('.search-results');
+    toSection(searchSection, data);
     searchInput.value = '';
   }
 });

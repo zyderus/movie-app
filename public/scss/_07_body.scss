@@ -134,7 +134,6 @@
 
 /* Sections */
 section {
-  padding-top: 4rem;
   position: relative;
   justify-content: center;
   overflow: hidden;
@@ -200,8 +199,8 @@ section {
 
 .movie-small {
   margin: 0.5rem;
-  transition: margin var(--movie-card-transition-speed) ease-in-out;
-  transition: all var(--movie-card-transition-speed) ease-in-out;
+  // transition: margin var(--movie-card-transition-speed) ease-in-out;
+  // transition: all var(--movie-card-transition-speed) ease-in-out;
   .img-container {
     width: calc(var(--movie-card-small-width));
     height: calc(var(--movie-card-small-height));
@@ -223,7 +222,7 @@ section {
   overflow: hidden;
   position: relative;
   margin: 1rem;
-  transition: all var(--movie-card-transition-speed) ease-in-out;
+  // transition: all var(--movie-card-transition-speed) ease-in-out;
   border-radius: 5px;
   box-shadow: 5px 0 15px rgba(5, 5, 5, 0.3);
   // box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
@@ -235,8 +234,8 @@ section {
   position: relative;
   width: var(--movie-card-width);
   height: var(--movie-card-height);
-  transition: width var(--movie-card-transition-speed) ease-in-out,
-  height var(--movie-card-transition-speed) ease-in-out;
+  // transition: width var(--movie-card-transition-speed) ease-in-out;
+  transition: height var(--movie-card-transition-speed) ease-in-out;
   .img {
     height: 100%;
     width: 100%;
@@ -270,8 +269,8 @@ section {
   overflow: hidden;
   text-overflow: ellipsis;
   width: var(--movie-card-width);
-  transition: font-size var(--movie-card-transition-speed) ease-in-out,
-    width var(--movie-card-transition-speed) ease-in-out;
+  // transition: font-size var(--movie-card-transition-speed) ease-in-out,
+    // width var(--movie-card-transition-speed) ease-in-out;
 
   // max-width: 290px;
   .overview-header__stats {

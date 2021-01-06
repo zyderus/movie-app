@@ -414,7 +414,6 @@ async function watchMovie(movie) {
   const videoId = ytData[0].id.videoId;
 
   iframeContainer.innerHTML = `
-
     <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&start=13&mute=1" 
     allow="autoplay; picture-in-picture;" frameborder="0" allowfullscreen>
     </iframe> 
@@ -422,23 +421,11 @@ async function watchMovie(movie) {
   `;
 }
 
-
-
-
-
-
-
-
-
-
-
 // Populate Genre lists
 function toGenresList(genres, list) {
   list.innerHTML = '';
 
-  console.log(genres);
-
-  genres.forEach((genre, index) => {
+  genres.forEach(genre => {
     const { id, name } = genre;
 
     const genreElement = document.createElement('li');
@@ -455,25 +442,11 @@ function toGenresList(genres, list) {
       
       const data = await fetch(url + params).then(res => res.json());
       clearPage();
-      toSection(sections[0], data.results);
+      const searchSection = document.querySelector('.search-results');
+      toSection(searchSection, data.results);
     });
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Click on view-icons for cards size
 document.addEventListener('click', e => {
