@@ -6,6 +6,8 @@
   --secondary-bg: #d3d3d3;
   --hr-color: #444;
   --mega-menu-bg: #e1e1e1;
+
+  // Scrollbar
   --scrollbar-background: #fff;
   --scrollbar-thumb: #bcbcbc;
   --shadow-color: rgb(153, 152, 152);
@@ -13,10 +15,12 @@
   --error: orangered;
   --success: green;
   
-  --watch-movie-bg: #19272e;
-  --suggest-movie-bg: #1c212e;
+  // Watch movie view
+  --watch-movie-bg: #ffffff;
+  --suggest-movie-bg: #a1a1a1;
   
-  --footer-bg: #131a22;
+  // Footer background color
+  --footer-bg: #c4c4c4;
   
   --transition-speed: 200ms;
   --navbar-height: 56px;
@@ -43,7 +47,16 @@
   --secondary-bg: #373b69;
   --hr-color: #ddd;
   --mega-menu-bg: #212529;
+
+  // Scrollbar
   --scrollbar-background: #383838;
   --scrollbar-thumb: #555;
   --shadow-color: #000;
+
+    // Watch movie view
+    --watch-movie-bg: #19272e;
+    --suggest-movie-bg: #1c212e;
+
+  // Footer background color
+  --footer-bg: #131a22;
 }

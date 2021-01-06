@@ -391,17 +391,13 @@ async function watchMovie(movie) {
       </div>
     </section>
 
-    <section class="suggest-movie">
+    <section class="suggest-movie" style="height: 100px;">
       <div class="container">
         <div class="title">
           <h4>You Also May Like</h4>
         </div>
       </div>
     </section>
-
-    <div class="container" style="padding-bottom: 10rem;">
-      <button data-tooltip=" Tooltip">Submit Form</button>
-    </div>
   `;
   window.scrollTo(0, 0);
 

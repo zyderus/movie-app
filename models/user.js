@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   resetPasswordToken: String,
   resetPasswordExpires: Date,
   isAdmin: { type: Boolean, default: false },
-  active: Boolean
+  active: Boolean,
   // created: { type: Date, default: Date.now }
 }, { timestamps: true });
 userSchema.plugin(passportLocalMongoose);

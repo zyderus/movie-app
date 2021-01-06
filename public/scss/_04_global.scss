@@ -16,6 +16,11 @@
   background-color: var(--scrollbar-background);
 }
 
+::selection {
+  color: #fff;
+  background: #e6400c;
+}
+
 :root {
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
