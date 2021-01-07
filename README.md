@@ -3,7 +3,8 @@
 ### Technologies used:
 **Frontend:** Vanilla Javascript and HTML/CSS/Bootstrap  
 **Backend:** NodeJS with Express, MongoDB with Mongoose  
-**APIs used:**  
+
+### APIs used:**  
 - TMDB
 - OpenWeatherMaps
 - FreeGEOIP
