@@ -239,7 +239,53 @@ router.get('/passwordreset/:token', (req, res) => {
 });
 
 router.post('/passwordreset/:token', (req, res) => {
-  res.send(`<h1>Password Updated</h1><p>your token ${req.params.token}`);
-})
+  async.waterfall([
+    function(done) {
+      User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+          console.log('Password reset token is invalid or has expired');
+          return res.redirect('back');
+        }
+        if (req.body.password === req.body.confirm) {
+          user.setPassword(req.body.password, function(err) {
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+  
+            user.save(function(err) {
+              req.logIn(user, function(err) {
+                done(err, user);
+              });
+            });
+          })
+        } else {
+          console.log('Passwords do not match');
+          res.redirect('back');
+        }
+      });
+    },
+    function(user, done) {
+      const smtpTransport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: process.env.GMAIL_UN,
+          pass: process.env.GMAIL_PW,
+        }
+      });
+      const mailOptions = {
+        to: user.email,
+        from: 'security@tron.com',
+        subject: 'Your password has been changed',
+        text: 'Hello,\n\n' +
+              'This is a confirmation that the password for your account ' + user.email + ' has just been changed.',
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        console.log('Success! Your password has been changed.');
+        done(err);
+      });
+    }
+  ], function(err) {
+    res.redirect('/');
+  });
+});
 
 module.exports = router;
