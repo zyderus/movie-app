@@ -102,7 +102,12 @@
 }
 
 #lang {
-  transform: translateX(3rem) translateY(.5rem);
+  transform: translateX(3rem) translateY(.85rem);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 5px 0 15px rgba(5, 5, 5, 0.3);
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(.9rem);
 }
 
 #lang img {
@@ -248,15 +253,23 @@
   min-width: 305px;
   width: 380px;
   margin: 0 auto;
-  margin-top: 8%;
+  margin-top: 5%;
 }
 
 .modal-content {
   background-color: var(--primary-bg);
   border: 1px solid var(--secondary-bg);
   color: var(--primary-color);
-  border-radius: 2px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  
+  // border-radius: 8px;
+  // box-shadow: 5px 0 15px rgba(5, 5, 5, 0.3);
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(.5rem);
+
+
+
+  // border-radius: 2px;
+  // box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   padding: 0 25px;
 }
 

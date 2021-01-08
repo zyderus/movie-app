@@ -13,11 +13,30 @@
   margin: 0;
   white-space: normal;
   background-color: var(--mega-menu-bg);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 5px 0 15px rgba(5, 5, 5, 0.3);
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(.9rem);
 }
 
 // Megamenu Movie
 .section-movie {
-  // background-color: green;
+  // background-color: #fff;
+}
+
+// .section-movie,
+.movie-genres {
+  background: #fff;
+  padding: 3rem !important;
+  border-radius: 20px;
+  min-width: 370px;
+  // top: 0;
+  // left: 0;
+  transform: translate(150%, 0);
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 5px 0 15px rgba(5, 5, 5, 0.3);
 }
 
 .megamenu-items-large {
