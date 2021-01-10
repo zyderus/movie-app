@@ -61,12 +61,20 @@
 <script src="/js/vanilla-tilt.js"></script>
 <script src="/js/main.min.js"></script>
 <script type="text/javascript">
-	VanillaTilt.init(document.querySelector(".map-box"), {
-		max: 10,
-    speed: 400,
-    glare: true,
-    "max-glare":.2, 
-	});
+  function tiltItems() {
+    return {
+      parallaxBox: document.querySelectorAll(".parallax-box"),
+    }
+  };
+  const tilt = element => {
+    return VanillaTilt.init(element, {
+      max: 7,
+      speed: 400,
+      // glare: true,
+      // "max-glare":.3, 
+    });
+  };
+  tiltItems().parallaxBox.forEach(box => tilt(box));
 </script>
 </body>
 </html>

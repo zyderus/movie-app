@@ -223,15 +223,27 @@ function toTheaterPicked(section, movie) {
   movieElement.innerHTML = `
     <div class="picked-overlay"></div>
     <div class="info-row">
-      <div class="info-box">
-        <div class="picked-title">${title} <span>(${new Date(release_date).getFullYear()})</span></div>
-        <span class="picked-rating">
-          ${vote_average} <i class="${getClassByRate(vote_average).star}"></i></span>
-        </span><br>
-        <span class="genres">${showMovieListGenres(genre_ids)}</span>
+      <div class="info-box parallax-box">
+        <div class="info-box_block">
+          <div class="picked-title">
+            ${title} <span>(${new Date(release_date).getFullYear()})</span>
+          </div>
+          <div class="details-block">
+            <div>
+              <img src="${img_path + poster_path}" height="220">
+            </div>
+            <div>
+              <span class="genres">${showMovieListGenres(genre_ids)}</span>
+              <br>
+              <span class="picked-rating">${vote_average} <i class="${getClassByRate(vote_average).star}"></i></span>
+              <br>
+              <p>${overview.substring(0, 150)}...</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="map-box">
-        ${section.getAttribute('data-desc')}<br>
+      <div class="map-box parallax-box">
+        ${section.getAttribute('data-desc')}
         <div id="map">MAP</div>
         <span class="notes">${section.getAttribute('data-desc-2')}</span><br>
       </div>

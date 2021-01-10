@@ -290,11 +290,10 @@ section {
 
 .pickedMovie {
   border: 1px solid green;
-  // text-shadow: var(--shadow-color) 0px 0px 50px, 2px 2px 2px var(--shadow-color);
   margin-top: 2rem;
   position: relative;
   height: 35rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   display: flex;
   align-items: center;
   color: var(--primary-color);
@@ -302,7 +301,6 @@ section {
   background-repeat: no-repeat;
   background-position: center;
   .info-row {
-    border: 1px solid red;
     position: absolute;
     left: 0;
     right: 0;
@@ -312,19 +310,38 @@ section {
     height: 30rem;
   }
   .info-box {
-    border: 1px solid blue;
-    // padding-top: 1rem;
     display: flex;
-    max-width: 600px;
     align-items: center;
-    text-align: center;
+    padding: 2rem;
+    min-width: 450px;
+    max-width: 45%;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255, 0.2);
+    border-left: 1px solid rgba(255,255,255, 0.2);
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    .details-block {
+      display: flex;
+      justify-content: start;
+      img {
+        margin-top: 1rem;
+        margin-right: 1rem;
+        transform: translateY(-.5rem);
+        box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+      }
+      p {
+        margin-top: 1rem;
+        font-size: 1rem;
+      }
+    }
   }
   .map-box {
-    padding: 1rem;
-    font-weight: 500;
-    max-width: 600px;
-    min-width: 300px;
+    padding: 1rem 0;
+    min-width: 320px;
+    width: 30vw;
+    position: relative;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -333,7 +350,7 @@ section {
     box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
   }
   .notes {
-    font-weight: 500;
+    padding-left: 1rem;
     font-size: .8rem;
   }
 }
@@ -376,7 +393,9 @@ section {
 }
 
 .picked-title {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  padding-bottom: 1rem;
   font-weight: 600;
   span {
     font-weight: 100;
@@ -389,7 +408,7 @@ section {
 .picked-overlay {
   position: absolute;
   background-color: var(--primary-bg);
-  opacity: 0.5;
+  opacity: 0.6;
   left: 0;
   top: 0;
   height: 100%;
