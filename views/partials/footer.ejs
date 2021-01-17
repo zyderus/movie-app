@@ -60,7 +60,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= process.env.GOOGLE_MAPS_KEY %> &libraries=places&v=weekly&language=<%= lang %>"></script>
 <script src="/js/vanilla-tilt.js"></script>
 <script src="/js/main.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" defer>
   function tiltItems() {
     return {
       parallaxBox: document.querySelectorAll(".parallax-box"),
