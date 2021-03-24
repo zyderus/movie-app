@@ -58,9 +58,9 @@
 <script src="https://kit.fontawesome.com/6aaffaaa09.js" crossorigin="anonymous"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= process.env.GOOGLE_MAPS_KEY %> &libraries=places&v=weekly&language=<%= lang %>"></script>
-<script src="/js/vanilla-tilt.js"></script>
 <script src="/js/main.min.js"></script>
-<script type="text/javascript" defer>
+<script src="/js/vanilla-tilt.js" ></script>
+<script type="text/javascript" >
   function tiltItems() {
     return {
       parallaxBox: document.querySelectorAll(".parallax-box"),
@@ -71,7 +71,7 @@
       max: 7,
       speed: 400,
       // glare: true,
-      // "max-glare":.3, 
+      // "max-glare":.3,
     });
   };
   tiltItems().parallaxBox.forEach(box => tilt(box));
