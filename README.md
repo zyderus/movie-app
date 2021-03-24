@@ -1,4 +1,4 @@
-# Movie Information Webapp
+# Movie Info Webapp
 
 ### Features
 - Latest movie and tv show information 
