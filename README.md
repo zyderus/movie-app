@@ -4,7 +4,7 @@
 </div>
 
 <p align="center">
-  View @ https://watch-movies-app.herokuapp.com/ | hosted with <a href="https://id.heroku.com/">heroku</a>
+  🚀 View @ https://watch-movies-app.herokuapp.com/ | hosted with <a href="https://id.heroku.com/">heroku</a>
 </p>
 
 <p align="center">
