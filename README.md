@@ -1,4 +1,49 @@
-# Movie Info Webapp
+<div align="center">
+  <h2>Tron Movies</h2>
+  <strong>Version 1.5.0</strong>
+</div>
+
+<p align="center">
+  View @ https://watch-movies-app.herokuapp.com/ | hosted with <a href="https://id.heroku.com/">heroku</a>
+</p>
+
+<p align="center">
+  
+</p>
+
+<div align="center">
+  <img src="https://github.com/zyderus/portfolio/blob/main/public/assets/images/tron.png" width="100%">
+</div>
+
+## Description
+A movies information portal with easily accesible relevant information
+
+## Tech
+Express, Mongo, Mongoose, Gulp, Bootstrap
+
+## Getting Started
+
+### 🛠 Installation & Set Up
+
+1. Installation
+
+   ```sh
+   npm install
+   ```
+
+2. Run the development server
+
+   ```sh
+   gulp
+   ```
+
+3. Build for Production
+
+   ```sh
+   gulp build
+   ```
+   
+---
 
 ### Features
 - Latest movie and tv show information 
@@ -14,10 +59,6 @@
 - To reduce server load and minimize load times all API requests are cached locally and in server memory. Also this helps to keep api requests within service providers limits. Caching algorithms comply with api provider's terms of service.
 - Funky color themes
 
-### Technologies
-**Frontend:** Vanilla Javascript and HTML/CSS/Bootstrap  
-**Backend:** NodeJS with Express, MongoDB with Mongoose  
-
 ### APIs
 - TMDB
 - OpenWeatherMaps
@@ -28,5 +69,16 @@
 - Gmail
 - Youtube Data
 
-
 Open in your browser: [movie app](https://watch-movies-app.herokuapp.com/)
+   
+---
+
+## Contributors
+
+- Rustam Ziyadov
+
+---
+
+## License & copyright
+
+&copy; Rustam Ziyadov
