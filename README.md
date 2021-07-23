@@ -68,8 +68,6 @@ Express, Mongo, Mongoose, Gulp, Bootstrap
 - Google Maps
 - Gmail
 - Youtube Data
-
-Open in your browser: [movie app](https://watch-movies-app.herokuapp.com/)
    
 ---
 
