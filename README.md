@@ -42,8 +42,6 @@ Express, Mongo, Mongoose, Gulp, Bootstrap
    ```sh
    gulp build
    ```
-   
----
 
 ### Features
 - Latest movie and tv show information 
@@ -68,14 +66,10 @@ Express, Mongo, Mongoose, Gulp, Bootstrap
 - Google Maps
 - Gmail
 - Youtube Data
-   
----
 
 ## Contributors
 
 - Rustam Ziyadov
-
----
 
 ## License & copyright
 
