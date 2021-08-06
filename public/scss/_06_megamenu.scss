@@ -16,27 +16,12 @@
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   box-shadow: 5px 0 15px rgba(5, 5, 5, 0.3);
-  background-color: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(.9rem);
+
 }
 
 // Megamenu Movie
 .section-movie {
   // background-color: #fff;
-}
-
-// .section-movie,
-.movie-genres {
-  background: #fff;
-  padding: 3rem !important;
-  border-radius: 20px;
-  min-width: 370px;
-  // top: 0;
-  // left: 0;
-  transform: translate(150%, 0);
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 5px 0 15px rgba(5, 5, 5, 0.3);
 }
 
 .megamenu-items-large {
@@ -90,10 +75,11 @@
   min-width: 280px;
 }
 .movie-genres {
-  // background-color: navy;
   min-width: 290px;
-  padding: 0 20px;
+  padding-left: 5%;
+  min-width: 370px;
 }
+
 .movie-genres ul {
   position: relative;
   list-style: none;
@@ -107,15 +93,8 @@
     margin-bottom: .7rem;
     text-transform: capitalize;
     padding-right: 2rem;
+    &:hover {
+      text-decoration: underline;
+    }
   }
-  // &::before{
-  //   position: absolute;
-  //   top: 0;
-  //   left: -15px;
-  //   transform: translateY(-2.7rem);
-  //   opacity: .3;
-  //   height: 112%;
-  //   content: "";
-  //   border-left: 1px solid var(--secondary-color);
-  // }
 }

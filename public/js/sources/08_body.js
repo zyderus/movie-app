@@ -222,31 +222,29 @@ function toTheaterPicked(section, movie) {
   movieElement.style.backgroundImage = `url(${img_path_highres + backdrop_path})`;
   movieElement.innerHTML = `
     <div class="picked-overlay"></div>
-    <div class="info-row">
-      <div class="info-box parallax-box">
-        <div class="info-box_block">
-          <div class="picked-title">
-            ${title} <span>(${new Date(release_date).getFullYear()})</span>
+    <div class="info-box parallax-box">
+      <div class="info-box_block">
+        <div class="picked-title">
+          ${title} <span>(${new Date(release_date).getFullYear()})</span>
+        </div>
+        <div class="details-block">
+          <div>
+            <img src="${img_path + poster_path}" height="220">
           </div>
-          <div class="details-block">
-            <div>
-              <img src="${img_path + poster_path}" height="220">
-            </div>
-            <div>
-              <span class="genres">${showMovieListGenres(genre_ids)}</span>
-              <br>
-              <span class="picked-rating">${vote_average} <i class="${getClassByRate(vote_average).star}"></i></span>
-              <br>
-              <p>${overview.substring(0, 150)}...</p>
-            </div>
+          <div>
+            <span class="genres">${showMovieListGenres(genre_ids)}</span>
+            <br>
+            <span class="picked-rating">${vote_average} <i class="${getClassByRate(vote_average).star}"></i></span>
+            <br>
+            <p>${overview.substring(0, 150)}...</p>
           </div>
         </div>
       </div>
-      <div class="map-box parallax-box">
-        ${section.getAttribute('data-desc')}
-        <div id="map">MAP</div>
-        <span class="notes">${section.getAttribute('data-desc-2')}</span><br>
-      </div>
+    </div>
+    <div class="map-box parallax-box">
+      <div>${section.getAttribute('data-desc')}</div>
+      <div id="map">MAP</div>
+      <div class="notes">${section.getAttribute('data-desc-2')}</div>
     </div>
   `;
 
